@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import jwt from "jsonwebtoken";
 
-function App() {
+import Router from "./Router";
+
+import "./App.css";
+
+function App(): JSX.Element {
+  const [userToken, setUserToken] = useState(() =>
+    window.localStorage.getItem("token")
+  );
+
+  const [user, setUser] = useState(() => {
+    const stored = window.localStorage.getItem("user");
+    return stored ? (JSON.parse(stored) as User) : null;
+  });
+
+  const setUserAndStorage = (user: User | null) => {
+    setUser(user);
+    const stringified = user ? JSON.stringify(user) : "";
+    window.localStorage.setItem("user", stringified);
+  };
+
+  const getUser = () => {
+    return userToken ? (jwt.decode(userToken) as UserToken) : null;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 
