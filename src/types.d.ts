@@ -13,3 +13,9 @@ interface LoginFormVals {
   email: string;
   password: string;
 }
+
+interface SignupFormVals {
+  email: string;
+  username: string;
+  password: string;
+}
