@@ -4,9 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-import { signup } from "./api";
-
-function SignupForm(): JSX.Element {
+function SignupForm({ signup, user }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,14 +25,27 @@ function SignupForm(): JSX.Element {
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate>
-      <TextField required id="username" name="username" label="Username" />
-      <TextField required id="email" name="email" label="Email" />
+      <TextField
+        required
+        id="username"
+        name="username"
+        label="Username"
+        autoComplete="username"
+      />
+      <TextField
+        required
+        id="email"
+        name="email"
+        label="Email"
+        autoComplete="email"
+      />
       <TextField
         required
         id="password"
         name="password"
         label="Password"
         type="password"
+        autoComplete="current-password"
       />
       <Button type="submit">Sign up</Button>
     </Box>

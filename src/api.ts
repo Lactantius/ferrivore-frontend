@@ -5,7 +5,10 @@ const BASE_URL =
  * User routes
  * */
 
-async function login({ email, password }: LoginFormVals): Promise<UserToken> {
+async function loginReq({
+  email,
+  password,
+}: LoginFormVals): Promise<UserToken> {
   const res = await fetch(`${BASE_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -13,10 +16,13 @@ async function login({ email, password }: LoginFormVals): Promise<UserToken> {
     },
     body: JSON.stringify({ email, password }),
   });
-  return res.json();
+  return res
+    .json()
+    .then((data) => data.user)
+    .catch((_) => null);
 }
 
-async function signup({
+async function signupReq({
   email,
   password,
   username,
@@ -28,11 +34,14 @@ async function signup({
     },
     body: JSON.stringify({ email, username, password }),
   });
-  return res.json();
+  return res
+    .json()
+    .then((data) => data.user)
+    .catch((_) => null);
 }
 
 /**
  * Idea routes
  * */
 
-export { login, signup };
+export { loginReq, signupReq };

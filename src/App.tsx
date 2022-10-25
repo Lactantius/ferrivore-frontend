@@ -3,10 +3,15 @@ import { BrowserRouter } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
 import Router from "./Router";
+import { loginReq, signupReq } from "./api";
 
 import "./App.css";
 
 function App(): JSX.Element {
+  /**
+   * Functions for user handling
+   */
+
   const [userToken, setUserToken] = useState(() =>
     window.localStorage.getItem("token")
   );
@@ -22,13 +27,45 @@ function App(): JSX.Element {
     window.localStorage.setItem("user", stringified);
   };
 
+  const setTokenAndStorage = (token: string) => {
+    setUserToken(token);
+    window.localStorage.setItem("token", token);
+  };
+
+  const login = async (loginData: LoginFormVals) => {
+    const token = await loginReq(loginData);
+    setTokenAndStorage(token.token);
+    setUserAndStorage({
+      email: token.email,
+      username: token.username,
+      userId: token.userId,
+    });
+    return token;
+  };
+
+  const signup = async (signupData: SignupFormVals) => {
+    const token = await signupReq(signupData);
+    setTokenAndStorage(token.token);
+    setUserAndStorage({
+      email: token.email,
+      username: token.username,
+      userId: token.userId,
+    });
+    return token;
+  };
+
+  const logout = () => {
+    setTokenAndStorage("");
+    setUserAndStorage(null);
+  };
+
   const getUser = () => {
-    return userToken ? (jwt.decode(userToken) as UserToken) : null;
+    return userToken ? (jwt.decode(userToken) as User) : null;
   };
 
   return (
     <BrowserRouter>
-      <Router />
+      <Router user={user} login={login} signup={signup} />
     </BrowserRouter>
   );
 }
