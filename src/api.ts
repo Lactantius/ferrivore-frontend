@@ -44,4 +44,36 @@ async function signupReq({
  * Idea routes
  * */
 
-export { loginReq, signupReq };
+async function disagreeableReq(token: string): Promise<Idea> {
+  const res = await fetch(`${BASE_URL}/ideas/disagreeable`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(res);
+  return res
+    .json()
+    .then((data) => data.idea)
+    .catch((_) => null);
+}
+
+async function addIdeaReq(
+  token: string,
+  { url, description }: AddIdeaFormVals
+): Promise<Idea> {
+  const res = await fetch(`${BASE_URL}/ideas/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ url, description }),
+  });
+  return res
+    .json()
+    .then((data) => data.idea)
+    .catch((_) => null);
+}
+
+export { loginReq, signupReq, addIdeaReq, disagreeableReq };

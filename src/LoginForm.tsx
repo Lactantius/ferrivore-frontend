@@ -15,7 +15,6 @@ function LoginForm({ user, login }: LoginFormProps): JSX.Element {
       password: data.get("password") as string,
     };
     const res = login(loginVals);
-    console.log(res);
     res.then((user: UserToken | null) => {
       if (user && Object.keys(user).length > 0) {
         navigate("/");

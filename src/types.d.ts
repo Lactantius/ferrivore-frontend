@@ -19,6 +19,10 @@ interface UserTokenRes {
   user: UserToken;
 }
 
+/*
+ * Forms
+ */
+
 interface LoginFormVals {
   email: string;
   password: string;
@@ -30,12 +34,34 @@ interface SignupFormVals {
   password: string;
 }
 
+interface AddIdeaFormVals {
+  url: string;
+  description: string;
+}
+
+interface Idea {
+  url: string;
+  description: string;
+}
+
+interface IdeaReq {
+  idea: Idea;
+}
+
 /*
  * Props
  */
 
 interface RouterProps {
   user: User | null;
+  token: string | null;
+  login: function;
+  signup: function;
+}
+
+interface HomeProps {
+  user: User | null;
+  token: string | null;
   login: function;
   signup: function;
 }
@@ -50,8 +76,12 @@ interface LoginFormProps {
   login: function;
 }
 
-interface HomeProps {
-  user: User | null;
-  login: function;
-  signup: function;
+interface IdeaContainerProps {
+  user: User;
+  token: string;
+}
+
+interface AddIdeaFormProps {
+  user: User;
+  token: string;
 }

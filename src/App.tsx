@@ -65,7 +65,7 @@ function App(): JSX.Element {
 
   return (
     <BrowserRouter>
-      <Router user={user} login={login} signup={signup} />
+      <Router user={user} token={userToken} login={login} signup={signup} />
     </BrowserRouter>
   );
 }
