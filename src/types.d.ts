@@ -8,3 +8,8 @@ interface UserToken {
   iat: number;
   sub: string;
 }
+
+interface LoginFormVals {
+  email: string;
+  password: string;
+}
