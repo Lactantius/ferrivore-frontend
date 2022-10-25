@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import IdeaContainer from "./IdeaContainer";
 import AddIdeaForm from "./AddIdeaForm";
+
+import "./Home.css";
 
 function Home({ user, token, login, signup }: HomeProps): JSX.Element {
   return (
@@ -16,8 +19,8 @@ function Home({ user, token, login, signup }: HomeProps): JSX.Element {
         </>
       ) : (
         <>
-          <LoginForm user={user} login={login} />
-          <SignupForm user={user} signup={signup} />
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign up</Link>
         </>
       )}
     </div>

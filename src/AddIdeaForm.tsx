@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 
 import { addIdeaReq } from "./api";
 
+import "./AddIdeaForm.css";
+
 function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,24 +20,29 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate>
-      <TextField
-        required
-        id="url"
-        name="url"
-        label="URL"
-        type="text"
-        autoComplete="url"
-      />
-      <TextField
-        required
-        id="description"
-        name="description"
-        label="Description"
-        type="text"
-        autoComplete="description"
-      />
-      <Button type="submit">Submit Idea</Button>
+    <Box className="AddIdeaForm">
+      <h2>Add A New Idea</h2>
+      <Box component="form" onSubmit={handleSubmit} noValidate>
+        <TextField
+          required
+          id="url"
+          name="url"
+          label="URL"
+          type="text"
+          autoComplete="url"
+        />
+        <TextField
+          required
+          id="description"
+          name="description"
+          label="Description"
+          type="text"
+          autoComplete="description"
+        />
+        <Button type="submit" variant="contained">
+          Submit Idea
+        </Button>
+      </Box>
     </Box>
   );
 }

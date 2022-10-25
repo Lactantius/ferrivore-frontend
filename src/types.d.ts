@@ -90,3 +90,12 @@ interface NavBarProps {
   user: User | null;
   logout: function;
 }
+
+interface IdeaCardProps {
+  idea: Idea;
+}
+
+interface ReactionFormProps {
+  user: User;
+  idea: Idea;
+}

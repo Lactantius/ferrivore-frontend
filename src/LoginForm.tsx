@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+import "./LoginForm.css";
+
 function LoginForm({ user, login }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
 
@@ -23,23 +25,28 @@ function LoginForm({ user, login }: LoginFormProps): JSX.Element {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate>
-      <TextField
-        required
-        id="email"
-        name="email"
-        label="Email"
-        autoComplete="email"
-      />
-      <TextField
-        required
-        id="password"
-        name="password"
-        label="Password"
-        type="password"
-        autoComplete="current-password"
-      />
-      <Button type="submit">Login</Button>
+    <Box className="LoginForm">
+      <h1>Log in</h1>
+      <Box component="form" onSubmit={handleSubmit} noValidate>
+        <TextField
+          required
+          id="email"
+          name="email"
+          label="Email"
+          autoComplete="email"
+        />
+        <TextField
+          required
+          id="password"
+          name="password"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+        />
+        <Button type="submit" variant="contained">
+          Login
+        </Button>
+      </Box>
     </Box>
   );
 }

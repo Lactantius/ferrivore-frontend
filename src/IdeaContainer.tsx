@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import IdeaCard from "./IdeaCard";
+import ReactionForm from "./ReactionForm";
 import { disagreeableReq } from "./api";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
@@ -8,11 +10,15 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   useEffect(() => {
     const disagreeable = disagreeableReq(token);
     disagreeable.then((data) => setIdea(data));
-  });
+  }, [token]);
+
+  console.log(idea);
 
   return (
     <div className="IdeaContainer">
-      <p>What do you think?</p>
+      <h2>What do you think?</h2>
+      <IdeaCard idea={idea} />
+      <ReactionForm idea={idea} user={user} />
     </div>
   );
 }
