@@ -85,3 +85,8 @@ interface AddIdeaFormProps {
   user: User;
   token: string;
 }
+
+interface NavBarProps {
+  user: User | null;
+  logout: function;
+}

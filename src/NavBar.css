@@ -1,0 +1,19 @@
+.NavBar {
+  display: flex;
+  gap: 2rem;
+  font-size: 2rem;
+  padding: 1rem;
+  background-color: black;
+  align-items: center;
+}
+
+.NavBar a:first-child {
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.NavBar a {
+  color: white;
+  text-decoration: none;
+  align-self: flex-end;
+}
