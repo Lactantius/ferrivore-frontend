@@ -76,4 +76,19 @@ async function addIdeaReq(
     .catch((_) => null);
 }
 
-export { loginReq, signupReq, addIdeaReq, disagreeableReq };
+async function reactionReq(
+  token: string,
+  { ideaId, type, agreement }: ReactionFormVals
+): Promise<Reaction> {
+  const res = await fetch(`${BASE_URL}/ideas/${ideaId}/react`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ type, agreement }),
+  });
+  return res.json();
+}
+
+export { loginReq, signupReq, addIdeaReq, disagreeableReq, reactionReq };

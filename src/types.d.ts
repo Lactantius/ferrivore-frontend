@@ -19,6 +19,14 @@ interface UserTokenRes {
   user: UserToken;
 }
 
+interface Reaction {
+  reaction: {
+    ideaId: string;
+    type: string;
+    agreement?: number;
+  };
+}
+
 /*
  * Forms
  */
@@ -39,9 +47,18 @@ interface AddIdeaFormVals {
   description: string;
 }
 
+interface ReactionFormVals {
+  ideaId: string;
+  type: string;
+  agreement?: number;
+}
+
 interface Idea {
   url: string;
   description: string;
+  createdAt: string;
+  ideaId: string;
+  agreement?: number;
 }
 
 interface IdeaReq {
@@ -97,5 +114,6 @@ interface IdeaCardProps {
 
 interface ReactionFormProps {
   user: User;
+  token: string;
   idea: Idea;
 }

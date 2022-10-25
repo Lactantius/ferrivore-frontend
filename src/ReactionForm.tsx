@@ -4,15 +4,29 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+import { reactionReq } from "./api";
+
 import "./ReactionForm.css";
-function ReactionForm({ idea, user }: ReactionFormProps): JSX.Element {
+
+function ReactionForm({ idea, user, token }: ReactionFormProps): JSX.Element {
   const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const agreement = Number(e.target.value) - 4;
+    const reaction = reactionReq(token, {
+      ideaId: idea.ideaId,
+      agreement,
+      type: "like",
+    });
+    console.log(reaction);
   };
 
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const reaction = reactionReq(token, {
+      ideaId: idea.ideaId,
+      type: "dislike",
+    });
+    console.log(reaction);
   };
   return (
     <>

@@ -18,7 +18,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     <div className="IdeaContainer">
       <h2>What do you think?</h2>
       <IdeaCard idea={idea} />
-      <ReactionForm idea={idea} user={user} />
+      <ReactionForm idea={idea} user={user} token={token} />
     </div>
   );
 }
