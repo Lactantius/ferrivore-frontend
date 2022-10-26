@@ -153,8 +153,8 @@ interface ProfileProps {
 }
 
 interface IdeaListProps {
-  user: User;
-  token: string;
+  user: User | null;
+  token: string | null;
 }
 
 interface ResultsProps {

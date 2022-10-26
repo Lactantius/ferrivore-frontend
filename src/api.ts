@@ -123,6 +123,16 @@ async function allReactionsReq(
   });
 }
 
+async function allUserIdeasReq(token: string): Promise<Array<Idea>> {
+  const res = await fetch(`${BASE_URL}/ideas/viewed`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
 export {
   loginReq,
   signupReq,
@@ -132,4 +142,5 @@ export {
   reactionReq,
   randomReq,
   allReactionsReq,
+  allUserIdeasReq,
 };
