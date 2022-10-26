@@ -54,6 +54,16 @@ async function disagreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
   return res.json();
 }
 
+async function agreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
+  const res = await fetch(`${BASE_URL}/ideas/agreeable`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
 async function randomReq(token: string): Promise<IdeaRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/random-unseen`, {
     headers: {
@@ -102,6 +112,7 @@ export {
   signupReq,
   addIdeaReq,
   disagreeableReq,
+  agreeableReq,
   reactionReq,
   randomReq,
 };

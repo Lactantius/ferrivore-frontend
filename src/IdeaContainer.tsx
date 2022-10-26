@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 import IdeaCard from "./IdeaCard";
 import ReactionForm from "./ReactionForm";
-import { disagreeableReq, randomReq } from "./api";
+import { disagreeableReq, agreeableReq, randomReq } from "./api";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   const [idea, setIdea] = useState<Idea | string>({} as Idea);
@@ -14,6 +14,20 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
       "idea" in data ? setIdea(data.idea) : setIdea(data.error);
     });
   }, [token]);
+
+  const getDisagreeable = (token: string) => {
+    const disagreeable = disagreeableReq(token);
+    disagreeable.then((data) => {
+      "idea" in data ? setIdea(data.idea) : setIdea(data.error);
+    });
+  };
+
+  const getAgreeable = (token: string) => {
+    const agreeable = agreeableReq(token);
+    agreeable.then((data) => {
+      "idea" in data ? setIdea(data.idea) : setIdea(data.error);
+    });
+  };
 
   const getRandomUnseen = (token: string) => {
     const random = randomReq(token);
@@ -33,7 +47,14 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
         <>
           <h2>What do you think?</h2>
           <IdeaCard idea={idea} />
-          <ReactionForm idea={idea} user={user} token={token} />
+          <ReactionForm
+            idea={idea}
+            user={user}
+            token={token}
+            getAgreeable={getAgreeable}
+            getRandomUnseen={getRandomUnseen}
+            getDisagreeable={getDisagreeable}
+          />
         </>
       )}
     </div>
