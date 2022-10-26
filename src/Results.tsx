@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart, XAxis, Bar, Tooltip, Legend } from "recharts";
+import { BarChart, XAxis, Bar, Tooltip } from "recharts";
 
 const freqMap: (arr: Array<T>) => Map<T, number> = (arr) => {
   return arr.reduce<Map<T, number>>((acc, elem) => {
@@ -11,30 +11,33 @@ const freqMap: (arr: Array<T>) => Map<T, number> = (arr) => {
 const dataArray = (map) =>
   Array.from(map, ([name, value]) => ({ name, value }));
 
-const dataObj = (map: Map) => map;
-
 function Results({ results, reactions }): JSX.Element {
   console.log(results);
   console.log(reactions);
-  const graphReactions = dataArray(freqMap(reactions.reactions));
-  const graphAgreement = dataArray(freqMap(reactions.agreement));
-  console.log(graphAgreement);
-  console.log(graphReactions);
+  const graphReactions = dataArray(
+    freqMap(
+      reactions.reactions.filter((reaction) =>
+        ["LIKES", "DISLIKES"].includes(reaction)
+      )
+    )
+  ).sort((a, b) => a.name > b.name);
+  const graphAgreement = dataArray(freqMap(reactions.agreement)).sort(
+    (a, b) => a.name - b.name
+  );
   return (
     <div className="Results">
+      <h2>Who found it interesting</h2>
       <BarChart data={graphReactions} height={200} width={200}>
         <XAxis dataKey="name" />
         <Tooltip />
-        <Legend />
         <Bar dataKey="value" fill="blue" />
       </BarChart>
+      <h2>Level of agreement</h2>
       <BarChart data={graphAgreement} height={200} width={200}>
         <XAxis dataKey="name" />
         <Tooltip />
-        <Legend />
         <Bar dataKey="value" fill="blue" />
       </BarChart>
-      <p>{freqMap(reactions.reactions)}</p>
     </div>
   );
 }
