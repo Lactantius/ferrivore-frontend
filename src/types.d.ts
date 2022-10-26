@@ -65,6 +65,14 @@ interface IdeaReq {
   idea: Idea;
 }
 
+interface IdeaRes {
+  idea: Idea;
+}
+
+interface ErrorRes {
+  error: string;
+}
+
 /*
  * Props
  */

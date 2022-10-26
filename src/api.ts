@@ -44,18 +44,14 @@ async function signupReq({
  * Idea routes
  * */
 
-async function disagreeableReq(token: string): Promise<Idea> {
+async function disagreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/disagreeable`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(res);
-  return res
-    .json()
-    .then((data) => data.idea)
-    .catch((_) => null);
+  return res.json();
 }
 
 async function addIdeaReq(
