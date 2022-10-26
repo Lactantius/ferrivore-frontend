@@ -117,7 +117,6 @@ async function allReactionsReq(
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(res);
   return res.json().then((data) => {
     console.log(data);
     return { reactions: data.idea.reactions, agreement: data.idea.agreement };

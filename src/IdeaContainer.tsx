@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import IdeaCard from "./IdeaCard";
 import ReactionForm from "./ReactionForm";
 import { disagreeableReq, agreeableReq, randomReq } from "./api";
+import "./IdeaContainer.css";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   const [idea, setIdea] = useState<Idea | string>({} as Idea);
@@ -45,7 +46,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
         </>
       ) : (
         <>
-          <h2>What do you think?</h2>
+          <h2>Here's an idea...</h2>
           <IdeaCard idea={idea} />
           <ReactionForm
             idea={idea}

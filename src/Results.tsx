@@ -1,5 +1,8 @@
+import { Box } from "@mui/material";
 import React from "react";
 import { BarChart, XAxis, Bar, Tooltip } from "recharts";
+
+import "./Results.css";
 
 const freqMap: (arr: Array<T>) => Map<T, number> = (arr) => {
   return arr.reduce<Map<T, number>>((acc, elem) => {
@@ -26,18 +29,31 @@ function Results({ results, reactions }): JSX.Element {
   );
   return (
     <div className="Results">
-      <h2>Who found it interesting</h2>
-      <BarChart data={graphReactions} height={200} width={200}>
-        <XAxis dataKey="name" />
-        <Tooltip />
-        <Bar dataKey="value" fill="blue" />
-      </BarChart>
-      <h2>Level of agreement</h2>
-      <BarChart data={graphAgreement} height={200} width={200}>
-        <XAxis dataKey="name" />
-        <Tooltip />
-        <Bar dataKey="value" fill="blue" />
-      </BarChart>
+      <h2>What other people thought</h2>
+      {graphAgreement.length > 2 ? (
+        <>
+          <div>
+            <h3>How many people found it interesting?</h3>
+            <BarChart data={graphReactions} height={150} width={400}>
+              <XAxis dataKey="name" />
+              <Tooltip />
+              <Bar dataKey="value" fill="blue" />
+            </BarChart>
+          </div>
+          <div>
+            <h3>How much did people agree?</h3>
+            <BarChart data={graphAgreement} height={200} width={400}>
+              <XAxis dataKey="name" />
+              <Tooltip />
+              <Bar dataKey="value" fill="blue" />
+            </BarChart>
+          </div>
+        </>
+      ) : (
+        <p>
+          <i>Not many people have rated this idea.</i>
+        </p>
+      )}
     </div>
   );
 }

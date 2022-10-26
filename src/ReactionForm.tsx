@@ -52,25 +52,29 @@ function ReactionForm({
   };
 
   return (
-    <>
-      <Box className="ReactionForm" component="form">
-        <Typography component="legend">Agreement</Typography>
+    <div className="ReactionForm">
+      <h2>Do you agree?</h2>
+      <Box component="form">
+        <legend>Agreement Level</legend>
         <Rating name="agreement" max={7} onChange={submitInteresting} />
       </Box>
-      <Box className="ReactionForm" component="form" onSubmit={submitBoring}>
-        <Button type="submit">Boring</Button>
+      <Box component="form" onSubmit={submitBoring}>
+        <Button type="submit">I am not interested</Button>
       </Box>
       {showResults ? (
         <>
+          <div>
+            <h3>Get a new idea</h3>
+            <Button onClick={() => getAgreeable(token)}>Agreeable</Button>
+            <Button onClick={() => getRandomUnseen(token)}>Random</Button>
+            <Button onClick={() => getDisagreeable(token)}>Disagreeable</Button>
+          </div>
           <Results results={results} reactions={reactions} />
-          <Button onClick={() => getAgreeable(token)}>Agreeable</Button>
-          <Button onClick={() => getRandomUnseen(token)}>Random</Button>
-          <Button onClick={() => getDisagreeable(token)}>Disagreeable</Button>
         </>
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }
 
