@@ -45,6 +45,21 @@ interface Reaction {
   };
 }
 
+interface IdeaWithAllReactions {
+  createdAt: string;
+  url: string;
+  description: string;
+  ideaId: string;
+  userAgreement?: number;
+  userRelationship: string;
+  allReactions: Array<string>;
+  allAgreement: Array<number>;
+}
+
+interface IdeasWithReactionsRes {
+  ideas: Array<IdeaWithAllReactions>;
+}
+
 /*
  * Forms
  */

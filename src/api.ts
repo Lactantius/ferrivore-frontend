@@ -123,8 +123,8 @@ async function allReactionsReq(
   });
 }
 
-async function allUserIdeasReq(token: string): Promise<Array<Idea>> {
-  const res = await fetch(`${BASE_URL}/ideas/viewed`, {
+async function allUserIdeasReq(token: string): Promise<IdeasWithReactionsRes> {
+  const res = await fetch(`${BASE_URL}/ideas/viewed-with-relationships`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

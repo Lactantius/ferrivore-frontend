@@ -5,10 +5,10 @@ import IdeaCard from "./IdeaCard";
 import { allUserIdeasReq } from "./api";
 
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {
-  const [ideas, setIdeas] = useState(Array<Idea>);
+  const [ideas, setIdeas] = useState(Array<IdeaWithAllReactions>);
 
   useEffect(() => {
-    allUserIdeasReq(token!).then((ideas) => setIdeas(ideas));
+    allUserIdeasReq(token!).then((ideas) => setIdeas(ideas.ideas));
   }, [token]);
 
   if (!user || !token) return <Navigate to="/" />;
@@ -17,14 +17,14 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   return (
     <>
       <h1>Ideas</h1>
-      {"ideas" in ideas ? (
+      {ideas.length > 0 ? (
         <>
-          {ideas.ideas.map((idea) => {
+          {ideas.map((idea) => {
             return <IdeaCard key={idea.ideaId} idea={idea} />;
           })}
         </>
       ) : (
-        <p>Loading</p>
+        <p>Loading...</p>
       )}
     </>
   );
