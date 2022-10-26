@@ -54,6 +54,16 @@ async function disagreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
   return res.json();
 }
 
+async function randomReq(token: string): Promise<IdeaRes | ErrorRes> {
+  const res = await fetch(`${BASE_URL}/ideas/random-unseen`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
 async function addIdeaReq(
   token: string,
   { url, description }: AddIdeaFormVals
@@ -87,4 +97,11 @@ async function reactionReq(
   return res.json();
 }
 
-export { loginReq, signupReq, addIdeaReq, disagreeableReq, reactionReq };
+export {
+  loginReq,
+  signupReq,
+  addIdeaReq,
+  disagreeableReq,
+  reactionReq,
+  randomReq,
+};
