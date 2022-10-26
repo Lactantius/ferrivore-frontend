@@ -62,7 +62,7 @@ function ReactionForm({
       </Box>
       {showResults ? (
         <>
-          <Results results={(results, reactions)} />
+          <Results results={results} reactions={reactions} />
           <Button onClick={() => getAgreeable(token)}>Agreeable</Button>
           <Button onClick={() => getRandomUnseen(token)}>Random</Button>
           <Button onClick={() => getDisagreeable(token)}>Disagreeable</Button>
