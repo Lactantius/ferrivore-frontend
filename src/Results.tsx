@@ -16,7 +16,7 @@ const frequencyArray: <T>(map: Map<T, number>) => Array<GraphData<T>> = (map) =>
 
 const formatResults = (results: Reaction) => {
   if (results.reaction.type === "DISLIKES") {
-    return "We'll try to find something more interesting.";
+    return "This just wasn't very interesting.";
   }
 
   const agreementMap = new Map([

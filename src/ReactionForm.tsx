@@ -24,31 +24,36 @@ function ReactionForm({
   const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const agreement = Number(e.target.value) - 4;
-    const reaction = reactionReq(token, {
+    const userReaction = reactionReq(token, {
       ideaId: idea.ideaId,
       agreement,
       type: "like",
     });
-    reaction.then((data) => setResults(data));
-    getReactions(token, idea.ideaId);
+    getReactions(userReaction, token, idea.ideaId);
   };
 
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const reaction = reactionReq(token, {
+    const userReaction = reactionReq(token, {
       ideaId: idea.ideaId,
       type: "dislike",
     });
-    reaction.then((data) => setResults(data));
-    getReactions(token, idea.ideaId);
+    getReactions(userReaction, token, idea.ideaId);
   };
 
-  const getReactions = (token: string, id: string) => {
-    const allReactions = allReactionsReq(token, id);
-    allReactions.then((data) => {
-      setReactions(data);
-      setShowResults(true);
-    });
+  const getReactions = (
+    userReactionPromise: Promise<Reaction>,
+    token: string,
+    id: string
+  ) => {
+    const allReactionsPromise = allReactionsReq(token, id);
+    Promise.all([userReactionPromise, allReactionsPromise]).then(
+      ([userReaction, allReactions]) => {
+        setResults(userReaction);
+        setReactions(allReactions);
+        setShowResults(true);
+      }
+    );
   };
 
   return (
