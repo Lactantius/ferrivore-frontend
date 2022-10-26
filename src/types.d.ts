@@ -4,6 +4,19 @@ interface User {
   userId: string;
 }
 
+interface GraphData<T> {
+  name: T;
+  frequency: number;
+}
+
+interface Reaction {
+  reaction: {
+    ideaId: string;
+    type: string;
+    agreement?: number;
+  };
+}
+
 interface UserToken {
   email: string;
   exp: string;
@@ -129,6 +142,9 @@ interface ReactionFormProps {
   user: User;
   token: string;
   idea: Idea;
+  getAgreeable: function;
+  getRandomUnseen: function;
+  getDisagreeable: function;
 }
 
 interface ProfileProps {
@@ -139,4 +155,9 @@ interface ProfileProps {
 interface IdeaListProps {
   user: User;
   token: string;
+}
+
+interface ResultsProps {
+  results: Reaction;
+  reactions: Reactions;
 }

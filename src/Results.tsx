@@ -4,27 +4,25 @@ import { BarChart, XAxis, Bar, Tooltip } from "recharts";
 
 import "./Results.css";
 
-const freqMap: (arr: Array<T>) => Map<T, number> = (arr) => {
+const freqMap: <T>(arr: Array<T>) => Map<T, number> = <T,>(arr: Array<T>) => {
   return arr.reduce<Map<T, number>>((acc, elem) => {
-    acc.has(elem) ? acc.set(elem, acc.get(elem) + 1) : acc.set(elem, 1);
+    acc.has(elem) ? acc.set(elem, Number(acc.get(elem)) + 1) : acc.set(elem, 1);
     return acc;
   }, new Map());
 };
 
-const dataArray = (map) =>
-  Array.from(map, ([name, value]) => ({ name, value }));
+const frequencyArray: <T>(map: Map<T, number>) => Array<GraphData<T>> = (map) =>
+  Array.from(map, ([name, frequency]) => ({ name, frequency }));
 
-function Results({ results, reactions }): JSX.Element {
-  console.log(results);
-  console.log(reactions);
-  const graphReactions = dataArray(
+function Results({ results, reactions }: ResultsProps): JSX.Element {
+  const graphReactions = frequencyArray(
     freqMap(
       reactions.reactions.filter((reaction) =>
         ["LIKES", "DISLIKES"].includes(reaction)
       )
     )
-  ).sort((a, b) => a.name > b.name);
-  const graphAgreement = dataArray(freqMap(reactions.agreement)).sort(
+  );
+  const graphAgreement = frequencyArray(freqMap(reactions.agreement)).sort(
     (a, b) => a.name - b.name
   );
   return (
