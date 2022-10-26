@@ -133,6 +133,19 @@ async function allUserIdeasReq(token: string): Promise<IdeasWithReactionsRes> {
   return res.json();
 }
 
+async function allPostedIdeasReq(
+  user: User,
+  token: string
+): Promise<IdeasWithReactionsRes> {
+  const res = await fetch(`${BASE_URL}/ideas/user/${user.userId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
 export {
   loginReq,
   signupReq,
@@ -143,4 +156,5 @@ export {
   randomReq,
   allReactionsReq,
   allUserIdeasReq,
+  allPostedIdeasReq,
 };

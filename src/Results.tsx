@@ -35,7 +35,7 @@ function Results({ results, reactions }: ResultsProps): JSX.Element {
             <BarChart data={graphReactions} height={150} width={400}>
               <XAxis dataKey="name" />
               <Tooltip />
-              <Bar dataKey="value" fill="blue" />
+              <Bar dataKey="frequency" fill="blue" />
             </BarChart>
           </div>
           <div>
@@ -43,7 +43,7 @@ function Results({ results, reactions }: ResultsProps): JSX.Element {
             <BarChart data={graphAgreement} height={200} width={400}>
               <XAxis dataKey="name" />
               <Tooltip />
-              <Bar dataKey="value" fill="blue" />
+              <Bar dataKey="frequency" fill="blue" />
             </BarChart>
           </div>
         </>
