@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import Profile from "./Profile";
+import IdeaList from "./IdeaList";
 
 function Router({ user, token, login, signup }: RouterProps): JSX.Element {
   return (
@@ -19,6 +21,8 @@ function Router({ user, token, login, signup }: RouterProps): JSX.Element {
         path="/signup"
         element={<SignupForm user={user} signup={signup} />}
       />
+      <Route path="/profile" element={<Profile user={user} token={token} />} />
+      <Route path="/ideas" element={<IdeaList user={user} token={token} />} />
     </Routes>
   );
 }

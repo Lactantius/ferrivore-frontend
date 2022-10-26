@@ -130,3 +130,13 @@ interface ReactionFormProps {
   token: string;
   idea: Idea;
 }
+
+interface ProfileProps {
+  user: User;
+  token: string;
+}
+
+interface IdeaListProps {
+  user: User;
+  token: string;
+}

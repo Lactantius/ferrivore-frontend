@@ -11,8 +11,9 @@ function NavBar({ user, logout }: NavBarProps): JSX.Element {
         <>
           <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/" onClick={(e: React.MouseEvent) => logout()}>
-            Logout {user.username}
+            Logout
           </NavLink>
+          <NavLink to="/ideas">Ideas</NavLink>
         </>
       ) : (
         <>
