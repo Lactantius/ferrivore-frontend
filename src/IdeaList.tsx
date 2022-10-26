@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { Navigate } from "react-router-dom";
 
 import IdeaCard from "./IdeaCard";
-import { allUserIdeasReq, allPostedIdeasReq } from "./api";
+import { allUserIdeasReq, allPostedIdeasReq, deleteIdeaReq } from "./api";
 import "./IdeaList.css";
 
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {
@@ -19,6 +19,11 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
 
   const setReactedIdeas = (token) =>
     allUserIdeasReq(token).then((i) => setIdeas(i.ideas));
+
+  const deleteIdea = (token: string, id: string) => {
+    deleteIdeaReq(id, token);
+    setIdeas((ideas) => ideas.filter((idea) => idea.ideaId !== id));
+  };
 
   if (!user || !token) return <Navigate to="/" />;
 
@@ -48,7 +53,17 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
       {ideas.length > 0 ? (
         <>
           {ideas.map((idea) => {
-            return <IdeaCard key={idea.ideaId} idea={idea} />;
+            return (
+              <>
+                <IdeaCard key={idea.ideaId} idea={idea} />
+                <Button
+                  variant="contained"
+                  onClick={() => deleteIdea(token, idea.ideaId)}
+                >
+                  Delete
+                </Button>
+              </>
+            );
           })}
         </>
       ) : (

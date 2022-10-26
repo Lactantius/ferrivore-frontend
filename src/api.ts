@@ -1,6 +1,11 @@
 const BASE_URL =
   process.env.REACT_APP_BASE_URL || "https://ferrivore.gerardkeiser.com/api";
 
+const headers = (token: string) => ({
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+});
+
 /**
  * User routes
  * */
@@ -146,6 +151,17 @@ async function allPostedIdeasReq(
   return res.json();
 }
 
+async function deleteIdeaReq(id: string, token: string) {
+  const res = await fetch(`${BASE_URL}/ideas/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
 export {
   loginReq,
   signupReq,
@@ -157,4 +173,5 @@ export {
   allReactionsReq,
   allUserIdeasReq,
   allPostedIdeasReq,
+  deleteIdeaReq,
 };
