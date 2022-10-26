@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import IdeaCard from "./IdeaCard";
 import { allUserIdeasReq } from "./api";
+import "./IdeaList.css";
 
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   const [ideas, setIdeas] = useState(Array<IdeaWithAllReactions>);
@@ -15,7 +16,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
 
   console.log(ideas);
   return (
-    <>
+    <div className="IdeaList">
       <h1>Ideas</h1>
       {ideas.length > 0 ? (
         <>
@@ -26,7 +27,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
       ) : (
         <p>Loading...</p>
       )}
-    </>
+    </div>
   );
 }
 

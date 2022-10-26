@@ -150,7 +150,7 @@ interface NavBarProps {
 }
 
 interface IdeaCardProps {
-  idea: Idea;
+  idea: IdeaWithAllReactions;
 }
 
 interface ReactionFormProps {

@@ -47,7 +47,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
       ) : (
         <>
           <h2>Here's an idea...</h2>
-          <IdeaCard idea={idea} />
+          <a href={idea.url}>{idea.description}</a>
           <ReactionForm
             idea={idea}
             user={user}

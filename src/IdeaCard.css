@@ -1,0 +1,8 @@
+.IdeaCard {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  width: 60%;
+  margin: auto;
+}
