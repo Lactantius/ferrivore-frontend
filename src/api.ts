@@ -107,6 +107,23 @@ async function reactionReq(
   return res.json();
 }
 
+async function allReactionsReq(
+  token: string,
+  idea_id: string
+): Promise<Reactions> {
+  const res = await fetch(`${BASE_URL}/ideas/${idea_id}/reactions`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(res);
+  return res.json().then((data) => {
+    console.log(data);
+    return { reactions: data.idea.reactions, agreement: data.idea.agreement };
+  });
+}
+
 export {
   loginReq,
   signupReq,
@@ -115,4 +132,5 @@ export {
   agreeableReq,
   reactionReq,
   randomReq,
+  allReactionsReq,
 };

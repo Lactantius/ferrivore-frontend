@@ -1,9 +1,13 @@
 import React from "react";
 
-function Results({ reactions }): JSX.Element {
+function Results({ results, reactions }): JSX.Element {
+  console.log(results);
+  console.log(reactions);
   return (
     <div className="Results">
-      <p>{reactions}</p>
+      <p>Results?</p>
+      <p>{results.agreement}</p>
+      <p>{results.reactions}</p>
     </div>
   );
 }

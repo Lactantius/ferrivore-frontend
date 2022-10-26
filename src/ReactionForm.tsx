@@ -4,9 +4,8 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import { reactionReq } from "./api";
+import { reactionReq, allReactionsReq } from "./api";
 import Results from "./Results";
-import NewIdeaButtons from "./NewIdeaButtons";
 
 import "./ReactionForm.css";
 
@@ -19,6 +18,7 @@ function ReactionForm({
   getDisagreeable,
 }: ReactionFormProps): JSX.Element {
   const [results, setResults] = useState<Reaction>({} as Reaction);
+  const [reactions, setReactions] = useState<Reactions>({} as Reactions);
   const [showResults, setShowResults] = useState(false);
 
   const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,8 @@ function ReactionForm({
       agreement,
       type: "like",
     });
-    setShowResults(true);
+    reaction.then((data) => setResults(data));
+    getReactions(token, idea.ideaId);
   };
 
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,8 +39,18 @@ function ReactionForm({
       ideaId: idea.ideaId,
       type: "dislike",
     });
-    setShowResults(true);
+    reaction.then((data) => setResults(data));
+    getReactions(token, idea.ideaId);
   };
+
+  const getReactions = (token: string, id: string) => {
+    const allReactions = allReactionsReq(token, id);
+    allReactions.then((data) => {
+      setReactions(data);
+      setShowResults(true);
+    });
+  };
+
   return (
     <>
       <Box className="ReactionForm" component="form">
@@ -51,7 +62,7 @@ function ReactionForm({
       </Box>
       {showResults ? (
         <>
-          <Results />
+          <Results results={(results, reactions)} />
           <Button onClick={() => getAgreeable(token)}>Agreeable</Button>
           <Button onClick={() => getRandomUnseen(token)}>Random</Button>
           <Button onClick={() => getDisagreeable(token)}>Disagreeable</Button>

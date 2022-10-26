@@ -19,6 +19,11 @@ interface UserTokenRes {
   user: UserToken;
 }
 
+interface Reactions {
+  reactions: string[];
+  agreement: number[];
+}
+
 interface Reaction {
   reaction: {
     ideaId: string;
