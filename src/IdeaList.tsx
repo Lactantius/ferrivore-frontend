@@ -56,12 +56,18 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
             return (
               <>
                 <IdeaCard key={idea.ideaId} idea={idea} />
-                <Button
-                  variant="contained"
-                  onClick={() => deleteIdea(token, idea.ideaId)}
-                >
-                  Delete
-                </Button>
+                {postedOnly ? (
+                  <Button
+                    variant="contained"
+                    onClick={() => deleteIdea(token, idea.ideaId)}
+                  >
+                    Delete
+                  </Button>
+                ) : (
+                  <Button href={`/ideas/${idea.ideaId}`}>
+                    Change reaction
+                  </Button>
+                )}
               </>
             );
           })}
