@@ -55,19 +55,13 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
           {ideas.map((idea) => {
             return (
               <>
-                <IdeaCard key={idea.ideaId} idea={idea} />
-                {postedOnly ? (
-                  <Button
-                    variant="contained"
-                    onClick={() => deleteIdea(token, idea.ideaId)}
-                  >
-                    Delete
-                  </Button>
-                ) : (
-                  <Button href={`/ideas/${idea.ideaId}`}>
-                    Change reaction
-                  </Button>
-                )}
+                <IdeaCard key={idea.ideaId} idea={idea} user={user} />
+                <Button
+                  key={"btn" + idea.ideaId}
+                  href={`/ideas/${idea.ideaId}`}
+                >
+                  View Details
+                </Button>
               </>
             );
           })}

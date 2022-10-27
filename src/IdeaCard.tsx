@@ -1,9 +1,12 @@
 import React from "react";
+import Button from "@mui/material/Button";
 
 import Results from "./Results";
 import "./IdeaCard.css";
 
-function IdeaCard({ idea }: IdeaCardProps): JSX.Element {
+function IdeaCard({ idea, user }: IdeaCardProps): JSX.Element {
+  console.log(idea);
+  console.log(user);
   return (
     <div className="IdeaCard">
       <a href={idea.url}>{idea.description}</a>

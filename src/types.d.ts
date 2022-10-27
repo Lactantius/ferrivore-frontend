@@ -58,6 +58,7 @@ interface IdeaWithAllReactions {
   userRelationship: string;
   allReactions: Array<string>;
   allAgreement: Array<number>;
+  postedBy: string;
 }
 
 interface IdeasWithReactionsRes {
@@ -155,6 +156,7 @@ interface NavBarProps {
 
 interface IdeaCardProps {
   idea: IdeaWithAllReactions;
+  user: User | null;
 }
 
 interface ReactionFormProps {
