@@ -32,6 +32,10 @@ interface UserTokenRes {
   user: UserToken;
 }
 
+interface IdeaDetailsRes {
+  idea: IdeaWithAllReactions;
+}
+
 interface Reactions {
   reactions: string[];
   agreement: number[];
@@ -168,6 +172,11 @@ interface ProfileProps {
 }
 
 interface IdeaListProps {
+  user: User | null;
+  token: string | null;
+}
+
+interface UserProps {
   user: User | null;
   token: string | null;
 }

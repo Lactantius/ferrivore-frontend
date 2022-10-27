@@ -162,6 +162,28 @@ async function deleteIdeaReq(id: string, token: string) {
   return res.json();
 }
 
+async function ideaDetailsReq(
+  id: string,
+  token: string,
+  with_reactions = false,
+  with_user_reaction = false
+): Promise<IdeaDetailsRes> {
+  const res = await fetch(
+    `${BASE_URL}/ideas/${id}?` +
+      new URLSearchParams({
+        "with-reactions": String(with_reactions),
+        "with-user-reaction": String(with_user_reaction),
+      }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res.json();
+}
+
 export {
   loginReq,
   signupReq,
@@ -174,4 +196,5 @@ export {
   allUserIdeasReq,
   allPostedIdeasReq,
   deleteIdeaReq,
+  ideaDetailsReq,
 };
