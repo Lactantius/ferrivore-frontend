@@ -7,6 +7,7 @@ import SignupForm from "./SignupForm";
 import Profile from "./Profile";
 import IdeaList from "./IdeaList";
 import IdeaDetails from "./IdeaDetails";
+import AddIdeaForm from "./AddIdeaForm";
 
 function Router({ user, token, login, signup }: RouterProps): JSX.Element {
   return (
@@ -28,6 +29,7 @@ function Router({ user, token, login, signup }: RouterProps): JSX.Element {
         path="/ideas/:id"
         element={<IdeaDetails user={user} token={token} />}
       />
+      <Route path="/new" element={<AddIdeaForm user={user} token={token} />} />
     </Routes>
   );
 }

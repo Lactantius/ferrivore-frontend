@@ -164,7 +164,7 @@ async function ideaDetailsReq(
   token: string,
   with_reactions = false,
   with_user_reaction = false
-): Promise<IdeaDetailsRes> {
+): Promise<IdeaDetailsRes | ErrorRes> {
   const res = await fetch(
     `${BASE_URL}/ideas/${id}?` +
     new URLSearchParams({

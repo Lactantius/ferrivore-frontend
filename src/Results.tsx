@@ -32,8 +32,6 @@ const formatResults = (userReaction: UserReaction) => {
 };
 
 function Results({ userReaction, allReactions }: ResultsProps): JSX.Element {
-  console.log(userReaction);
-  console.log(allReactions);
   if (
     "msg" in userReaction ||
     "msg" in allReactions ||

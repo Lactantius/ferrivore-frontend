@@ -50,41 +50,43 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
 
   return (
     <div className="IdeaContainer">
-      {typeof idea === "string" ? (
-        <>
-          <h3>{idea}</h3>
-          <Button onClick={() => getRandomUnseen(token)}>Random Idea</Button>
-        </>
-      ) : (
-        <>
-          <h2>Here's an idea...</h2>
-          <a href={idea.url}>{idea.description}</a>
-          <ReactionForm
-            idea={idea}
-            user={user}
-            token={token}
-            setUserReaction={setUserReaction}
-            setAllReactions={setAllReactions}
-            setReactionSubmitted={setReactionSubmitted}
-          />
-          {reactionSubmitted ? (
-            <>
-              <GetIdeaForm
-                token={token}
-                getAgreeable={getAgreeable}
-                getRandomUnseen={getRandomUnseen}
-                getDisagreeable={getDisagreeable}
-              />
-              <Results
-                userReaction={userReaction}
-                allReactions={allReactions}
-              />
-            </>
-          ) : (
-            <></>
-          )}
-        </>
-      )}
+      <React.StrictMode>
+        {typeof idea === "string" ? (
+          <>
+            <h3>{idea}</h3>
+            <Button onClick={() => getRandomUnseen(token)}>Random Idea</Button>
+          </>
+        ) : (
+          <>
+            <h2>Here's an idea...</h2>
+            <a href={idea.url}>{idea.description}</a>
+            <ReactionForm
+              idea={idea}
+              user={user}
+              token={token}
+              setUserReaction={setUserReaction}
+              setAllReactions={setAllReactions}
+              setReactionSubmitted={setReactionSubmitted}
+            />
+            {reactionSubmitted ? (
+              <>
+                <GetIdeaForm
+                  token={token}
+                  getAgreeable={getAgreeable}
+                  getRandomUnseen={getRandomUnseen}
+                  getDisagreeable={getDisagreeable}
+                />
+                <Results
+                  userReaction={userReaction}
+                  allReactions={allReactions}
+                />
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
+      </React.StrictMode>
     </div>
   );
 }

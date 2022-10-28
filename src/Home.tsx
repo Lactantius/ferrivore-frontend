@@ -13,10 +13,7 @@ function Home({ user, token, login, signup }: HomeProps): JSX.Element {
     <div className="Home">
       <h1>Ferrivore</h1>
       {user && token ? (
-        <>
-          <IdeaContainer user={user} token={token} />
-          <AddIdeaForm user={user} token={token} />
-        </>
+        <IdeaContainer user={user} token={token} />
       ) : (
         <>
           <Link to="/login">Log in</Link>

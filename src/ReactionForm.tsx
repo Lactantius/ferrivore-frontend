@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
@@ -15,9 +15,10 @@ function ReactionForm({
   setAllReactions,
   setReactionSubmitted,
 }: ReactionFormProps): JSX.Element {
-  const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const agreement = Number(e.target.value) - 4;
+  const [value, setValue] = React.useState<number | null>(null);
+
+  const submitInteresting = (val: number | null) => {
+    const agreement = Number(val) - 4;
     const reactionRes = reactReq(token, {
       ideaId: idea.ideaId,
       agreement,
@@ -27,7 +28,6 @@ function ReactionForm({
       getReactions(reactionRes, token, idea.ideaId);
     }
   };
-
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const reactionRes = reactReq(token, {
@@ -73,7 +73,15 @@ function ReactionForm({
       <h2>Do you agree?</h2>
       <Box component="form">
         <legend>Agreement Level</legend>
-        <Rating name="agreement" max={7} onChange={submitInteresting} />
+        <Rating
+          name="agreement"
+          max={7}
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(() => newValue);
+            submitInteresting(newValue);
+          }}
+        />
       </Box>
       <Box component="form" onSubmit={submitBoring}>
         <Button type="submit">I am not interested</Button>

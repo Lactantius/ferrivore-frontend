@@ -2,12 +2,14 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
 
 import { addIdeaReq } from "./api";
 
 import "./AddIdeaForm.css";
 
 function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -17,6 +19,9 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
     };
     const res = addIdeaReq(token, IdeaVals);
     console.log(res);
+    res.then(idea => {
+      navigate(`/ideas/${idea.ideaId}`);
+    })
   };
 
   return (

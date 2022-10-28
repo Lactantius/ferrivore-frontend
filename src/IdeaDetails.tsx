@@ -10,12 +10,22 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [idea, setIdea] = useState({} as IdeaWithAllReactions);
-
+  const [idea, setIdea] = useState<Idea | IdeaWithAllReactions | ErrorRes>(
+    {} as IdeaWithAllReactions
+  );
   useEffect(() => {
-    ideaDetailsReq(id, token, true, true).then((data) => {
-      setIdea((old) => data.idea);
-    });
+    const getIdea = async () => {
+      const withReactions = await ideaDetailsReq(id, token, true, true);
+      if ("idea" in withReactions) {
+        setIdea(withReactions.idea);
+      } else {
+        const withoutReactions = await ideaDetailsReq(id, token);
+        setIdea(() =>
+          "idea" in withoutReactions ? withoutReactions.idea : withoutReactions
+        );
+      }
+    };
+    getIdea();
   }, [id, token]);
 
   const deleteIdea = (token: string, id: string) => {
@@ -25,25 +35,27 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
 
   if (!user || !token) return <Navigate to="/" />;
 
-  if (Object.keys(idea).length === 0) return <h2>Loading...</h2>;
-
   console.log(idea);
+
+  if (!idea || Object.keys(idea).length === 0) return <h2>Loading...</h2>;
 
   return (
     <div className="IdeaDetails">
-      <h1>Idea Details</h1>
-      <IdeaCard idea={idea} user={user} />
-      <ReactionForm idea={idea} user={user} token={token} />
-      {idea.postedBy === user?.userId ? (
-        <Button
-          variant="contained"
-          onClick={() => deleteIdea(token, idea.ideaId)}
-        >
-          Delete
-        </Button>
-      ) : (
-        <></>
-      )}
+      <React.StrictMode>
+        <h1>Idea Details</h1>
+        <IdeaCard idea={idea} user={user} />
+        <ReactionForm idea={idea} user={user} token={token} />
+        {idea.postedBy === user?.userId ? (
+          <Button
+            variant="contained"
+            onClick={() => deleteIdea(token, idea.ideaId)}
+          >
+            Delete
+          </Button>
+        ) : (
+          <></>
+        )}
+      </React.StrictMode>
     </div>
   );
 }
