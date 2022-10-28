@@ -1,0 +1,17 @@
+.Footer {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem 1rem 2rem;
+  gap: 3rem;
+  margin-top: auto;
+}
+
+.Footer a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

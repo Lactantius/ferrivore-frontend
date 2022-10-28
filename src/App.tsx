@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 import Router from "./Router";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 import { loginReq, signupReq } from "./api";
 
 import "./App.css";
@@ -65,10 +66,13 @@ function App(): JSX.Element {
   };
 
   return (
-    <BrowserRouter>
-      <NavBar user={user} logout={logout} />
-      <Router user={user} token={userToken} login={login} signup={signup} />
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <NavBar user={user} logout={logout} />
+        <Router user={user} token={userToken} login={login} signup={signup} />
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
