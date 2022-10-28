@@ -1,0 +1,18 @@
+.LandingPage {
+  margin-top: 3rem;
+}
+
+.LandingPage h1 {
+  font-size: 6rem;
+}
+
+.LandingPage h2 {
+  font-size: 3rem;
+}
+
+.LandingPage-buttons {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}

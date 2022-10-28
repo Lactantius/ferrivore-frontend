@@ -17,10 +17,10 @@ function Footer(): JSX.Element {
         <ContactPageOutlinedIcon />
         Contact
       </a>
-      <Link to="/">
+      <a href="https://github.com/Lactantius/ferrivore">
         <CodeIcon />
         Source
-      </Link>
+      </a>
     </div>
   );
 }

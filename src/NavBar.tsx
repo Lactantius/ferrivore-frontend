@@ -4,6 +4,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
 import "./NavBar.css";
 
@@ -32,8 +34,14 @@ function NavBar({ user, logout }: NavBarProps): JSX.Element {
         </>
       ) : (
         <>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign up</NavLink>
+          <NavLink to="/login" className="push">
+            <LoginIcon />
+            Login
+          </NavLink>
+          <NavLink to="/signup">
+            <PersonAddAltOutlinedIcon />
+            Sign up
+          </NavLink>
         </>
       )}
     </nav>
