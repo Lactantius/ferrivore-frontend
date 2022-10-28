@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import IdeaList from "./IdeaList";
 import IdeaDetails from "./IdeaDetails";
 import AddIdeaForm from "./AddIdeaForm";
+import PageNotFound from "./PageNotFound";
 
 function Router({ user, token, login, signup }: RouterProps): JSX.Element {
   return (
@@ -30,6 +31,7 @@ function Router({ user, token, login, signup }: RouterProps): JSX.Element {
         element={<IdeaDetails user={user} token={token} />}
       />
       <Route path="/new" element={<AddIdeaForm user={user} token={token} />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
