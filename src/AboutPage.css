@@ -1,0 +1,16 @@
+.AboutPage {
+  margin: 3rem auto auto auto;
+  width: 60%;
+}
+
+.AboutPage .AboutPage-centered {
+  text-align: center;
+}
+
+.AboutPage h1 {
+  font-size: 6rem;
+}
+
+.AboutPage p {
+  text-align: left;
+}
