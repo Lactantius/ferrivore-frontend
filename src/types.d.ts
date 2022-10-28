@@ -108,6 +108,7 @@ interface Idea {
   createdAt: string;
   ideaId: string;
   agreement?: number;
+  postedBy: string;
 }
 
 interface IdeaReq {
@@ -152,6 +153,7 @@ interface HomeProps {
 interface SignupFormProps {
   user: User | null;
   signup: function;
+  token: string | null;
 }
 
 interface LoginFormProps {
@@ -165,8 +167,8 @@ interface IdeaContainerProps {
 }
 
 interface AddIdeaFormProps {
-  user: User;
-  token: string;
+  user: User | null;
+  token: string | null;
 }
 
 interface NavBarProps {
@@ -175,22 +177,22 @@ interface NavBarProps {
 }
 
 interface IdeaCardProps {
-  idea: IdeaWithAllReactions;
-  user: User | null;
+  idea: Idea | IdeaWithAllReactions | ErrorRes;
 }
 
 interface ReactionFormProps {
   user: User;
   token: string;
   idea: Idea;
-  getAgreeable: function;
-  getRandomUnseen: function;
-  getDisagreeable: function;
+  initialValue: number | null;
+  setUserReaction?: function;
+  setAllReactions?: function;
+  setReactionSubmitted?: function;
 }
 
 interface ProfileProps {
-  user: User;
-  token: string;
+  user: User | null;
+  token: string | null;
 }
 
 interface IdeaListProps {
@@ -205,5 +207,12 @@ interface UserProps {
 
 interface ResultsProps {
   userReaction: UserReaction | ErrorRes;
-  allReactions: AllReactions | ErrorRes;
+  anonReactions: AnonReactions | ErrorRes;
+}
+
+interface GetIdeaFormProps {
+  token: string;
+  getAgreeable: function;
+  getRandomUnseen: function;
+  getDisagreeable: function;
 }

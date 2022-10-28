@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 import "./SignupForm.css";
 
-function SignupForm({ signup, user }: SignupFormProps): JSX.Element {
+function SignupForm({ signup, user, token }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,6 +24,10 @@ function SignupForm({ signup, user }: SignupFormProps): JSX.Element {
       }
     });
   };
+
+  if (!user || !token) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Box className="SignupForm">

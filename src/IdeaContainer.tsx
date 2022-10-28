@@ -79,7 +79,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
                 />
                 <Results
                   userReaction={userReaction}
-                  allReactions={allReactions}
+                  anonReactions={allReactions}
                 />
               </>
             ) : (

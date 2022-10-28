@@ -6,7 +6,7 @@ function GetIdeaForm({
   getAgreeable,
   getRandomUnseen,
   getDisagreeable,
-}): JSX.Element {
+}: GetIdeaFormProps): JSX.Element {
   return (
     <div className="GetIdeaForm">
       <h3>Get a new idea</h3>

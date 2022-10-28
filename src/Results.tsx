@@ -31,11 +31,11 @@ const formatResults = (userReaction: UserReaction) => {
   return `You ${agreementMap.get(userReaction.userAgreement!)}.`;
 };
 
-function Results({ userReaction, allReactions }: ResultsProps): JSX.Element {
+function Results({ userReaction, anonReactions }: ResultsProps): JSX.Element {
   if (
     "msg" in userReaction ||
-    "msg" in allReactions ||
-    Object.keys(allReactions).length === 0 ||
+    "msg" in anonReactions ||
+    Object.keys(anonReactions).length === 0 ||
     Object.keys(userReaction).length === 0
   ) {
     return <h2>Results could not be displayed.</h2>;
@@ -43,13 +43,13 @@ function Results({ userReaction, allReactions }: ResultsProps): JSX.Element {
 
   const graphReactions = frequencyArray(
     freqMap(
-      allReactions.allReactions.filter((allReactions) =>
-        ["LIKES", "DISLIKES"].includes(allReactions)
+      anonReactions.allReactions.filter((reactions) =>
+        ["LIKES", "DISLIKES"].includes(reactions)
       )
     )
   );
   const graphAgreement = frequencyArray(
-    freqMap(allReactions.allAgreement)
+    freqMap(anonReactions.allAgreement)
   ).sort((a, b) => a.name - b.name);
 
   return (

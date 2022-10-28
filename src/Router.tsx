@@ -23,7 +23,7 @@ function Router({ user, token, login, signup }: RouterProps): JSX.Element {
       <Route path="/login" element={<LoginForm user={user} login={login} />} />
       <Route
         path="/signup"
-        element={<SignupForm user={user} signup={signup} />}
+        element={<SignupForm user={user} signup={signup} token={token} />}
       />
       <Route path="/profile" element={<Profile user={user} token={token} />} />
       <Route path="/ideas" element={<IdeaList user={user} token={token} />} />

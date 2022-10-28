@@ -11,19 +11,14 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   const [postedOnly, setPostedOnly] = useState(false);
 
   useEffect(() => {
-    setReactedIdeas(token);
+    setReactedIdeas(token!);
   }, [token]);
 
-  const setPostedIdeas = (user, token) =>
+  const setPostedIdeas = (user: User, token: string) =>
     allPostedIdeasReq(user, token).then((i) => setIdeas(i.ideas));
 
-  const setReactedIdeas = (token) =>
+  const setReactedIdeas = (token: string) =>
     allUserIdeasReq(token).then((i) => setIdeas(i.ideas));
-
-  const deleteIdea = (token: string, id: string) => {
-    deleteIdeaReq(id, token);
-    setIdeas((ideas) => ideas.filter((idea) => idea.ideaId !== id));
-  };
 
   if (!user || !token) return <Navigate to="/" />;
 
@@ -55,7 +50,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
           {ideas.map((idea) => {
             return (
               <>
-                <IdeaCard key={idea.ideaId} idea={idea} user={user} />
+                <IdeaCard key={idea.ideaId} idea={idea} />
                 <Button
                   key={"btn-" + idea.ideaId}
                   href={`/ideas/${idea.ideaId}`}
