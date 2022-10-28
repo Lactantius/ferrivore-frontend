@@ -23,7 +23,7 @@ function ReactionForm({
       agreement,
       type: "like",
     });
-    if (setAllReactions) {
+    if (setUserReaction) {
       getReactions(reactionRes, token, idea.ideaId);
     }
   };
@@ -39,29 +39,33 @@ function ReactionForm({
     }
   };
 
+  /* Process user reactions, get reactions from other users, and set the reaction submitted variable */
   const getReactions = (
-    reactionPromise: Promise<Reaction | ErrorRes>,
+    reactionPromise: Promise<ReactionRes | ErrorRes>,
     token: string,
     id: string
   ) => {
-    const allReactionsPromise = allReactionsReq(token, id);
-    Promise.all([reactionPromise, allReactionsPromise]).then(
-      ([reaction, allReactions]) => {
-        console.log(reaction);
-        if ("ideaId" in reaction) {
+    reactionPromise
+      .then((reaction) => {
+        if ("reaction" in reaction) {
           setUserReaction({
-            userReaction: reaction.type,
-            userAgreement: reaction.agreement,
+            userReaction: reaction.reaction.type,
+            userAgreement: reaction.reaction.agreement,
           });
         } else {
           setUserReaction(reaction);
         }
-        setAllReactions(allReactions);
-        if (setReactionSubmitted) {
-          setReactionSubmitted(true);
+      })
+      .then((_) => allReactionsReq(token, id))
+      .then((allReactions) => {
+        // Let the first request finish so that the new reaction will be included.
+        if ("reactions" in allReactions) {
+          setAllReactions(allReactions.reactions);
+        } else {
+          setAllReactions(allReactions);
         }
-      }
-    );
+        setReactionSubmitted(true);
+      });
   };
 
   return (

@@ -100,7 +100,7 @@ async function addIdeaReq(
 async function reactReq(
   token: string,
   { ideaId, type, agreement }: ReactionFormVals
-): Promise<Reaction | ErrorRes> {
+): Promise<ReactionRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/${ideaId}/react`, {
     method: "POST",
     headers: {
@@ -109,14 +109,7 @@ async function reactReq(
     },
     body: JSON.stringify({ type, agreement }),
   });
-  return res.json().then((data) => {
-    console.log("Here:");
-    console.log(data);
-    if ("reaction" in data) {
-      return data.reaction;
-    }
-    return data;
-  });
+  return res.json();
 }
 
 async function allReactionsReq(
@@ -129,12 +122,7 @@ async function allReactionsReq(
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json().then((data) => {
-    if ("reactions" in data) {
-      return data.reactions;
-    }
-    return data;
-  });
+  return res.json();
 }
 
 async function allUserIdeasReq(token: string): Promise<IdeasWithReactionsRes> {
@@ -179,10 +167,10 @@ async function ideaDetailsReq(
 ): Promise<IdeaDetailsRes> {
   const res = await fetch(
     `${BASE_URL}/ideas/${id}?` +
-      new URLSearchParams({
-        "with-reactions": String(with_reactions),
-        "with-user-reaction": String(with_user_reaction),
-      }),
+    new URLSearchParams({
+      "with-reactions": String(with_reactions),
+      "with-user-reaction": String(with_user_reaction),
+    }),
     {
       headers: {
         "Content-Type": "application/json",

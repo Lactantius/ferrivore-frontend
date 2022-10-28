@@ -32,7 +32,14 @@ const formatResults = (userReaction: UserReaction) => {
 };
 
 function Results({ userReaction, allReactions }: ResultsProps): JSX.Element {
-  if ("msg" in userReaction || "msg" in allReactions) {
+  console.log(userReaction);
+  console.log(allReactions);
+  if (
+    "msg" in userReaction ||
+    "msg" in allReactions ||
+    Object.keys(allReactions).length === 0 ||
+    Object.keys(userReaction).length === 0
+  ) {
     return <h2>Results could not be displayed.</h2>;
   }
 
