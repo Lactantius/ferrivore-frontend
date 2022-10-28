@@ -26,6 +26,10 @@ function AboutPage(): JSX.Element {
             submit your initial reaction.
           </li>
           <li>
+            You can specifically request ideas that will probably interest you
+            but that you will also probably disagree with.
+          </li>
+          <li>
             You can see what others thought of your posts, but you will not
             receive any notifications about it.
           </li>
@@ -48,7 +52,7 @@ function AboutPage(): JSX.Element {
       </p>
       <h2>Dedication</h2>
       <p className="AboutPage-centered">
-        Luke Burgis, whose writings on mimetic theory inspired this project.
+        To Luke Burgis, whose writings on mimetic theory inspired this project.
       </p>
     </div>
   );
