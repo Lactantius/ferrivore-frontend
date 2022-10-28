@@ -100,7 +100,7 @@ async function addIdeaReq(
 async function reactionReq(
   token: string,
   { ideaId, type, agreement }: ReactionFormVals
-): Promise<Reaction> {
+): Promise<Reaction | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/${ideaId}/react`, {
     method: "POST",
     headers: {
@@ -109,13 +109,18 @@ async function reactionReq(
     },
     body: JSON.stringify({ type, agreement }),
   });
-  return res.json();
+  return res.json().then((data) => {
+    if ("reaction" in data) {
+      return data.reactions;
+    }
+    return data;
+  });
 }
 
 async function allReactionsReq(
   token: string,
   idea_id: string
-): Promise<Reactions> {
+): Promise<AllReactionsRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/${idea_id}/reactions`, {
     headers: {
       "Content-Type": "application/json",
@@ -123,8 +128,10 @@ async function allReactionsReq(
     },
   });
   return res.json().then((data) => {
-    console.log(data);
-    return { reactions: data.idea.reactions, agreement: data.idea.agreement };
+    if ("reactions" in data) {
+      return data.reactions;
+    }
+    return data;
   });
 }
 

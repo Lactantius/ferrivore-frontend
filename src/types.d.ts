@@ -9,14 +9,6 @@ interface GraphData<T> {
   frequency: number;
 }
 
-interface Reaction {
-  reaction: {
-    ideaId: string;
-    type: string;
-    agreement?: number;
-  };
-}
-
 interface UserToken {
   email: string;
   exp: string;
@@ -41,12 +33,27 @@ interface Reactions {
   agreement: number[];
 }
 
+interface UserReaction {
+  userReaction: string;
+  userAgreement?: number;
+}
+
+interface AnonReactions {
+  allReactions: string[];
+  allAgreement: number[];
+}
+
+interface AllReactions {
+  userReaction: string;
+  userAgreement?: number;
+  allReactions: string[];
+  allAgreement: number[];
+}
+
 interface Reaction {
-  reaction: {
-    ideaId: string;
-    type: string;
-    agreement?: number;
-  };
+  ideaId: string;
+  type: string;
+  agreement?: number;
 }
 
 interface IdeaWithAllReactions {
@@ -55,7 +62,7 @@ interface IdeaWithAllReactions {
   description: string;
   ideaId: string;
   userAgreement?: number;
-  userRelationship: string;
+  userReaction: string;
   allReactions: Array<string>;
   allAgreement: Array<number>;
   postedBy: string;
@@ -63,6 +70,10 @@ interface IdeaWithAllReactions {
 
 interface IdeasWithReactionsRes {
   ideas: Array<IdeaWithAllReactions>;
+}
+
+interface ReactionRes {
+  reaction: Reaction;
 }
 
 /*
@@ -108,7 +119,16 @@ interface IdeaRes {
 }
 
 interface ErrorRes {
-  error: string;
+  msg: string;
+}
+
+interface AllReactionsRes {
+  reactions: {
+    userReaction: string;
+    userAgreement?: number;
+    allReactions: string[];
+    allAgreement: number[];
+  };
 }
 
 /*
@@ -184,6 +204,6 @@ interface UserProps {
 }
 
 interface ResultsProps {
-  results: Reaction;
-  reactions: Reactions;
+  userReaction: UserReaction | ErrorRes;
+  allReactions: AllReactions | ErrorRes;
 }

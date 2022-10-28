@@ -57,7 +57,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
               <>
                 <IdeaCard key={idea.ideaId} idea={idea} user={user} />
                 <Button
-                  key={"btn" + idea.ideaId}
+                  key={"btn-" + idea.ideaId}
                   href={`/ideas/${idea.ideaId}`}
                 >
                   View Details

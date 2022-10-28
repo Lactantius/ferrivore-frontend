@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 
 import { ideaDetailsReq, deleteIdeaReq } from "./api";
 import IdeaCard from "./IdeaCard";
+import ReactionForm from "./ReactionForm";
 
 function IdeaDetails({ user, token }: UserProps): JSX.Element {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
     <div className="IdeaDetails">
       <h1>Idea Details</h1>
       <IdeaCard idea={idea} user={user} />
+      <ReactionForm idea={idea} user={user} token={token} />
       {idea.postedBy === user?.userId ? (
         <Button
           variant="contained"

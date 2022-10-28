@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 
 import { reactionReq, allReactionsReq } from "./api";
 import Results from "./Results";
+import GetIdeaForm from "./GetIdeaForm";
 
 import "./ReactionForm.css";
 
@@ -13,45 +14,52 @@ function ReactionForm({
   idea,
   user,
   token,
-  getAgreeable,
-  getRandomUnseen,
-  getDisagreeable,
+  setUserReaction,
+  setAllReactions,
+  setReactionSubmitted,
 }: ReactionFormProps): JSX.Element {
-  const [results, setResults] = useState<Reaction>({} as Reaction);
-  const [reactions, setReactions] = useState<Reactions>({} as Reactions);
-  const [showResults, setShowResults] = useState(false);
-
   const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const agreement = Number(e.target.value) - 4;
-    const userReaction = reactionReq(token, {
+    const reactionRes = reactionReq(token, {
       ideaId: idea.ideaId,
       agreement,
       type: "like",
     });
-    getReactions(userReaction, token, idea.ideaId);
+    console.log(reactionRes);
+    getReactions(reactionRes, token, idea.ideaId);
   };
 
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userReaction = reactionReq(token, {
+    const reactionRes = reactionReq(token, {
       ideaId: idea.ideaId,
       type: "dislike",
     });
-    getReactions(userReaction, token, idea.ideaId);
+    getReactions(reactionRes, token, idea.ideaId);
   };
 
   const getReactions = (
-    userReactionPromise: Promise<Reaction>,
+    reactionPromise: Promise<Reaction | ErrorRes>,
     token: string,
     id: string
   ) => {
     const allReactionsPromise = allReactionsReq(token, id);
-    Promise.all([userReactionPromise, allReactionsPromise]).then(
-      ([userReaction, allReactions]) => {
-        setResults(userReaction);
-        setReactions(allReactions);
-        setShowResults(true);
+    Promise.all([reactionPromise, allReactionsPromise]).then(
+      ([reaction, allReactions]) => {
+        console.log(reaction);
+        if ("ideaId" in reaction) {
+          setUserReaction({
+            userReaction: reaction.type,
+            userAgreement: reaction.agreement,
+          });
+        } else {
+          setUserReaction(reaction);
+        }
+        setAllReactions(allReactions);
+        if (setReactionSubmitted) {
+          setReactionSubmitted(true);
+        }
       }
     );
   };
@@ -66,19 +74,6 @@ function ReactionForm({
       <Box component="form" onSubmit={submitBoring}>
         <Button type="submit">I am not interested</Button>
       </Box>
-      {showResults ? (
-        <>
-          <div>
-            <h3>Get a new idea</h3>
-            <Button onClick={() => getAgreeable(token)}>Agreeable</Button>
-            <Button onClick={() => getRandomUnseen(token)}>Random</Button>
-            <Button onClick={() => getDisagreeable(token)}>Disagreeable</Button>
-          </div>
-          <Results results={results} reactions={reactions} />
-        </>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import React from "react";
 import { BarChart, XAxis, Bar, Tooltip } from "recharts";
 
@@ -14,8 +13,9 @@ const freqMap: <T>(arr: Array<T>) => Map<T, number> = <T,>(arr: Array<T>) => {
 const frequencyArray: <T>(map: Map<T, number>) => Array<GraphData<T>> = (map) =>
   Array.from(map, ([name, frequency]) => ({ name, frequency }));
 
-const formatResults = (results: Reaction) => {
-  if (results.reaction.type === "DISLIKES") {
+const formatResults = (userReaction: UserReaction) => {
+  console.log(userReaction);
+  if (userReaction.userReaction === "DISLIKES") {
     return "This just wasn't very interesting.";
   }
 
@@ -28,24 +28,28 @@ const formatResults = (results: Reaction) => {
     [2, "see this as quite likely"],
     [3, "couldn't agree more"],
   ]);
-  return `You ${agreementMap.get(results.reaction.agreement)}.`;
+  return `You ${agreementMap.get(userReaction.userAgreement!)}.`;
 };
 
-function Results({ results, reactions }: ResultsProps): JSX.Element {
+function Results({ userReaction, allReactions }: ResultsProps): JSX.Element {
+  if ("msg" in userReaction || "msg" in allReactions) {
+    return <h2>Results could not be displayed.</h2>;
+  }
+
   const graphReactions = frequencyArray(
     freqMap(
-      reactions.reactions.filter((reaction) =>
-        ["LIKES", "DISLIKES"].includes(reaction)
+      allReactions.allReactions.filter((allReactions) =>
+        ["LIKES", "DISLIKES"].includes(allReactions)
       )
     )
   );
-  const graphAgreement = frequencyArray(freqMap(reactions.agreement)).sort(
-    (a, b) => a.name - b.name
-  );
-  console.log(results.reaction);
+  const graphAgreement = frequencyArray(
+    freqMap(allReactions.allAgreement)
+  ).sort((a, b) => a.name - b.name);
+
   return (
     <div className="Results">
-      <p>{formatResults(results)}</p>
+      <p>{formatResults(userReaction)}</p>
       <h2>What other people thought</h2>
       {graphAgreement.length > 2 ? (
         <>

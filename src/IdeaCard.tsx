@@ -5,22 +5,17 @@ import Results from "./Results";
 import "./IdeaCard.css";
 
 function IdeaCard({ idea, user }: IdeaCardProps): JSX.Element {
-  console.log(idea);
-  console.log(user);
   return (
     <div className="IdeaCard">
       <a href={idea.url}>{idea.description}</a>
       <Results
-        reactions={{
-          reactions: idea.allReactions,
-          agreement: idea.allAgreement,
+        allReactions={{
+          allReactions: idea.allReactions,
+          allAgreement: idea.allAgreement,
         }}
-        results={{
-          reaction: {
-            ideaId: idea.ideaId,
-            type: idea.userRelationship,
-            agreement: idea.userAgreement,
-          },
+        userReaction={{
+          userReaction: idea.userReaction,
+          userAgreement: idea.userAgreement,
         }}
       />
     </div>
