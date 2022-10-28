@@ -29,6 +29,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     disagreeable.then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
     });
+    setReactionSubmitted(false);
   };
 
   const getAgreeable = (token: string) => {
@@ -36,6 +37,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     agreeable.then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
     });
+    setReactionSubmitted(false);
   };
 
   const getRandomUnseen = (token: string) => {
@@ -43,6 +45,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     random.then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
     });
+    setReactionSubmitted(false);
   };
 
   return (
