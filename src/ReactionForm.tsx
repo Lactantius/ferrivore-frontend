@@ -73,7 +73,7 @@ function ReactionForm({
 
   return (
     <div className="ReactionForm">
-      <h2>Do you agree?</h2>
+      <h2>How much do you agree?</h2>
       <Box component="form">
         <legend>Agreement Level</legend>
         <Rating
@@ -87,7 +87,9 @@ function ReactionForm({
         />
       </Box>
       <Box component="form" onSubmit={submitBoring}>
-        <Button type="submit">I am not interested</Button>
+        <Button type="submit" variant="outlined">
+          I am not interested in this idea
+        </Button>
       </Box>
     </div>
   );

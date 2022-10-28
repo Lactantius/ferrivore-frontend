@@ -49,15 +49,16 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
         <>
           {ideas.map((idea) => {
             return (
-              <>
+              <div className="IdeaList-idea">
                 <IdeaCard key={idea.ideaId} idea={idea} />
                 <Button
-                  key={"btn-" + idea.ideaId}
+                  key={"button" + idea.ideaId}
                   href={`/ideas/${idea.ideaId}`}
+                  variant="outlined"
                 >
                   View Details
                 </Button>
-              </>
+              </div>
             );
           })}
         </>

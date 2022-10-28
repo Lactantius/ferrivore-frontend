@@ -1,0 +1,11 @@
+.IdeaDetails {
+  margin-top: 2rem;
+}
+
+.IdeaDetails h1 {
+  font-size: 3rem;
+}
+
+.IdeaDetails-delete {
+  margin: 2rem;
+}

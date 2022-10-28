@@ -1,7 +1,12 @@
 .IdeaList {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
   align-items: center;
   text-align: center;
+  gap: 6rem;
+  margin-bottom: 3rem;
+}
+
+.IdeaList-details {
+  margin-bottom: 5rem;
 }

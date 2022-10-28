@@ -9,7 +9,9 @@ function IdeaCard({ idea }: IdeaCardProps): JSX.Element {
   }
   return (
     <div className="IdeaCard">
-      <a href={idea.url}>{idea.description}</a>
+      <a className="IdeaCard-idea" href={idea.url}>
+        {idea.description}
+      </a>
       {"allReactions" in idea ? (
         <Results
           anonReactions={{

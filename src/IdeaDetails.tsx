@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { ideaDetailsReq, deleteIdeaReq } from "./api";
 import IdeaCard from "./IdeaCard";
 import ReactionForm from "./ReactionForm";
+import "./IdeaDetails.css";
 
 function IdeaDetails({ user, token }: UserProps): JSX.Element {
   const navigate = useNavigate();
@@ -50,14 +51,18 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
           idea={idea}
           user={user}
           token={token}
-          initialValue={"userAgreement" in idea ? idea.userAgreement! : null}
+          initialValue={
+            "userAgreement" in idea ? idea.userAgreement! + 4 : null
+          }
         />
         {idea.postedBy === user.userId ? (
           <Button
+            className="IdeaDetails-delete"
             variant="contained"
+            color="error"
             onClick={() => deleteIdea(token, idea.ideaId)}
           >
-            Delete
+            Delete idea
           </Button>
         ) : (
           <></>

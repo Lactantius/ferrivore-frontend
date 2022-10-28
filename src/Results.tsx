@@ -54,7 +54,9 @@ function Results({ userReaction, anonReactions }: ResultsProps): JSX.Element {
 
   return (
     <div className="Results">
-      <p>{formatResults(userReaction)}</p>
+      <p>
+        <i>{formatResults(userReaction)}</i>
+      </p>
       <h2>What other people thought</h2>
       {graphAgreement.length > 2 ? (
         <>
