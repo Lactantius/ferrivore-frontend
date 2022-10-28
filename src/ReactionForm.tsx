@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
@@ -11,11 +11,14 @@ function ReactionForm({
   idea,
   user,
   token,
+  initialValue,
   setUserReaction,
   setAllReactions,
   setReactionSubmitted,
 }: ReactionFormProps): JSX.Element {
   const [value, setValue] = React.useState<number | null>(null);
+
+  useEffect(() => setValue(initialValue), [idea]);
 
   const submitInteresting = (val: number | null) => {
     const agreement = Number(val) - 4;

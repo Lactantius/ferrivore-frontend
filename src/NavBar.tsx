@@ -14,6 +14,7 @@ function NavBar({ user, logout }: NavBarProps): JSX.Element {
             Logout
           </NavLink>
           <NavLink to="/ideas">Ideas</NavLink>
+          <NavLink to="/new">New</NavLink>
         </>
       ) : (
         <>

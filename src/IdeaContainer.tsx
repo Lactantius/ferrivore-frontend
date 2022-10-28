@@ -64,6 +64,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
               idea={idea}
               user={user}
               token={token}
+              initialValue={null}
               setUserReaction={setUserReaction}
               setAllReactions={setAllReactions}
               setReactionSubmitted={setReactionSubmitted}
