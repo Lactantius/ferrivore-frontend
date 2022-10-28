@@ -45,8 +45,6 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     });
   };
 
-  console.log(idea);
-
   return (
     <div className="IdeaContainer">
       {typeof idea === "string" ? (

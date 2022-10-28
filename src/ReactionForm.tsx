@@ -1,12 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import { reactionReq, allReactionsReq } from "./api";
-import Results from "./Results";
-import GetIdeaForm from "./GetIdeaForm";
+import { reactReq, allReactionsReq } from "./api";
 
 import "./ReactionForm.css";
 
@@ -21,22 +18,25 @@ function ReactionForm({
   const submitInteresting = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const agreement = Number(e.target.value) - 4;
-    const reactionRes = reactionReq(token, {
+    const reactionRes = reactReq(token, {
       ideaId: idea.ideaId,
       agreement,
       type: "like",
     });
-    console.log(reactionRes);
-    getReactions(reactionRes, token, idea.ideaId);
+    if (setAllReactions) {
+      getReactions(reactionRes, token, idea.ideaId);
+    }
   };
 
   const submitBoring = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const reactionRes = reactionReq(token, {
+    const reactionRes = reactReq(token, {
       ideaId: idea.ideaId,
       type: "dislike",
     });
-    getReactions(reactionRes, token, idea.ideaId);
+    if (setAllReactions) {
+      getReactions(reactionRes, token, idea.ideaId);
+    }
   };
 
   const getReactions = (

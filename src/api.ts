@@ -97,7 +97,7 @@ async function addIdeaReq(
     .catch((_) => null);
 }
 
-async function reactionReq(
+async function reactReq(
   token: string,
   { ideaId, type, agreement }: ReactionFormVals
 ): Promise<Reaction | ErrorRes> {
@@ -110,8 +110,10 @@ async function reactionReq(
     body: JSON.stringify({ type, agreement }),
   });
   return res.json().then((data) => {
+    console.log("Here:");
+    console.log(data);
     if ("reaction" in data) {
-      return data.reactions;
+      return data.reaction;
     }
     return data;
   });
@@ -197,7 +199,7 @@ export {
   addIdeaReq,
   disagreeableReq,
   agreeableReq,
-  reactionReq,
+  reactReq,
   randomReq,
   allReactionsReq,
   allUserIdeasReq,
