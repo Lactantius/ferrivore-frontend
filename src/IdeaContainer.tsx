@@ -18,10 +18,15 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   );
 
   useEffect(() => {
-    const disagreeable = disagreeableReq(token);
-    disagreeable.then((data) => {
-      "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
-    });
+    const getIdea = async () => {
+      const disagreeable = await disagreeableReq(token);
+      if ("idea" in disagreeable) {
+        return disagreeable;
+      }
+      const random = await randomReq(token);
+      return random;
+    };
+    getIdea().then((data) => setIdea("idea" in data ? data.idea : data.msg));
   }, [token]);
 
   const getDisagreeable = (token: string) => {
