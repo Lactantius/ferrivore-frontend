@@ -76,7 +76,7 @@ async function randomReq(token: string): Promise<IdeaRes | ErrorRes> {
 async function addIdeaReq(
   token: string,
   { url, description }: AddIdeaFormVals
-): Promise<Idea> {
+): Promise<IdeaRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/`, {
     method: "POST",
     headers: {
@@ -85,10 +85,7 @@ async function addIdeaReq(
     },
     body: JSON.stringify({ url, description }),
   });
-  return res
-    .json()
-    .then((data) => data.idea)
-    .catch((_) => null);
+  return res.json();
 }
 
 async function reactReq(

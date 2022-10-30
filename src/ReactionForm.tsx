@@ -27,6 +27,9 @@ function ReactionForm({
       agreement,
       type: "like",
     });
+    if (setReactionSubmitted) {
+      setReactionSubmitted(true);
+    }
     if (setUserReaction) {
       getReactions(reactionRes, token, idea.ideaId);
     }
@@ -37,6 +40,9 @@ function ReactionForm({
       ideaId: idea.ideaId,
       type: "dislike",
     });
+    if (setReactionSubmitted) {
+      setReactionSubmitted(true);
+    }
     if (setAllReactions) {
       getReactions(reactionRes, token, idea.ideaId);
     }
@@ -67,7 +73,6 @@ function ReactionForm({
         } else {
           setAllReactions(allReactions);
         }
-        setReactionSubmitted(true);
       });
   };
 
