@@ -11,19 +11,17 @@ import AddIdeaForm from "./AddIdeaForm";
 import AboutPage from "./AboutPage";
 import PageNotFound from "./PageNotFound";
 
-function Router({ user, token, login, signup }: RouterProps): JSX.Element {
+function Router({ user, token, saveUser }: RouterProps): JSX.Element {
   return (
     <Routes>
+      <Route path="/" element={<Home user={user} token={token} />} />
       <Route
-        path="/"
-        element={
-          <Home user={user} token={token} login={login} signup={signup} />
-        }
+        path="/login"
+        element={<LoginForm user={user} token={token} saveUser={saveUser} />}
       />
-      <Route path="/login" element={<LoginForm user={user} login={login} />} />
       <Route
         path="/signup"
-        element={<SignupForm user={user} signup={signup} token={token} />}
+        element={<SignupForm user={user} saveUser={saveUser} token={token} />}
       />
       <Route path="/profile" element={<Profile user={user} token={token} />} />
       <Route path="/ideas" element={<IdeaList user={user} token={token} />} />

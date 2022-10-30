@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+import { signupReq } from "./api";
 import "./SignupForm.css";
 
-function SignupForm({ signup, user, token }: SignupFormProps): JSX.Element {
+function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
+  const [formErrors, setFormErrors] = useState<string>("");
+
+  const signup = async (signupData: SignupFormVals) => {
+    const res = await signupReq(signupData);
+    if ("user" in res) {
+      saveUser(res.user);
+      navigate("/");
+    } else {
+      setFormErrors(res.msg);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,15 +29,10 @@ function SignupForm({ signup, user, token }: SignupFormProps): JSX.Element {
       username: data.get("username") as string,
       password: data.get("password") as string,
     };
-    const res = signup(signupVals);
-    res.then((user: UserToken | null) => {
-      if (user && Object.keys(user).length > 0) {
-        navigate("/");
-      }
-    });
+    signup(signupVals);
   };
 
-  if (!user || !token) {
+  if (user || token) {
     return <Navigate to="/" />;
   }
 

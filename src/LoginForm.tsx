@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import "./LoginForm.css";
+import { loginReq } from "./api";
 
-function LoginForm({ user, login }: LoginFormProps): JSX.Element {
+function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
+  const [formErrors, setFormErrors] = useState<string>("");
+
+  const login = async (loginData: LoginFormVals) => {
+    const res = await loginReq(loginData);
+    if ("user" in res) {
+      saveUser(res.user);
+      navigate("/");
+    } else {
+      setFormErrors(res.msg);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,12 +28,7 @@ function LoginForm({ user, login }: LoginFormProps): JSX.Element {
       email: data.get("email") as string,
       password: data.get("password") as string,
     };
-    const res = login(loginVals);
-    res.then((user: UserToken | null) => {
-      if (user && Object.keys(user).length > 0) {
-        navigate("/");
-      }
-    });
+    login(loginVals);
   };
 
   return (

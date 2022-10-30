@@ -13,7 +13,7 @@ const headers = (token: string) => ({
 async function loginReq({
   email,
   password,
-}: LoginFormVals): Promise<UserToken> {
+}: LoginFormVals): Promise<UserTokenRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -21,17 +21,14 @@ async function loginReq({
     },
     body: JSON.stringify({ email, password }),
   });
-  return res
-    .json()
-    .then((data) => data.user)
-    .catch((_) => null);
+  return res.json();
 }
 
 async function signupReq({
   email,
   password,
   username,
-}: SignupFormVals): Promise<UserToken> {
+}: SignupFormVals): Promise<UserTokenRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/users/signup`, {
     method: "POST",
     headers: {
@@ -39,10 +36,7 @@ async function signupReq({
     },
     body: JSON.stringify({ email, username, password }),
   });
-  return res
-    .json()
-    .then((data) => data.user)
-    .catch((_) => null);
+  return res.json();
 }
 
 /**
@@ -167,10 +161,10 @@ async function ideaDetailsReq(
 ): Promise<IdeaDetailsRes | ErrorRes> {
   const res = await fetch(
     `${BASE_URL}/ideas/${id}?` +
-    new URLSearchParams({
-      "with-reactions": String(with_reactions),
-      "with-user-reaction": String(with_user_reaction),
-    }),
+      new URLSearchParams({
+        "with-reactions": String(with_reactions),
+        "with-user-reaction": String(with_user_reaction),
+      }),
     {
       headers: {
         "Content-Type": "application/json",

@@ -14,11 +14,11 @@ function App(): JSX.Element {
    * Functions for user handling
    */
 
-  const [userToken, setUserToken] = useState(() =>
+  const [userToken, setUserToken] = useState<string | null>(() =>
     window.localStorage.getItem("token")
   );
 
-  const [user, setUser] = useState(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const stored = window.localStorage.getItem("user");
     return stored ? (JSON.parse(stored) as User) : null;
   });
@@ -34,26 +34,16 @@ function App(): JSX.Element {
     window.localStorage.setItem("token", token);
   };
 
-  const login = async (loginData: LoginFormVals) => {
-    const token = await loginReq(loginData);
-    setTokenAndStorage(token.token);
-    setUserAndStorage({
-      email: token.email,
-      username: token.username,
-      userId: token.userId,
-    });
-    return token;
-  };
-
-  const signup = async (signupData: SignupFormVals) => {
-    const token = await signupReq(signupData);
-    setTokenAndStorage(token.token);
-    setUserAndStorage({
-      email: token.email,
-      username: token.username,
-      userId: token.userId,
-    });
-    return token;
+  const saveUser = (user: UserToken) => {
+    const userData: User = {
+      email: user.email,
+      username: user.username,
+      userId: user.userId,
+    };
+    setUser(userData);
+    window.localStorage.setItem("user", JSON.stringify(userData));
+    setUserToken(user.token);
+    window.localStorage.setItem("token", user.token);
   };
 
   const logout = () => {
@@ -69,7 +59,7 @@ function App(): JSX.Element {
     <div className="App">
       <BrowserRouter>
         <NavBar user={user} logout={logout} />
-        <Router user={user} token={userToken} login={login} signup={signup} />
+        <Router user={user} token={userToken} saveUser={saveUser} />
         <Footer />
       </BrowserRouter>
     </div>
