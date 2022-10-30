@@ -216,3 +216,9 @@ interface GetIdeaFormProps {
   getRandomUnseen: function;
   getDisagreeable: function;
 }
+
+interface SignupFormErrors {
+  uniqueUsername?: string;
+  uniqueEmail?: string;
+  passwordsMatch?: string;
+}

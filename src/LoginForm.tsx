@@ -37,6 +37,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
+          error={formErrors ? true : false}
+          helperText={formErrors}
           id="email"
           name="email"
           label="Email"
@@ -44,6 +46,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
         />
         <TextField
           required
+          error={formErrors ? true : false}
+          helperText={formErrors}
           id="password"
           name="password"
           label="Password"

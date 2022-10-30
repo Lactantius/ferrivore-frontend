@@ -9,7 +9,9 @@ import "./SignupForm.css";
 
 function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
-  const [formErrors, setFormErrors] = useState<string>("");
+  const [formErrors, setFormErrors] = useState<SignupFormErrors>(
+    {} as SignupFormErrors
+  );
 
   const signup = async (signupData: SignupFormVals) => {
     const res = await signupReq(signupData);
@@ -17,7 +19,16 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       saveUser(res.user);
       navigate("/");
     } else {
-      setFormErrors(res.msg);
+      console.log(res.msg);
+      setFormErrors(formatErrors(res.msg));
+    }
+  };
+
+  const formatErrors = (err: string) => {
+    if (err.includes("email")) {
+      return { uniqueEmail: "Email already registered." };
+    } else if (err.includes("username")) {
+      return { uniqueUsername: "Username already taken." };
     }
   };
 
@@ -42,6 +53,8 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
+          error={"uniqueUsername" in formErrors ? true : false}
+          helperText={formErrors.uniqueUsername || ""}
           id="username"
           name="username"
           label="Username"
@@ -49,6 +62,8 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         />
         <TextField
           required
+          error={"uniqueEmail" in formErrors ? true : false}
+          helperText={formErrors.uniqueEmail || ""}
           id="email"
           name="email"
           label="Email"
@@ -56,11 +71,23 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         />
         <TextField
           required
+          error={"passwordsMatch" in formErrors ? true : false}
+          helperText={formErrors.passwordsMatch || ""}
           id="password"
           name="password"
           label="Password"
           type="password"
           autoComplete="current-password"
+        />
+        <TextField
+          required
+          error={"passwordsMatch" in formErrors ? true : false}
+          helperText={formErrors.passwordsMatch || ""}
+          id="confirm-password"
+          name="confirm-password"
+          label="Confirm Password"
+          type="password"
+          autoComplete="confirm-password"
         />
         <Button type="submit" variant="contained">
           Sign up
