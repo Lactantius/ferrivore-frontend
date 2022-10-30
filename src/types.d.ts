@@ -85,6 +85,12 @@ interface LoginFormVals {
   password: string;
 }
 
+interface ProfileFormVals {
+  username: string;
+  email: string;
+  confirmPassword: string;
+}
+
 interface SignupFormVals {
   email: string;
   username: string;
