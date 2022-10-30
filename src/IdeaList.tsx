@@ -63,7 +63,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
           })}
         </>
       ) : (
-        <p>Loading...</p>
+        <p>You have not rated any ideas yet.</p>
       )}
     </div>
   );

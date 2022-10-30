@@ -30,11 +30,11 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
     } else if (err.includes("username")) {
       return { uniqueUsername: "Username already taken." };
     }
+    return {};
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormErrors(() => {});
     console.log(formErrors);
     const data = new FormData(e.currentTarget);
     const signupVals: SignupFormVals = {

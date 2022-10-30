@@ -6,6 +6,7 @@ import { disagreeableReq, agreeableReq, randomReq } from "./api";
 import "./IdeaContainer.css";
 import GetIdeaForm from "./GetIdeaForm";
 import Results from "./Results";
+import Idea from "./Idea";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   const [idea, setIdea] = useState<Idea | string>({} as Idea);
@@ -64,7 +65,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
         ) : (
           <>
             <h2>Here's an idea...</h2>
-            <a href={idea.url}>{idea.description}</a>
+            <Idea idea={idea} />
             <ReactionForm
               idea={idea}
               user={user}

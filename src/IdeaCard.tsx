@@ -1,6 +1,7 @@
 import React from "react";
 
 import Results from "./Results";
+import Idea from "./Idea";
 import "./IdeaCard.css";
 
 function IdeaCard({ idea }: IdeaCardProps): JSX.Element {
@@ -9,9 +10,7 @@ function IdeaCard({ idea }: IdeaCardProps): JSX.Element {
   }
   return (
     <div className="IdeaCard">
-      <a className="IdeaCard-idea" href={idea.url}>
-        {idea.description}
-      </a>
+      <Idea idea={idea} />
       {"allReactions" in idea ? (
         <Results
           anonReactions={{
