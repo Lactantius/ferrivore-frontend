@@ -89,6 +89,7 @@ interface SignupFormVals {
   email: string;
   username: string;
   password: string;
+  confirmPassword: string;
 }
 
 interface AddIdeaFormVals {
@@ -221,4 +222,6 @@ interface SignupFormErrors {
   uniqueUsername?: string;
   uniqueEmail?: string;
   passwordsMatch?: string;
+  properEmail?: string;
+  passwordSufficient?: string;
 }
