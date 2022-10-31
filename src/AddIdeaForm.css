@@ -14,3 +14,7 @@
 .AddIdeaForm form button {
   font-size: 1rem;
 }
+
+.AddIdeaForm-cancel {
+  margin-top: 2rem;
+}

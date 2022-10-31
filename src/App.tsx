@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import jwt from "jsonwebtoken";
 
 import Router from "./Router";
 import NavBar from "./NavBar";
@@ -9,6 +8,10 @@ import Footer from "./Footer";
 import "./App.css";
 
 function App(): JSX.Element {
+  useEffect(() => {
+    document.title = "Ferrivore";
+  }, []);
+
   /**
    * Functions for user handling
    */
