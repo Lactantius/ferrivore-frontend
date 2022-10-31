@@ -4,6 +4,15 @@ interface User {
   userId: string;
 }
 
+interface Idea {
+  url: string;
+  description: string;
+  createdAt: string;
+  ideaId: string;
+  agreement?: number;
+  postedBy: string;
+}
+
 interface GraphData<T> {
   name: T;
   frequency: number;
@@ -18,14 +27,6 @@ interface UserToken {
   token: string;
   userId: string;
   username: string;
-}
-
-interface UserTokenRes {
-  user: UserToken;
-}
-
-interface IdeaDetailsRes {
-  idea: IdeaWithAllReactions;
 }
 
 interface Reactions {
@@ -68,12 +69,49 @@ interface IdeaWithAllReactions {
   postedBy: string;
 }
 
+/*
+ * API Responses
+ */
+
+interface UserTokenRes {
+  user: UserToken;
+}
+
+interface IdeaDetailsRes {
+  idea: IdeaWithAllReactions;
+}
+
 interface IdeasWithReactionsRes {
   ideas: Array<IdeaWithAllReactions>;
 }
 
 interface ReactionRes {
   reaction: Reaction;
+}
+
+interface IdeaRes {
+  idea: Idea;
+}
+
+interface ErrorRes {
+  msg: string;
+}
+
+interface AllReactionsRes {
+  reactions: {
+    userReaction: string;
+    userAgreement?: number;
+    allReactions: string[];
+    allAgreement: number[];
+  };
+}
+
+/*
+ * API Requests
+ */
+
+interface IdeaReq {
+  idea: Idea;
 }
 
 /*
@@ -126,36 +164,6 @@ interface ReactionFormVals {
   ideaId: string;
   type: string;
   agreement?: number;
-}
-
-interface Idea {
-  url: string;
-  description: string;
-  createdAt: string;
-  ideaId: string;
-  agreement?: number;
-  postedBy: string;
-}
-
-interface IdeaReq {
-  idea: Idea;
-}
-
-interface IdeaRes {
-  idea: Idea;
-}
-
-interface ErrorRes {
-  msg: string;
-}
-
-interface AllReactionsRes {
-  reactions: {
-    userReaction: string;
-    userAgreement?: number;
-    allReactions: string[];
-    allAgreement: number[];
-  };
 }
 
 /*

@@ -10,6 +10,13 @@ import "./SignupForm.css";
 
 function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<SignupFormVals>({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  } as SignupFormVals);
+
   const [formErrors, setFormErrors] = useState<SignupFormErrors>(
     {} as SignupFormErrors
   );
@@ -20,24 +27,50 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       saveUser(res.user);
       navigate("/");
     } else {
-      console.log(res.msg);
       setFormErrors(formatErrors(res.msg));
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formErrors);
-    const data = new FormData(e.currentTarget);
-    const signupVals: SignupFormVals = {
-      email: data.get("email") as string,
-      username: data.get("username") as string,
-      password: data.get("password") as string,
-      confirmPassword: data.get("confirm-password") as string,
-    };
-    if (validate(signupVals)) {
-      signup(signupVals);
+    if (validate(formData)) {
+      signup(formData);
     }
+    /* const data = new FormData(e.currentTarget);
+     * const signupVals: SignupFormVals = {
+     *   email: data.get("email") as string,
+     *   username: data.get("username") as string,
+     *   password: data.get("password") as string,
+     *   confirmPassword: data.get("confirm-password") as string,
+     * }; */
+    /* if (validate(signupVals)) {
+     *   signup(signupVals);
+     * } */
+    setFormData({ ...formData, password: "", confirmPassword: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent) => {
+    const { name, value } = e.target as HTMLInputElement;
+    if (name === "password") {
+      setFormErrors({
+        ...formErrors,
+        passwordSufficient: null,
+        passwordsMatch: null,
+      });
+    }
+    if (name === "confirmPassword") {
+      setFormErrors({ ...formErrors, passwordsMatch: null });
+    }
+    if (name === "email") {
+      setFormErrors({ ...formErrors, uniqueEmail: null, properEmail: null });
+    }
+    if (name === "username") {
+      setFormErrors({ ...formErrors, uniqueUsername: null });
+    }
+    setFormData((fData) => ({
+      ...fData,
+      [name]: value,
+    }));
   };
 
   const validate = (data: SignupFormVals) => {
@@ -82,30 +115,32 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
-          error={"uniqueUsername" in formErrors ? true : false}
+          error={formErrors.uniqueUsername ? true : false}
           helperText={formErrors.uniqueUsername ?? ""}
           id="username"
           name="username"
           label="Username"
           autoComplete="username"
+          onChange={handleChange}
+          value={formData.username}
         />
         <TextField
           required
           error={
-            "uniqueEmail" in formErrors || "properEmail" in formErrors
-              ? true
-              : false
+            formErrors.uniqueEmail || formErrors.properEmail ? true : false
           }
           helperText={formErrors.uniqueEmail ?? formErrors.properEmail ?? ""}
           id="email"
           name="email"
           label="Email"
           autoComplete="email"
+          onChange={handleChange}
+          value={formData.email}
         />
         <TextField
           required
           error={
-            "passwordsMatch" in formErrors || "passwordSufficient" in formErrors
+            formErrors.passwordsMatch || formErrors.passwordSufficient
               ? true
               : false
           }
@@ -117,16 +152,20 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
           label="Password"
           type="password"
           autoComplete="current-password"
+          onChange={handleChange}
+          value={formData.password}
         />
         <TextField
           required
-          error={"passwordsMatch" in formErrors ? true : false}
+          error={formErrors.passwordsMatch ? true : false}
           helperText={formErrors.passwordsMatch ?? ""}
           id="confirm-password"
-          name="confirm-password"
+          name="confirmPassword"
           label="Confirm Password"
           type="password"
           autoComplete="confirm-password"
+          onChange={handleChange}
+          value={formData.confirmPassword}
         />
         <Button type="submit" variant="contained">
           Sign up
