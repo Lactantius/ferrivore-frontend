@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ferrivore/static/css/main.3492b3d3.css",
-    "main.js": "/ferrivore/static/js/main.2c742677.js",
-    "static/js/787.9db75ca8.chunk.js": "/ferrivore/static/js/787.9db75ca8.chunk.js",
-    "index.html": "/ferrivore/index.html",
-    "main.3492b3d3.css.map": "/ferrivore/static/css/main.3492b3d3.css.map",
-    "main.2c742677.js.map": "/ferrivore/static/js/main.2c742677.js.map",
-    "787.9db75ca8.chunk.js.map": "/ferrivore/static/js/787.9db75ca8.chunk.js.map"
+    "main.css": "/ferrivore-frontend/static/css/main.3492b3d3.css",
+    "main.js": "/ferrivore-frontend/static/js/main.7e8f9f00.js",
+    "static/js/787.9db75ca8.chunk.js": "/ferrivore-frontend/static/js/787.9db75ca8.chunk.js",
+    "index.html": "/ferrivore-frontend/index.html",
+    "main.3492b3d3.css.map": "/ferrivore-frontend/static/css/main.3492b3d3.css.map",
+    "main.7e8f9f00.js.map": "/ferrivore-frontend/static/js/main.7e8f9f00.js.map",
+    "787.9db75ca8.chunk.js.map": "/ferrivore-frontend/static/js/787.9db75ca8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3492b3d3.css",
-    "static/js/main.2c742677.js"
+    "static/js/main.7e8f9f00.js"
   ]
 }
