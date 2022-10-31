@@ -27,26 +27,33 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
     <div className="IdeaList">
       <h1>Ideas</h1>
       {postedOnly ? (
-        <Button
-          onClick={() => {
-            setReactedIdeas(token);
-            setPostedOnly(false);
-          }}
-        >
-          See all viewed ideas
-        </Button>
-      ) : (
-        <Button
-          onClick={() => {
-            setPostedIdeas(user, token);
-            setPostedOnly(true);
-          }}
-        >
-          See only ideas you have posted
-        </Button>
-      )}
-      {ideas.length > 0 ? (
         <>
+          <p>These are the ideas you have posted.</p>
+          <Button
+            onClick={() => {
+              setReactedIdeas(token);
+              setPostedOnly(false);
+            }}
+          >
+            See all viewed ideas
+          </Button>
+        </>
+      ) : (
+        <>
+          <p>These are the ideas you have rated.</p>
+          <Button
+            onClick={() => {
+              setPostedIdeas(user, token);
+              setPostedOnly(true);
+            }}
+          >
+            See only ideas you have posted
+          </Button>
+        </>
+      )}
+      <Button href="/">See new ideas instead</Button>
+      {ideas.length > 0 ? (
+        <div className="IdeaList-list">
           {ideas.map((idea) => {
             return (
               <div className="IdeaList-idea">
@@ -61,7 +68,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
               </div>
             );
           })}
-        </>
+        </div>
       ) : (
         <p>You have not rated any ideas yet.</p>
       )}

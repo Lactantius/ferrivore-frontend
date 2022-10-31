@@ -64,7 +64,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
           </>
         ) : (
           <>
-            <h2>Here's an idea...</h2>
+            <h1>Here’s an idea...</h1>
             <Idea idea={idea} />
             <ReactionForm
               idea={idea}

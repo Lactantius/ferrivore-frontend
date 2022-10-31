@@ -3,4 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 60%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.IdeaContainer h1 {
+  font-size: 4rem;
 }
