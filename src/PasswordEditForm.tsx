@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import { updateReq } from "./api";
+import { formatErrors } from "./helpers";
 import "./PasswordEditForm.css";
 import Success from "./Success";
 
@@ -18,8 +19,8 @@ function PasswordEditForm({
     confirmNewPassword: "",
   } as PasswordEditFormVals);
 
-  const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
-    {} as EditProfileFormErrors
+  const [formErrors, setFormErrors] = useState<EditPasswordFormErrors>(
+    {} as EditPasswordFormErrors
   );
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -45,7 +46,7 @@ function PasswordEditForm({
     }));
   };
 
-  const validate = (data: SignupFormVals) => {
+  const validate = (data: PasswordEditFormVals) => {
     const passwordsMatch = data.newPassword === data.confirmNewPassword;
     const passwordSufficient = data.newPassword.length > 9;
     if (passwordsMatch && passwordSufficient) {

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Idea.css";
 
-function Idea({ idea }): JSX.Element {
+function Idea({ idea }: IdeaProps): JSX.Element {
   return (
     <a className="Idea" href={idea.url}>
       <p>{idea.description}</p>

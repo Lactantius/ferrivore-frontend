@@ -166,6 +166,12 @@ interface ReactionFormVals {
   agreement?: number;
 }
 
+interface PasswordEditFormVals {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 /*
  * Props
  */
@@ -173,31 +179,33 @@ interface ReactionFormVals {
 interface RouterProps {
   user: User | null;
   token: string | null;
-  login: function;
-  signup: function;
+  saveUser: function;
 }
 
 interface HomeProps {
   user: User | null;
   token: string | null;
-  login: function;
-  signup: function;
 }
 
 interface SignupFormProps {
   user: User | null;
-  signup: function;
   token: string | null;
+  saveUser: function;
 }
 
 interface LoginFormProps {
   user: User | null;
-  login: function;
+  token: string | null;
+  saveUser: function;
 }
 
 interface IdeaContainerProps {
   user: User;
   token: string;
+}
+
+interface SuccessProps {
+  message: string;
 }
 
 interface AddIdeaFormProps {
@@ -227,6 +235,7 @@ interface ReactionFormProps {
 interface ProfileProps {
   user: User | null;
   token: string | null;
+  saveUser: function;
 }
 
 interface IdeaListProps {
@@ -255,6 +264,16 @@ interface PasswordEditFormProps {
   token: string;
   user: User;
   saveUser: function;
+}
+
+interface ProfileEditFormProps {
+  token: string;
+  user: User;
+  saveUser: function;
+}
+
+interface IdeaProps {
+  idea: Idea;
 }
 
 /*

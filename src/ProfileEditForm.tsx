@@ -8,7 +8,11 @@ import { formatErrors } from "./helpers";
 import "./ProfileEditForm.css";
 import Success from "./Success";
 
-function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
+function ProfileEditForm({
+  user,
+  token,
+  saveUser,
+}: ProfileEditFormProps): JSX.Element {
   const [formData, setFormData] = useState<EditProfileFormVals>({
     username: user!.username,
     email: user!.email,

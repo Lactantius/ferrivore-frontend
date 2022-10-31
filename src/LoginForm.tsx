@@ -10,7 +10,7 @@ import { loginReq } from "./api";
 function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormVals>({
-    username: "",
+    email: "",
     password: "",
   } as LoginFormVals);
 
