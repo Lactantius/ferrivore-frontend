@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 import { updateReq } from "./api";
 import { formatErrors } from "./helpers";
+import "./ProfileEditForm.css";
 
 function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
   const [formData, setFormData] = useState<EditProfileFormVals>({
