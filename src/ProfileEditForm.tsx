@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { updateReq } from "./api";
 import { formatErrors } from "./helpers";
 import "./ProfileEditForm.css";
+import Success from "./Success";
 
 function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
   const [formData, setFormData] = useState<EditProfileFormVals>({
@@ -17,6 +18,8 @@ function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
   const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
     {} as EditProfileFormErrors
   );
+
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const validate = (data: EditProfileFormVals) => {
     const properEmail = data.email.toLowerCase().match(
@@ -73,8 +76,8 @@ function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
     const res = await updateReq(token, userId, updateData);
     if ("user" in res) {
       saveUser(res.user);
+      setSuccessMessage("Profile updated successfully.");
     } else {
-      console.log(res);
       setFormErrors(formatErrors(res.msg));
     }
   };
@@ -82,6 +85,7 @@ function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
   return (
     <div className="ProfileEditForm">
       <h1>Edit Profile</h1>
+      {successMessage ? <Success message={successMessage} /> : <></>}
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required

@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 import { updateReq } from "./api";
 import "./PasswordEditForm.css";
+import Success from "./Success";
 
 function PasswordEditForm({
   user,
@@ -16,6 +17,12 @@ function PasswordEditForm({
     newPassword: "",
     confirmNewPassword: "",
   } as PasswordEditFormVals);
+
+  const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
+    {} as EditProfileFormErrors
+  );
+
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -37,10 +44,6 @@ function PasswordEditForm({
       [name]: value,
     }));
   };
-
-  const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
-    {} as EditProfileFormErrors
-  );
 
   const validate = (data: SignupFormVals) => {
     const passwordsMatch = data.newPassword === data.confirmNewPassword;
@@ -89,8 +92,8 @@ function PasswordEditForm({
     const res = await updateReq(token, userId, updateData);
     if ("user" in res) {
       saveUser(res.user);
+      setSuccessMessage("Password changed successfully.");
     } else {
-      console.log(res);
       setFormErrors(formatErrors(res.msg));
     }
   };
@@ -98,6 +101,7 @@ function PasswordEditForm({
   return (
     <div className="PasswordEditForm">
       <h1>Change Password</h1>
+      {successMessage ? <Success message={successMessage} /> : <></>}
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
