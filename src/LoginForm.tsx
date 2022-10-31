@@ -45,6 +45,10 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
     login(loginVals);
   };
 
+  if (user || token) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <Box className="LoginForm">
       <h1>Log in</h1>

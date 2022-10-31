@@ -1,11 +1,6 @@
 const BASE_URL =
   process.env.REACT_APP_BASE_URL || "https://ferrivore.gerardkeiser.com/api";
 
-const headers = (token: string) => ({
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${token}`,
-});
-
 /**
  * User routes
  * */

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { Navigate } from "react-router-dom";
 
 import IdeaCard from "./IdeaCard";
-import { allUserIdeasReq, allPostedIdeasReq, deleteIdeaReq } from "./api";
+import { allUserIdeasReq, allPostedIdeasReq } from "./api";
 import "./IdeaList.css";
 
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {

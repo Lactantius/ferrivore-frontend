@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import Router from "./Router";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import { loginReq, signupReq } from "./api";
 
 import "./App.css";
 
@@ -49,10 +48,6 @@ function App(): JSX.Element {
   const logout = () => {
     setTokenAndStorage("");
     setUserAndStorage(null);
-  };
-
-  const getUser = () => {
-    return userToken ? (jwt.decode(userToken) as User) : null;
   };
 
   return (
