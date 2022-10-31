@@ -85,10 +85,29 @@ interface LoginFormVals {
   password: string;
 }
 
-interface ProfileFormVals {
+interface EditProfileFormVals {
   username: string;
   email: string;
-  confirmPassword: string;
+  password: string;
+}
+
+interface EditPasswordFormVals {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
+interface UpdateUserVals {
+  currentPassword: string;
+  newPassword?: string;
+  newUsername?: string;
+  newEmail?: string;
+}
+
+interface ChangePasswordFormVals {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
 }
 
 interface SignupFormVals {
@@ -224,10 +243,33 @@ interface GetIdeaFormProps {
   getDisagreeable: function;
 }
 
+interface PasswordEditFormProps {
+  token: string;
+  user: User;
+  saveUser: function;
+}
+
+/*
+ * Form Errors
+ */
+
 interface SignupFormErrors {
-  uniqueUsername?: string;
-  uniqueEmail?: string;
-  passwordsMatch?: string;
-  properEmail?: string;
-  passwordSufficient?: string;
+  uniqueUsername?: string | null;
+  uniqueEmail?: string | null;
+  passwordsMatch?: string | null;
+  properEmail?: string | null;
+  passwordSufficient?: string | null;
+}
+
+interface EditProfileFormErrors {
+  invalidPassword?: string | null;
+  uniqueUsername?: string | null;
+  uniqueEmail?: string | null;
+  properEmail?: string | null;
+}
+
+interface EditPasswordFormErrors {
+  invalidPassword?: string | null;
+  passwordSufficient?: string | null;
+  passwordsMatch?: string | null;
 }

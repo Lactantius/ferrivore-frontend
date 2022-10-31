@@ -3,13 +3,48 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-function ProfileEditForm({ user, token }): JSX.Element {
-  const [formData, setFormData] = useState<EditProfileFormVals>(
-    {} as EditProfileFormVals
+import { updateReq } from "./api";
+import { formatErrors } from "./helpers";
+
+function ProfileEditForm({ user, token, saveUser }: UserProps): JSX.Element {
+  const [formData, setFormData] = useState<EditProfileFormVals>({
+    username: user!.username,
+    email: user!.email,
+    password: "",
+  } as EditProfileFormVals);
+
+  const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
+    {} as EditProfileFormErrors
   );
+
+  const validate = (data: EditProfileFormVals) => {
+    const properEmail = data.email.toLowerCase().match(
+      // From https://stackoverflow.com/a/46181/6632828
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    );
+    if (properEmail) {
+      return true;
+    }
+    if (!properEmail) {
+      setFormErrors({
+        ...formErrors,
+        properEmail: "Please enter a validly formatted email.",
+      });
+      return false;
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent) => {
     const { name, value } = e.target as HTMLInputElement;
+    if (name === "password") {
+      setFormErrors({ ...formErrors, invalidPassword: null });
+    }
+    if (name === "email") {
+      setFormErrors({ ...formErrors, uniqueEmail: null, properEmail: null });
+    }
+    if (name === "username") {
+      setFormErrors({ ...formErrors, uniqueUsername: null });
+    }
     setFormData((fData) => ({
       ...fData,
       [name]: value,
@@ -18,13 +53,29 @@ function ProfileEditForm({ user, token }): JSX.Element {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const res = register(formData);
-    console.log(res);
-    res.then((user: User | null) => {
-      if (user && Object.keys(user).length > 0) {
-        navigate("/");
-      }
-    });
+    if (validate(formData)) {
+      updateUser(token, user.userId, formData);
+    }
+    setFormData({ ...formData, password: "" });
+  };
+
+  const updateUser = async (
+    token: string,
+    userId: string,
+    data: EditProfileFormVals
+  ) => {
+    const updateData: UpdateUserVals = {
+      currentPassword: data.password,
+      newUsername: data.username,
+      newEmail: data.email,
+    };
+    const res = await updateReq(token, userId, updateData);
+    if ("user" in res) {
+      saveUser(res.user);
+    } else {
+      console.log(res);
+      setFormErrors(formatErrors(res.msg));
+    }
   };
 
   return (
@@ -33,26 +84,40 @@ function ProfileEditForm({ user, token }): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
+          error={formErrors.uniqueUsername ? true : false}
+          helperText={formErrors.uniqueUsername ?? ""}
           id="username"
           name="username"
           label="Username"
           autoComplete="username"
+          onChange={handleChange}
+          value={formData.username}
         />
         <TextField
           required
+          error={
+            formErrors.uniqueEmail || formErrors.properEmail ? true : false
+          }
+          helperText={formErrors.uniqueEmail ?? formErrors.properEmail ?? ""}
           id="email"
           name="email"
           label="Email"
           autoComplete="email"
           type="email"
+          onChange={handleChange}
+          value={formData.email}
         />
         <TextField
           required
-          id="confirm-password"
-          name="confirm-password"
+          error={formErrors.invalidPassword ? true : false}
+          helperText={formErrors.invalidPassword ?? ""}
+          id="password"
+          name="password"
           label="Confirm Password"
           type="password"
-          autoComplete="confirm-password"
+          autoComplete="password"
+          onChange={handleChange}
+          value={formData.password}
         />
         <Button type="submit" variant="contained">
           Submit

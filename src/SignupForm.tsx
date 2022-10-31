@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import { signupReq } from "./api";
+import { formatErrors } from "./helpers";
 import "./SignupForm.css";
 
 function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
@@ -22,15 +23,6 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       console.log(res.msg);
       setFormErrors(formatErrors(res.msg));
     }
-  };
-
-  const formatErrors = (err: string) => {
-    if (err.includes("email")) {
-      return { uniqueEmail: "Email already registered." };
-    } else if (err.includes("username")) {
-      return { uniqueUsername: "Username already taken." };
-    }
-    return {};
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -10,6 +10,9 @@ const headers = (token: string) => ({
  * User routes
  * */
 
+/*
+ * Login a user
+ */
 async function loginReq({
   email,
   password,
@@ -24,6 +27,9 @@ async function loginReq({
   return res.json();
 }
 
+/*
+ * Register a new user
+ */
 async function signupReq({
   email,
   password,
@@ -35,6 +41,26 @@ async function signupReq({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, username, password }),
+  });
+  return res.json();
+}
+
+/*
+ * Update user info
+ */
+async function updateReq(
+  token: string,
+  userId: string,
+  updateData: UpdateUserVals
+): Promise<UserTokenRes | ErrorRes> {
+  console.log(updateData);
+  const res = await fetch(`${BASE_URL}/users/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ ...updateData }),
   });
   return res.json();
 }
@@ -175,6 +201,7 @@ async function ideaDetailsReq(
 export {
   loginReq,
   signupReq,
+  updateReq,
   addIdeaReq,
   disagreeableReq,
   agreeableReq,
