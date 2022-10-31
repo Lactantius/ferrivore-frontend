@@ -9,6 +9,11 @@ import { loginReq } from "./api";
 
 function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<LoginFormVals>({
+    username: "",
+    password: "",
+  } as LoginFormVals);
+
   const [formErrors, setFormErrors] = useState<string>("");
 
   const login = async (loginData: LoginFormVals) => {
@@ -19,6 +24,15 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
     } else {
       setFormErrors(res.msg);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent) => {
+    const { name, value } = e.target as HTMLInputElement;
+    setFormErrors("");
+    setFormData((fData) => ({
+      ...fData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,6 +57,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
           name="email"
           label="Email"
           autoComplete="email"
+          onChange={handleChange}
+          value={formData.email}
         />
         <TextField
           required
@@ -53,6 +69,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
           label="Password"
           type="password"
           autoComplete="current-password"
+          onChange={handleChange}
+          value={formData.password}
         />
         <Button type="submit" variant="contained">
           Login
