@@ -76,7 +76,12 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
       ) : (
         <></>
       )}
-      <Button variant="contained" color="error" onClick={() => navigate("/")}>
+      <Button
+        className="AddIdeaForm-cancel"
+        variant="contained"
+        color="error"
+        onClick={() => navigate("/")}
+      >
         Cancel
       </Button>
     </Box>

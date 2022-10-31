@@ -2,7 +2,7 @@
   "name": "ferrivore-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lactantius.github.io/ferrivore-frontend",
+  "homepage": "https://ferrivore.gerardkeiser.com",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
