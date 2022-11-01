@@ -18,3 +18,7 @@
 .AddIdeaForm button.AddIdeaForm-cancel {
   margin-top: 2rem;
 }
+
+.AddIdeaForm button.AddIdeaForm-save {
+  margin-top: 2rem;
+}

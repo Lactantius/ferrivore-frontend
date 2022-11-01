@@ -9,7 +9,7 @@ import Results from "./Results";
 import Idea from "./Idea";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
-  const [idea, setIdea] = useState<Idea | string>({} as Idea);
+  const [idea, setIdea] = useState<Idea | string>("Loading...");
   const [reactionSubmitted, setReactionSubmitted] = useState<boolean>(false);
   const [userReaction, setUserReaction] = useState<UserReaction | ErrorRes>(
     {} as UserReaction
@@ -60,7 +60,6 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
         {typeof idea === "string" ? (
           <>
             <h3>{idea}</h3>
-            <Button onClick={() => getRandomUnseen(token)}>Random Idea</Button>
           </>
         ) : (
           <>

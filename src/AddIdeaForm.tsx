@@ -70,7 +70,11 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
         <></>
       )}
       {reactionSubmitted ? (
-        <Button variant="contained" onClick={() => navigate("/")}>
+        <Button
+          className="AddIdeaForm-save"
+          variant="contained"
+          onClick={() => navigate("/")}
+        >
           Save
         </Button>
       ) : (
