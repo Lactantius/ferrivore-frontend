@@ -1,18 +1,30 @@
 .LandingPage {
-  margin-top: 3rem;
+  margin: 3rem auto auto auto;
+  width: 80%;
 }
 
 .LandingPage h1 {
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 .LandingPage h2 {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .LandingPage-buttons {
   margin-top: 3rem;
+  margin-bottom: 2rem;
   display: flex;
   gap: 2rem;
   justify-content: center;
+}
+
+.LandingPage p {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 800px) {
+  .LandingPage h1 {
+    font-size: 6rem;
+  }
 }

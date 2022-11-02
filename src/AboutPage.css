@@ -1,6 +1,6 @@
 .AboutPage {
   margin: 3rem auto auto auto;
-  width: 60%;
+  width: 80%;
 }
 
 .AboutPage .AboutPage-centered {
@@ -8,9 +8,23 @@
 }
 
 .AboutPage h1 {
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 .AboutPage p {
   text-align: left;
+  font-size: 1.2rem;
+}
+
+.AboutPage h2 {
+  margin-top: 3rem;
+}
+
+@media screen and (min-width: 800px) {
+  .AboutPage {
+    width: 60%;
+  }
+  .AboutPage h1 {
+    font-size: 6rem;
+  }
 }
