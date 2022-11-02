@@ -1,9 +1,10 @@
 .Footer {
   background-color: black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem 2rem 1rem 2rem;
-  gap: 3rem;
+  gap: 1rem;
   margin-top: auto;
 }
 
@@ -14,4 +15,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .Footer {
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+  }
 }

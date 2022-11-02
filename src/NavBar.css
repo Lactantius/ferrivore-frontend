@@ -1,15 +1,30 @@
 .NavBar {
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
   font-size: 1.5rem;
   padding: 1rem 2rem 1rem 2rem;
   background-color: black;
   align-items: center;
 }
 
-.NavBar a:first-child {
+.NavBar-logo {
   font-size: 2rem;
   text-transform: uppercase;
+}
+
+.NavBar-desktop {
+  display: none;
+  gap: 2rem;
+}
+
+.NavBar button {
+  color: white;
+  background-color: black;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
 }
 
 .NavBar a {
@@ -20,6 +35,36 @@
   gap: 0.4rem;
 }
 
+.MuiMenuItem-root a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.MuiButton-root {
+  color: white;
+}
+
+.MuiMenu-list {
+  background-color: black;
+}
+
 .NavBar .push {
   margin-left: auto;
+}
+
+.NavBar-mobile {
+  display: block;
+}
+
+@media screen and (min-width: 800px) {
+  .NavBar-desktop {
+    display: flex;
+  }
+
+  .NavBar-mobile {
+    display: none;
+  }
 }
