@@ -17,6 +17,10 @@
   gap: 0.5rem;
 }
 
+.Footer .Footer-Neo4jLogo {
+  width: 4rem;
+}
+
 @media screen and (min-width: 800px) {
   .Footer {
     flex-direction: row;

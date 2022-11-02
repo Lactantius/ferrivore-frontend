@@ -5,6 +5,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 
 import "./Footer.css";
+import { ReactComponent as Neo4jLogo } from "./Neo4j-logo-white.svg";
 
 function Footer(): JSX.Element {
   return (
@@ -20,6 +21,9 @@ function Footer(): JSX.Element {
       <a href="https://github.com/Lactantius/ferrivore">
         <CodeIcon />
         Source
+      </a>
+      <a href="https://neo4j.com">
+        Powered by <Neo4jLogo className="Footer-Neo4jLogo" />
       </a>
     </div>
   );
