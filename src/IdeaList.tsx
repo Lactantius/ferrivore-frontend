@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
 import { Navigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 import IdeaCard from "./IdeaCard";
 import { allUserIdeasReq, allPostedIdeasReq } from "./api";
@@ -53,22 +59,26 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
       )}
       <Button href="/">See new ideas instead</Button>
       {ideas.length > 0 ? (
-        <div className="IdeaList-list">
-          {ideas.map((idea) => {
-            return (
-              <div className="IdeaList-idea">
-                <IdeaCard key={idea.ideaId} idea={idea} />
-                <Button
-                  key={"button" + idea.ideaId}
-                  href={`/ideas/${idea.ideaId}`}
-                  variant="outlined"
-                >
-                  View Details
-                </Button>
-              </div>
-            );
-          })}
-        </div>
+        <Table className="IdeaList-table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Idea</TableCell>
+              <TableCell>URL</TableCell>
+              <TableCell>Rating</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {ideas.map((idea) => {
+              return (
+                <TableRow>
+                  <TableCell>{idea.description}</TableCell>
+                  <TableCell>{idea.url}</TableCell>
+                  <TableCell>{idea.userAgreement}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       ) : (
         <p>You have not rated any ideas yet.</p>
       )}
