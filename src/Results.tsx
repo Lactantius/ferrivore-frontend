@@ -13,24 +13,24 @@ const freqMap: <T>(arr: Array<T>) => Map<T, number> = <T,>(arr: Array<T>) => {
 const frequencyArray: <T>(map: Map<T, number>) => Array<GraphData<T>> = (map) =>
   Array.from(map, ([name, frequency]) => ({ name, frequency }));
 
-const formatResults = (userReaction: UserReaction) => {
-  console.log(userReaction);
-  if (userReaction.userReaction === "DISLIKES") {
-    return "This just wasn't very interesting.";
-  }
-
-  const agreementMap = new Map([
-    [-3, "think this is totally wrong"],
-    [-2, "seriously doubt this"],
-    [-1, "are somewhat sceptical"],
-    [0, "are neutral"],
-    [1, "think this is more likely than not"],
-    [2, "see this as quite likely"],
-    [3, "couldn't agree more"],
-  ]);
-  return `You ${agreementMap.get(userReaction.userAgreement!)}.`;
-};
-
+/* const formatResults = (userReaction: UserReaction) => {
+ *   console.log(userReaction);
+ *   if (userReaction.userReaction === "DISLIKES") {
+ *     return "This just wasn't very interesting.";
+ *   }
+ *
+ *   const agreementMap = new Map([
+ *     [-3, "think this is totally wrong"],
+ *     [-2, "seriously doubt this"],
+ *     [-1, "are somewhat sceptical"],
+ *     [0, "are neutral"],
+ *     [1, "think this is more likely than not"],
+ *     [2, "see this as quite likely"],
+ *     [3, "couldn't agree more"],
+ *   ]);
+ *   return `You ${agreementMap.get(userReaction.userAgreement!)}.`;
+ * };
+ *  */
 function Results({ userReaction, anonReactions }: ResultsProps): JSX.Element {
   if (
     "msg" in userReaction ||
@@ -54,9 +54,6 @@ function Results({ userReaction, anonReactions }: ResultsProps): JSX.Element {
 
   return (
     <div className="Results">
-      <p>
-        <i>{formatResults(userReaction)}</i>
-      </p>
       <h2>What other people thought</h2>
       {graphAgreement.length > 2 ? (
         <>

@@ -2,11 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .Results div {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Results h2 {
+  font-size: 2rem;
+}
+
+.Results h3 {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: normal;
 }
