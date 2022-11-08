@@ -60,7 +60,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
           </Button>
         </>
       )}
-      <Button href="/">See new ideas instead</Button>
+      <Button href="/">Get a new instead</Button>
       {ideas.length > 0 ? (
         <Table className="IdeaList-table">
           <TableHead>
