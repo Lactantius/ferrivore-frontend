@@ -1,0 +1,24 @@
+.GetIdeaForm {
+  margin-top: 2rem;
+}
+
+.GetIdeaForm h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.GetIdeaForm-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.GetIdeaForm button {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 800px) {
+  .GetIdeaForm-buttons {
+    flex-direction: row;
+  }
+}

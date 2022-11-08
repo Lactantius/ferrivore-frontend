@@ -96,7 +96,11 @@ function ReactionForm({
         />
       </Box>
       <Box component="form" onSubmit={submitBoring}>
-        <Button type="submit" variant="outlined">
+        <Button
+          type="submit"
+          variant="outlined"
+          className="ReactionForm-button"
+        >
           I am not interested in this idea
         </Button>
       </Box>
