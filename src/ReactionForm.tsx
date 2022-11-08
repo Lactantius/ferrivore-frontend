@@ -82,8 +82,8 @@ function ReactionForm({
       <h2>
         {reactionSubmitted ? "Change your response" : "How much do you agree?"}
       </h2>
-      <Box component="form">
-        <legend>Agreement Level</legend>
+      <Box className="ReactionForm-form" component="form">
+        <legend className="ReactionForm-legend">Agreement Level</legend>
         <Rating
           name="agreement"
           max={7}

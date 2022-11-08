@@ -3,13 +3,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   text-align: center;
 }
 
-.ReactionForm form {
+.ReactionForm h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ReactionForm .ReactionForm-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+}
+
+.ReactionForm .ReactionForm-legend {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
