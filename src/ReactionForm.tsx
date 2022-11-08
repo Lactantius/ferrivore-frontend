@@ -89,6 +89,7 @@ function ReactionForm({
             setValue(() => newValue);
             submitInteresting(newValue);
           }}
+          size="large"
         />
       </Box>
       <Box component="form" onSubmit={submitBoring}>

@@ -52,7 +52,9 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
           user={user}
           token={token}
           initialValue={
-            "userAgreement" in idea ? idea.userAgreement! + 4 : null
+            "userReaction" in idea && idea.userReaction === "LIKES"
+              ? idea.userAgreement! + 4
+              : null
           }
         />
         {idea.postedBy === user.userId ? (
