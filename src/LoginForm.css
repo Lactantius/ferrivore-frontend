@@ -5,12 +5,23 @@
   align-items: center;
 }
 
+.LoginForm h1 {
+  font-size: 3rem;
+}
+
 .LoginForm form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 90%;
 }
 
 .LoginForm form button {
   font-size: 1.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .LoginForm form {
+    width: 24rem;
+  }
 }

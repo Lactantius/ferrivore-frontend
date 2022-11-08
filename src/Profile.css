@@ -1,8 +1,14 @@
 .Profile {
   margin: 3rem auto 3rem auto;
-  width: 60%;
+  width: 100%;
 }
 
 .Profile-h1 {
-  font-size: 4rem;
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 800px) {
+  .AddIdeaForm form {
+    width: 60%;
+  }
 }

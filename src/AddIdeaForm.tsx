@@ -32,11 +32,9 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
     return <Navigate to="/" />;
   }
 
-  console.log(reactionSubmitted);
-
   return (
     <Box className="AddIdeaForm">
-      <h2>Add A New Idea</h2>
+      <h1>Add A New Idea</h1>
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required

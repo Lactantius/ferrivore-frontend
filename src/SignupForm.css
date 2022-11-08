@@ -5,12 +5,23 @@
   align-items: center;
 }
 
+.SignupForm h1 {
+  font-size: 3rem;
+}
+
 .SignupForm form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 90%;
 }
 
 .SignupForm form button {
   font-size: 1.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .SignupForm form {
+    width: 24rem;
+  }
 }
