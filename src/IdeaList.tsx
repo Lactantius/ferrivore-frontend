@@ -4,11 +4,10 @@ import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Rating from "@mui/material/Rating";
 
-import IdeaCard from "./IdeaCard";
 import { allUserIdeasReq, allPostedIdeasReq } from "./api";
 import "./IdeaList.css";
 
@@ -64,7 +63,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
             <TableRow>
               <TableCell>Idea</TableCell>
               <TableCell>URL</TableCell>
-              <TableCell>Rating</TableCell>
+              <TableCell>Agreement Level</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,8 +71,21 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
               return (
                 <TableRow>
                   <TableCell>{idea.description}</TableCell>
-                  <TableCell>{idea.url}</TableCell>
-                  <TableCell>{idea.userAgreement}</TableCell>
+                  <TableCell>
+                    <a href={idea.url}>{idea.url}</a>
+                  </TableCell>
+                  <TableCell>
+                    {idea.userAgreement ? (
+                      <Rating
+                        name="agreement"
+                        max={7}
+                        value={idea.userAgreement + 4}
+                        readOnly
+                      />
+                    ) : (
+                      <i>Not interested</i>
+                    )}
+                  </TableCell>
                 </TableRow>
               );
             })}
