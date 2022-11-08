@@ -11,6 +11,10 @@ import Rating from "@mui/material/Rating";
 import { allUserIdeasReq, allPostedIdeasReq } from "./api";
 import "./IdeaList.css";
 
+const truncateString: (length: number) => (str: string) => string =
+  (length: number) => (str: string) =>
+    str.length > length ? str.slice(0, length - 3).concat("...") : str;
+
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   const [ideas, setIdeas] = useState(Array<IdeaWithAllReactions>);
   const [postedOnly, setPostedOnly] = useState(false);
@@ -69,10 +73,10 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
           <TableBody>
             {ideas.map((idea) => {
               return (
-                <TableRow>
-                  <TableCell>{idea.description}</TableCell>
+                <TableRow hover={true}>
+                  <TableCell>{truncateString(60)(idea.description)}</TableCell>
                   <TableCell>
-                    <a href={idea.url}>{idea.url}</a>
+                    <a href={idea.url}>{truncateString(30)(idea.url)}</a>
                   </TableCell>
                   <TableCell>
                     {idea.userAgreement ? (
