@@ -11,7 +11,7 @@ const formatErrors = (err: string) => {
 
 const cleanLink: (link: string) => string = (link: string) => {
   const url = new URL(link);
-  return url.origin + url.pathname;
+  return url.hostname + url.pathname;
 };
 
 export { formatErrors, cleanLink };

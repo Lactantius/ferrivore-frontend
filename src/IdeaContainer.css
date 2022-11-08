@@ -2,11 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60%;
+  width: 90%;
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
 
 .IdeaContainer h1 {
-  font-size: 4rem;
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 800px) {
+  .IdeaContainer {
+    width: 60%;
+  }
+
+  .IdeaContainer h1 {
+    font-size: 4rem;
+  }
 }

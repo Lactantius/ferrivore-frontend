@@ -9,3 +9,8 @@
 .Idea p.Idea-url {
   font-size: 1rem;
 }
+
+@media screen and (min-width: 800px) {
+  .Idea {
+  }
+}
