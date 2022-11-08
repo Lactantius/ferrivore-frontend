@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Rating from "@mui/material/Rating";
 
 import { allUserIdeasReq, allPostedIdeasReq } from "./api";
+import { cleanLink } from "./helpers";
 import "./IdeaList.css";
 
 const truncateString: (length: number) => (str: string) => string =
@@ -79,7 +80,9 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
                     </a>
                   </TableCell>
                   <TableCell>
-                    <a href={idea.url}>{truncateString(20)(idea.url)}</a>
+                    <a href={idea.url}>
+                      {truncateString(20)(cleanLink(idea.url))}
+                    </a>
                   </TableCell>
                   <TableCell>
                     {idea.userAgreement ? (
