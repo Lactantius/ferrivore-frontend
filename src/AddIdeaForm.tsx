@@ -65,6 +65,7 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
           token={token}
           initialValue={null}
           setReactionSubmitted={setReactionSubmitted}
+          reactionSubmitted={reactionSubmitted}
         />
       ) : (
         <></>

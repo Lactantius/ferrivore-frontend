@@ -15,6 +15,7 @@ function ReactionForm({
   setUserReaction,
   setAllReactions,
   setReactionSubmitted,
+  reactionSubmitted,
 }: ReactionFormProps): JSX.Element {
   const [value, setValue] = React.useState<number | null>(null);
 
@@ -78,7 +79,9 @@ function ReactionForm({
 
   return (
     <div className="ReactionForm">
-      <h2>How much do you agree?</h2>
+      <h2>
+        {reactionSubmitted ? "Change your response" : "How much do you agree?"}
+      </h2>
       <Box component="form">
         <legend>Agreement Level</legend>
         <Rating

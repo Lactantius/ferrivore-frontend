@@ -56,6 +56,7 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
               ? idea.userAgreement! + 4
               : null
           }
+          reactionSubmitted={true}
         />
         {idea.postedBy === user.userId ? (
           <Button

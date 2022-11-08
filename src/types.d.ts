@@ -230,6 +230,7 @@ interface ReactionFormProps {
   setUserReaction?: function;
   setAllReactions?: function;
   setReactionSubmitted?: function;
+  reactionSubmitted: boolean;
 }
 
 interface ProfileProps {
