@@ -5,6 +5,7 @@
   padding: 1rem 2rem 1rem 2rem;
   background-color: black;
   align-items: center;
+  width: 100%;
 }
 
 .NavBar-logo {

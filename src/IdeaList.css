@@ -6,19 +6,10 @@
   margin: 3rem auto 3rem auto;
 }
 
-.IdeaList-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6rem;
-  margin-top: 3rem;
-}
-
 .IdeaList h1 {
   font-size: 4rem;
 }
 
-.IdeaList-details {
-  margin-bottom: 5rem;
+.IdeaList-table {
+  margin-top: 3rem;
 }

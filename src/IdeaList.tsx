@@ -31,7 +31,6 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
 
   if (!user || !token) return <Navigate to="/" />;
 
-  console.log(ideas);
   return (
     <div className="IdeaList">
       <h1>Ideas</h1>
@@ -74,9 +73,13 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
             {ideas.map((idea) => {
               return (
                 <TableRow hover={true}>
-                  <TableCell>{truncateString(60)(idea.description)}</TableCell>
                   <TableCell>
-                    <a href={idea.url}>{truncateString(30)(idea.url)}</a>
+                    <a href={`/ideas/${idea.ideaId}`}>
+                      {truncateString(50)(idea.description)}
+                    </a>
+                  </TableCell>
+                  <TableCell>
+                    <a href={idea.url}>{truncateString(20)(idea.url)}</a>
                   </TableCell>
                   <TableCell>
                     {idea.userAgreement ? (
@@ -84,6 +87,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
                         name="agreement"
                         max={7}
                         value={idea.userAgreement + 4}
+                        size="small"
                         readOnly
                       />
                     ) : (
