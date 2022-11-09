@@ -301,3 +301,10 @@ interface EditPasswordFormErrors {
   passwordSufficient?: string | null;
   passwordsMatch?: string | null;
 }
+
+interface AddIdeaFormErrors {
+  urlIsValid: string | null;
+  descriptionIsLongEnough: string | null;
+  descriptionIsShortEnough: string | null;
+  submission: string | null;
+}

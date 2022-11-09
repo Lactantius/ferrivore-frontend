@@ -18,7 +18,13 @@
 }
 
 .AddIdeaForm form button {
-  font-size: 1rem;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.AddIdeaForm button {
+  font-size: 1.2rem;
+  width: 90%;
 }
 
 .AddIdeaForm button.AddIdeaForm-cancel {
@@ -31,6 +37,9 @@
 
 @media screen and (min-width: 800px) {
   .AddIdeaForm form {
+    width: 24rem;
+  }
+  .AddIdeaForm button {
     width: 24rem;
   }
 }
