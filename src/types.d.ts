@@ -103,7 +103,7 @@ interface IdeaRes {
 }
 
 interface IdeaWithScoreRes {
-  idea: Idea;
+  idea: IdeaWithScore;
 }
 
 interface ErrorRes {
@@ -238,7 +238,7 @@ interface IdeaCardProps {
 interface ReactionFormProps {
   user: User;
   token: string;
-  idea: Idea;
+  idea: Idea | IdeaWithScore;
   initialValue: number | null;
   setUserReaction?: function;
   setAllReactions?: function;
