@@ -20,9 +20,6 @@ function GetIdeaForm({
         <Button onClick={() => getRandomUnseen(token)} variant="outlined">
           Random
         </Button>
-        <Button onClick={() => getRandomUnseen(token)} variant="outlined">
-          Random
-        </Button>
         <Button onClick={() => getPopular(token)} variant="outlined">
           Popular
         </Button>
