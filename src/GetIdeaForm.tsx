@@ -8,6 +8,7 @@ function GetIdeaForm({
   getAgreeable,
   getRandomUnseen,
   getDisagreeable,
+  getPopular,
 }: GetIdeaFormProps): JSX.Element {
   return (
     <div className="GetIdeaForm">
@@ -18,6 +19,12 @@ function GetIdeaForm({
         </Button>
         <Button onClick={() => getRandomUnseen(token)} variant="outlined">
           Random
+        </Button>
+        <Button onClick={() => getRandomUnseen(token)} variant="outlined">
+          Random
+        </Button>
+        <Button onClick={() => getPopular(token)} variant="outlined">
+          Popular
         </Button>
         <Button onClick={() => getDisagreeable(token)} variant="outlined">
           Disagreeable

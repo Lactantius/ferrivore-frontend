@@ -64,7 +64,19 @@ async function updateReq(
  * Idea routes
  * */
 
-async function disagreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
+async function popularReq(token: string): Promise<IdeaWithScoreRes | ErrorRes> {
+  const res = await fetch(`${BASE_URL}/ideas/popular`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
+
+async function disagreeableReq(
+  token: string
+): Promise<IdeaWithScoreRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/disagreeable`, {
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +86,9 @@ async function disagreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
   return res.json();
 }
 
-async function agreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
+async function agreeableReq(
+  token: string
+): Promise<IdeaWithScoreRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/agreeable`, {
     headers: {
       "Content-Type": "application/json",
@@ -84,7 +98,7 @@ async function agreeableReq(token: string): Promise<IdeaRes | ErrorRes> {
   return res.json();
 }
 
-async function randomReq(token: string): Promise<IdeaRes | ErrorRes> {
+async function randomReq(token: string): Promise<IdeaWithScoreRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/random-unseen`, {
     headers: {
       "Content-Type": "application/json",
@@ -198,6 +212,7 @@ export {
   signupReq,
   updateReq,
   addIdeaReq,
+  popularReq,
   disagreeableReq,
   agreeableReq,
   reactReq,

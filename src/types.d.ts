@@ -13,6 +13,15 @@ interface Idea {
   postedBy: string;
 }
 
+interface IdeaWithScore {
+  url: string;
+  description: string;
+  createdAt: string;
+  ideaId: string;
+  score: number;
+  popularity: number;
+}
+
 interface GraphData<T> {
   name: T;
   frequency: number;
@@ -90,6 +99,10 @@ interface ReactionRes {
 }
 
 interface IdeaRes {
+  idea: Idea;
+}
+
+interface IdeaWithScoreRes {
   idea: Idea;
 }
 
@@ -259,6 +272,7 @@ interface GetIdeaFormProps {
   getAgreeable: function;
   getRandomUnseen: function;
   getDisagreeable: function;
+  getPopular: function;
 }
 
 interface PasswordEditFormProps {
@@ -274,7 +288,7 @@ interface ProfileEditFormProps {
 }
 
 interface IdeaProps {
-  idea: Idea;
+  idea: Idea | IdeaWithScore;
 }
 
 /*

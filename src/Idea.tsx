@@ -8,6 +8,13 @@ function Idea({ idea }: IdeaProps): JSX.Element {
     <a className="Idea" href={idea.url}>
       <p>{idea.description}</p>
       <p className="Idea-url">({cleanLink(idea.url)})</p>
+      {"score" in idea ? (
+        <p className="Idea-score">
+          Score: {idea.score} | Popularity: {idea.popularity}
+        </p>
+      ) : (
+        <></>
+      )}
     </a>
   );
 }

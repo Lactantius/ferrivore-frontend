@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 import ReactionForm from "./ReactionForm";
-import { disagreeableReq, agreeableReq, randomReq } from "./api";
+import { disagreeableReq, agreeableReq, popularReq, randomReq } from "./api";
 import "./IdeaContainer.css";
 import GetIdeaForm from "./GetIdeaForm";
 import Results from "./Results";
 import Idea from "./Idea";
 
 function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
-  const [idea, setIdea] = useState<Idea | string>("Loading...");
+  const [idea, setIdea] = useState<IdeaWithScore | string>("Loading...");
   const [reactionSubmitted, setReactionSubmitted] = useState<boolean>(false);
   const [userReaction, setUserReaction] = useState<UserReaction | ErrorRes>(
     {} as UserReaction
@@ -53,6 +53,14 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
     setReactionSubmitted(false);
   };
 
+  const getPopular = (token: string) => {
+    const popular = popularReq(token);
+    popular.then((data) => {
+      "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
+    });
+    setReactionSubmitted(false);
+  };
+
   return (
     <div className="IdeaContainer">
       <React.StrictMode>
@@ -81,6 +89,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
                   getAgreeable={getAgreeable}
                   getRandomUnseen={getRandomUnseen}
                   getDisagreeable={getDisagreeable}
+                  getPopular={getPopular}
                 />
                 <Results
                   userReaction={userReaction}
