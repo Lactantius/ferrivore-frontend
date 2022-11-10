@@ -128,7 +128,7 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
           value={formData.description}
         />
         <Button type="submit" variant="contained">
-          Submit
+          Submit Idea
         </Button>
       </Box>
       {idea ? (

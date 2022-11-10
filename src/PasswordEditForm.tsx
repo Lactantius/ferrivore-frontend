@@ -147,7 +147,7 @@ function PasswordEditForm({
           value={formData.confirmNewPassword}
         />
         <Button type="submit" variant="contained">
-          Submit
+          Change Password
         </Button>
       </Box>
     </div>

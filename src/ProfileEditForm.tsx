@@ -129,7 +129,7 @@ function ProfileEditForm({
           value={formData.password}
         />
         <Button type="submit" variant="contained">
-          Submit
+          Submit Edits
         </Button>
       </Box>
     </div>
