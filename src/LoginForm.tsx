@@ -56,7 +56,7 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
         <TextField
           required
           error={formErrors ? true : false}
-          helperText={formErrors}
+          helperText={formErrors ? formErrors : "Input your account email"}
           id="email"
           name="email"
           label="Email"
@@ -67,7 +67,7 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
         <TextField
           required
           error={formErrors ? true : false}
-          helperText={formErrors}
+          helperText={formErrors ? formErrors : "Input your password"}
           id="password"
           name="password"
           label="Password"

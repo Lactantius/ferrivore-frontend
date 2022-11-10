@@ -116,7 +116,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         <TextField
           required
           error={formErrors.uniqueUsername ? true : false}
-          helperText={formErrors.uniqueUsername ?? ""}
+          helperText={formErrors.uniqueUsername ?? "Input a username"}
           id="username"
           name="username"
           label="Username"
@@ -129,7 +129,11 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
           error={
             formErrors.uniqueEmail || formErrors.properEmail ? true : false
           }
-          helperText={formErrors.uniqueEmail ?? formErrors.properEmail ?? ""}
+          helperText={
+            formErrors.uniqueEmail ??
+            formErrors.properEmail ??
+            "We won't share it"
+          }
           id="email"
           name="email"
           label="Email"
@@ -145,7 +149,9 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
               : false
           }
           helperText={
-            formErrors.passwordsMatch ?? formErrors.passwordSufficient ?? ""
+            formErrors.passwordsMatch ??
+            formErrors.passwordSufficient ??
+            "Input a password of at least 10 characters"
           }
           id="password"
           name="password"
@@ -158,7 +164,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         <TextField
           required
           error={formErrors.passwordsMatch ? true : false}
-          helperText={formErrors.passwordsMatch ?? ""}
+          helperText={formErrors.passwordsMatch ?? "Input your password again"}
           id="confirm-password"
           name="confirmPassword"
           label="Confirm Password"

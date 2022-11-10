@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import Tooltip from "@mui/material/Tooltip";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import { addIdeaReq, deleteIdeaReq } from "./api";
@@ -96,7 +98,9 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
         <TextField
           required
           error={formErrors.urlIsValid ? true : false}
-          helperText={formErrors.urlIsValid ?? ""}
+          helperText={
+            formErrors.urlIsValid ?? "Link to the idea (book, blog post, etc.)"
+          }
           id="url"
           name="url"
           label="URL"
@@ -117,7 +121,9 @@ function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
           helperText={
             formErrors.descriptionIsLongEnough ??
             formErrors.descriptionIsShortEnough ??
-            ""
+            `Summary of the idea (${
+              2000 - formData.description.length
+            } characters remaining)`
           }
           id="description"
           name="description"

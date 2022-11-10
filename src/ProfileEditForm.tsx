@@ -94,7 +94,7 @@ function ProfileEditForm({
         <TextField
           required
           error={formErrors.uniqueUsername ? true : false}
-          helperText={formErrors.uniqueUsername ?? ""}
+          helperText={formErrors.uniqueUsername ?? "Edit to change username"}
           id="username"
           name="username"
           label="Username"
@@ -107,7 +107,11 @@ function ProfileEditForm({
           error={
             formErrors.uniqueEmail || formErrors.properEmail ? true : false
           }
-          helperText={formErrors.uniqueEmail ?? formErrors.properEmail ?? ""}
+          helperText={
+            formErrors.uniqueEmail ??
+            formErrors.properEmail ??
+            "Edit to change email"
+          }
           id="email"
           name="email"
           label="Email"
@@ -119,7 +123,7 @@ function ProfileEditForm({
         <TextField
           required
           error={formErrors.invalidPassword ? true : false}
-          helperText={formErrors.invalidPassword ?? ""}
+          helperText={formErrors.invalidPassword ?? "Input current password"}
           id="password"
           name="password"
           label="Confirm Password"

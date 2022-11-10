@@ -107,7 +107,7 @@ function PasswordEditForm({
         <TextField
           required
           error={formErrors.invalidPassword ? true : false}
-          helperText={formErrors.invalidPassword ?? ""}
+          helperText={formErrors.invalidPassword ?? "Input current password"}
           id="current-password"
           name="currentPassword"
           label="Current Password"
@@ -124,7 +124,9 @@ function PasswordEditForm({
               : false
           }
           helperText={
-            formErrors.passwordSufficient ?? formErrors.passwordsMatch ?? ""
+            formErrors.passwordSufficient ??
+            formErrors.passwordsMatch ??
+            "Input new password"
           }
           id="new-password"
           name="newPassword"
@@ -137,7 +139,7 @@ function PasswordEditForm({
         <TextField
           required
           error={formErrors.passwordsMatch ? true : false}
-          helperText={formErrors.passwordsMatch ?? ""}
+          helperText={formErrors.passwordsMatch ?? "Input new password again"}
           id="confirm-new-password"
           name="confirmNewPassword"
           label="Confirm New Password"
