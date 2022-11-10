@@ -12,7 +12,7 @@ function Idea({ idea }: IdeaProps): JSX.Element {
         <table className="Idea-score">
           <tr>
             <td>Agreement Score:</td>
-            <td>{idea.score.toPrecision(3) ?? "N/A"}</td>
+            <td>{idea.score ? idea.score.toPrecision(3) : "N/A"}</td>
           </tr>
           <tr>
             <td>Popularity Score:</td>

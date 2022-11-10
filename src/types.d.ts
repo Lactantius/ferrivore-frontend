@@ -268,11 +268,7 @@ interface ResultsProps {
 }
 
 interface GetIdeaFormProps {
-  token: string;
-  getAgreeable: function;
-  getRandomUnseen: function;
-  getDisagreeable: function;
-  getPopular: function;
+  getIdea: function;
 }
 
 interface PasswordEditFormProps {

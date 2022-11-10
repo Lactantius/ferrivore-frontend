@@ -64,49 +64,20 @@ async function updateReq(
  * Idea routes
  * */
 
-async function popularReq(token: string): Promise<IdeaWithScoreRes | ErrorRes> {
-  const res = await fetch(`${BASE_URL}/ideas/popular`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.json();
-}
+const authHeaders = (token: string) => ({
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${token}`,
+});
 
-async function disagreeableReq(
-  token: string
-): Promise<IdeaWithScoreRes | ErrorRes> {
-  const res = await fetch(`${BASE_URL}/ideas/disagreeable`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+type NewIdeaReqFunc = (
+  ideaType: string
+) => (token: string) => Promise<IdeaWithScoreRes | ErrorRes>;
+const newIdeaReq: NewIdeaReqFunc = (ideaType) => async (token) => {
+  const res = await fetch(`${BASE_URL}/ideas/${ideaType}`, {
+    headers: authHeaders(token),
   });
   return res.json();
-}
-
-async function agreeableReq(
-  token: string
-): Promise<IdeaWithScoreRes | ErrorRes> {
-  const res = await fetch(`${BASE_URL}/ideas/agreeable`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.json();
-}
-
-async function randomReq(token: string): Promise<IdeaWithScoreRes | ErrorRes> {
-  const res = await fetch(`${BASE_URL}/ideas/random-unseen`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.json();
-}
+};
 
 async function addIdeaReq(
   token: string,
@@ -212,14 +183,11 @@ export {
   signupReq,
   updateReq,
   addIdeaReq,
-  popularReq,
-  disagreeableReq,
-  agreeableReq,
   reactReq,
-  randomReq,
   allReactionsReq,
   allUserIdeasReq,
   allPostedIdeasReq,
   deleteIdeaReq,
   ideaDetailsReq,
+  newIdeaReq,
 };

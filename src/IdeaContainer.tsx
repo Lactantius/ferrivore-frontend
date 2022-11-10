@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import ReactionForm from "./ReactionForm";
-import { disagreeableReq, agreeableReq, popularReq, randomReq } from "./api";
+import { newIdeaReq } from "./api";
 import "./IdeaContainer.css";
 import GetIdeaForm from "./GetIdeaForm";
 import Results from "./Results";
@@ -18,44 +18,22 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   );
 
   useEffect(() => {
-    const getIdea = async () => {
-      const disagreeable = await disagreeableReq(token);
+    const getFirstIdea = async () => {
+      const disagreeable = await newIdeaReq("disagreeable")(token);
       if ("idea" in disagreeable) {
         return disagreeable;
       }
-      const random = await randomReq(token);
-      return random;
+      const popular = await newIdeaReq("popular")(token);
+      return popular;
     };
-    getIdea().then((data) => setIdea("idea" in data ? data.idea : data.msg));
+    getFirstIdea().then((data) =>
+      setIdea("idea" in data ? data.idea : data.msg)
+    );
   }, [token]);
 
-  const getDisagreeable = (token: string) => {
-    const disagreeable = disagreeableReq(token);
-    disagreeable.then((data) => {
-      "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
-    });
-    setReactionSubmitted(false);
-  };
-
-  const getAgreeable = (token: string) => {
-    const agreeable = agreeableReq(token);
-    agreeable.then((data) => {
-      "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
-    });
-    setReactionSubmitted(false);
-  };
-
-  const getRandomUnseen = (token: string) => {
-    const random = randomReq(token);
-    random.then((data) => {
-      "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
-    });
-    setReactionSubmitted(false);
-  };
-
-  const getPopular = (token: string) => {
-    const popular = popularReq(token);
-    popular.then((data) => {
+  type GetIdeaFunc = (token: string) => (ideaType: string) => void;
+  const getIdea: GetIdeaFunc = (token) => (ideaType) => {
+    newIdeaReq(ideaType)(token).then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
     });
     setReactionSubmitted(false);
@@ -84,13 +62,7 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
             />
             {reactionSubmitted ? (
               <>
-                <GetIdeaForm
-                  token={token}
-                  getAgreeable={getAgreeable}
-                  getRandomUnseen={getRandomUnseen}
-                  getDisagreeable={getDisagreeable}
-                  getPopular={getPopular}
-                />
+                <GetIdeaForm getIdea={getIdea(token)} />
                 <Results
                   userReaction={userReaction}
                   anonReactions={allReactions}
