@@ -34,8 +34,9 @@ function AboutPage(): JSX.Element {
             receive any notifications about it.
           </li>
           <li>
-            There are no comment or discussion features. Most ideas will link to
-            websites that <i>do</i> have those features, so do it there instead.
+            There are no comment or discussion features. This website is just
+            for discovering ideas; there are plenty of other places to talk
+            about them.
           </li>
           <li>
             <i>Coming soon:</i> You can commend posts for being particularly
@@ -49,6 +50,15 @@ function AboutPage(): JSX.Element {
           the source code and documentation is available here
         </a>
         .
+      </p>
+      <h2>About the name</h2>
+      <p>
+        An <i>omnivore</i> eats everything. A <i>ferrivore</i> eats{" "}
+        <i>ferrum</i>: iron. So that seems an apt name for someone who seeks
+        powerful ideas and arguments, whether agreeable or not. (
+        <i>Chalybivore</i>, or <i>steel-eater</i>, would relate better to
+        steel-manning, but it is an ugly word with a root that very few would
+        recognize.)
       </p>
       <h2>Dedication</h2>
       <p className="AboutPage-centered">

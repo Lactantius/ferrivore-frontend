@@ -11,8 +11,8 @@ This is the frontend code for Ferrivore. For more information, [see the main rep
 - [ ] More loading indicators
 - [x] Show info about why a particular idea was selected
 - [x] Keep forms from changing size
-- [ ] Add explanation for name
+- [x] Add explanation for name
 - [x] Use datagrid for history page
-- [ ] Change button names to be more descriptive
+- [x] Change button names to be more descriptive
 - [x] Add Neo4j logo
 - [ ] Input icons into separate files and output them from there
