@@ -18,6 +18,7 @@ const truncateString: (length: number) => (str: string) => string =
 
 function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   const [ideas, setIdeas] = useState(Array<IdeaWithAllReactions>);
+  const [loading, setLoading] = useState<boolean>(true);
   const [postedOnly, setPostedOnly] = useState(false);
 
   useEffect(() => {
@@ -25,10 +26,16 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
   }, [token]);
 
   const setPostedIdeas = (user: User, token: string) =>
-    allPostedIdeasReq(user, token).then((i) => setIdeas(i.ideas));
+    allPostedIdeasReq(user, token).then((i) => {
+      setIdeas(i.ideas);
+      setLoading(false);
+    });
 
   const setReactedIdeas = (token: string) =>
-    allUserIdeasReq(token).then((i) => setIdeas(i.ideas));
+    allUserIdeasReq(token).then((i) => {
+      setIdeas(i.ideas);
+      setLoading(false);
+    });
 
   if (!user || !token) return <Navigate to="/" />;
 
@@ -42,6 +49,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
             onClick={() => {
               setReactedIdeas(token);
               setPostedOnly(false);
+              setLoading(true);
             }}
           >
             See all viewed ideas
@@ -54,6 +62,7 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
             onClick={() => {
               setPostedIdeas(user, token);
               setPostedOnly(true);
+              setLoading(true);
             }}
           >
             See only ideas you have posted
@@ -61,49 +70,61 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
         </>
       )}
       <Button href="/">Get a new instead</Button>
-      {ideas.length > 0 ? (
-        <Table className="IdeaList-table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Idea</TableCell>
-              <TableCell>URL</TableCell>
-              <TableCell>Agreement Level</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {ideas.map((idea) => {
-              return (
-                <TableRow hover={true}>
-                  <TableCell>
-                    <a href={`/ideas/${idea.ideaId}`}>
-                      {truncateString(50)(idea.description)}
-                    </a>
-                  </TableCell>
-                  <TableCell>
-                    <a href={idea.url}>
-                      {truncateString(20)(cleanLink(idea.url))}
-                    </a>
-                  </TableCell>
-                  <TableCell>
-                    {idea.userAgreement ? (
-                      <Rating
-                        name="agreement"
-                        max={7}
-                        value={idea.userAgreement + 4}
-                        size="small"
-                        readOnly
-                      />
-                    ) : (
-                      <i>Not interested</i>
-                    )}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+      {loading ? (
+        <p>Loading...</p>
       ) : (
-        <p>You have not rated any ideas yet.</p>
+        <>
+          {ideas.length > 0 ? (
+            <Table className="IdeaList-table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Idea</TableCell>
+                  <TableCell>URL</TableCell>
+                  <TableCell>Agreement Level</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {ideas.map((idea) => {
+                  return (
+                    <TableRow hover={true}>
+                      <TableCell>
+                        <a href={`/ideas/${idea.ideaId}`}>
+                          {truncateString(50)(idea.description)}
+                        </a>
+                      </TableCell>
+                      <TableCell>
+                        <a href={idea.url}>
+                          {truncateString(20)(cleanLink(idea.url))}
+                        </a>
+                      </TableCell>
+                      <TableCell>
+                        {idea.userAgreement ? (
+                          <Rating
+                            name="agreement"
+                            max={7}
+                            value={idea.userAgreement + 4}
+                            size="small"
+                            readOnly
+                          />
+                        ) : (
+                          <i>Not interested</i>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          ) : (
+            <>
+              {postedOnly ? (
+                <p>You have not posted any ideas yet.</p>
+              ) : (
+                <p>You have not rated any ideas yet.</p>
+              )}
+            </>
+          )}
+        </>
       )}
     </div>
   );

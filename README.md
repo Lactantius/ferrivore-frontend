@@ -6,7 +6,7 @@ This is the frontend code for Ferrivore. For more information, [see the main rep
 
 - [x] Clean URLs when displaying
 - [x] Add validation before adding an idea
-- [ ] Add more description to the new idea form
+- [x] Add more description to the new idea form
 - [ ] Fix layout bugs on mobile
 - [ ] More loading indicators
 - [x] Show info about why a particular idea was selected
