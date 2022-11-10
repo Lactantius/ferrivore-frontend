@@ -11,6 +11,16 @@
   font-size: 1rem;
 }
 
+.Idea .Idea-score {
+  font-size: 1rem;
+  text-align: left;
+  margin: auto;
+}
+
+.Idea .Idea-score td {
+  padding: 0.3rem;
+}
+
 @media screen and (min-width: 800px) {
   .Idea {
   }

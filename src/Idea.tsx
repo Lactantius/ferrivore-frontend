@@ -9,9 +9,16 @@ function Idea({ idea }: IdeaProps): JSX.Element {
       <p>{idea.description}</p>
       <p className="Idea-url">({cleanLink(idea.url)})</p>
       {"score" in idea ? (
-        <p className="Idea-score">
-          Score: {idea.score} | Popularity: {idea.popularity}
-        </p>
+        <table className="Idea-score">
+          <tr>
+            <td>Agreement Score:</td>
+            <td>{idea.score.toPrecision(3) ?? "N/A"}</td>
+          </tr>
+          <tr>
+            <td>Popularity Score:</td>
+            <td>{idea.popularity ?? "N/A"}</td>
+          </tr>
+        </table>
       ) : (
         <></>
       )}
