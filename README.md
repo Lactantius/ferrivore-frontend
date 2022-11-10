@@ -8,7 +8,7 @@ This is the frontend code for Ferrivore. For more information, [see the main rep
 - [x] Add validation before adding an idea
 - [x] Add more description to the new idea form
 - [ ] Fix layout bugs on mobile
-- [ ] More loading indicators
+- [x] More loading indicators
 - [x] Show info about why a particular idea was selected
 - [x] Keep forms from changing size
 - [x] Add explanation for name

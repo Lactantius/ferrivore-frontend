@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "@mui/material/Button";
 
 import ReactionForm from "./ReactionForm";
 import { newIdeaReq } from "./api";
@@ -44,7 +45,19 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
       <React.StrictMode>
         {typeof idea === "string" ? (
           <>
-            <h3>{idea}</h3>
+            <h3 className="IdeaContainer-empty">{idea}</h3>
+            {idea.includes("disagree") || idea.includes("nice") ? (
+              <Button
+                onClick={() => getIdea(token)("popular")}
+                variant="outlined"
+              >
+                Get a popular idea
+              </Button>
+            ) : (
+              <Button href="/new" variant="outlined">
+                Add more ideas
+              </Button>
+            )}
           </>
         ) : (
           <>
