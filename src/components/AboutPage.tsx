@@ -2,7 +2,7 @@ import React from "react";
 
 import "./AboutPage.css";
 
-function AboutPage (): JSX.Element {
+function AboutPage(): JSX.Element {
   return (
     <div className="AboutPage">
       <h1>What is this?</h1>
@@ -11,7 +11,7 @@ function AboutPage (): JSX.Element {
         promise this, but their recommendation algorithms tend to show you
         things that you already agree with, from people you already follow.
         Ferrivore, on the other hand, has no user likes or follows; liking a
-        post by a user does not automatically prioritize that user's other
+        post by a user does not automatically prioritize that user’s other
         posts. It also encourages you to like ideas{" "}
         <i>regardless of how much you agree with them</i>, so that the algorithm
         can recommend <i>all</i> interesting ideas and not just sort you into a
@@ -45,7 +45,7 @@ function AboutPage (): JSX.Element {
         </ul>
       </p>
       <p>
-        If you're interested in the technical details,{" "}
+        If you’re interested in the technical details,{" "}
         <a href="https://github.com/Lactantius/ferrivore">
           the source code and documentation is available here
         </a>
