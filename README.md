@@ -16,3 +16,6 @@ This is the frontend code for Ferrivore. For more information, [see the main rep
 - [x] Change button names to be more descriptive
 - [x] Add Neo4j logo
 - [ ] Input icons into separate files and output them from there
+- [ ] Move more logic out of components
+- [ ] Refactor api.ts to reduce duplication and add safety
+- [ ] Turn on more type checking
