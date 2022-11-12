@@ -11,13 +11,9 @@ const idea: IdeaWithScore = {
   popularity: 10,
 };
 
-it("renders", () => {
-  render(<Idea idea={idea} />);
-});
-
 it("matches snapshot", () => {
-  const { component } = render(<Idea idea={idea} />);
-  expect(component).toMatchSnapshot();
+  const { asFragment } = render(<Idea idea={idea} />);
+  expect(asFragment()).toMatchSnapshot();
 });
 
 test("renders data", () => {

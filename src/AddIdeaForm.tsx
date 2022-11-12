@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import Tooltip from "@mui/material/Tooltip";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import { addIdeaReq, deleteIdeaReq } from "./api";
