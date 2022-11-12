@@ -12,24 +12,26 @@ function Idea({ idea }: IdeaProps): JSX.Element {
       <p className="Idea-url">({cleanLink(idea.url)})</p>
       {"score" in idea ? (
         <table className="Idea-score">
-          <tr>
-            <td>Agreement Score:</td>
-            <td>{idea.score ? idea.score.toPrecision(3) : "N/A"}</td>
-            <td>
-              <Tooltip title="How well this idea matches your beliefs (based on user responses)">
-                <InfoOutlinedIcon fontSize="small" />
-              </Tooltip>
-            </td>
-          </tr>
-          <tr>
-            <td>Popularity Score:</td>
-            <td>{idea.popularity ?? "N/A"}</td>
-            <td>
-              <Tooltip title="How many users thought this was interesting">
-                <InfoOutlinedIcon fontSize="small" />
-              </Tooltip>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Agreement Score:</td>
+              <td>{idea.score ? idea.score.toPrecision(3) : "N/A"}</td>
+              <td>
+                <Tooltip title="How well this idea matches your beliefs (based on user responses)">
+                  <InfoOutlinedIcon fontSize="small" />
+                </Tooltip>
+              </td>
+            </tr>
+            <tr>
+              <td>Popularity Score:</td>
+              <td>{idea.popularity ?? "N/A"}</td>
+              <td>
+                <Tooltip title="How many users thought this was interesting">
+                  <InfoOutlinedIcon fontSize="small" />
+                </Tooltip>
+              </td>
+            </tr>
+          </tbody>
         </table>
       ) : (
         <></>
