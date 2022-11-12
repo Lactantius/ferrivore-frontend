@@ -4,8 +4,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-import { signupReq } from "./api";
-import { formatErrors } from "./helpers";
+import { signupReq } from "../api";
+import { formatErrors } from "../helpers";
 import "./SignupForm.css";
 
 function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {

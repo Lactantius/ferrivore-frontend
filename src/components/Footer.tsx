@@ -5,7 +5,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 
 import "./Footer.css";
-import { ReactComponent as Neo4jLogo } from "./Neo4j-logo-white.svg";
+import { ReactComponent as Neo4jLogo } from "../Neo4j-logo-white.svg";
 
 function Footer(): JSX.Element {
   return (

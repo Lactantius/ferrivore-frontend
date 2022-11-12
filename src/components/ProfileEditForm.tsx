@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import { updateReq } from "./api";
-import { formatErrors } from "./helpers";
+import { updateReq } from "../api";
+import { formatErrors } from "../helpers";
 import "./ProfileEditForm.css";
 import Success from "./Success";
 

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 
-import { reactReq, allReactionsReq } from "./api";
+import { reactReq, allReactionsReq } from "../api";
 
 import "./ReactionForm.css";
 

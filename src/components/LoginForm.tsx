@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import "./LoginForm.css";
-import { loginReq } from "./api";
+import { loginReq } from "../api";
 
 function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();

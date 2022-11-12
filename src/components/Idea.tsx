@@ -3,7 +3,7 @@ import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 import "./Idea.css";
-import { cleanLink } from "./helpers";
+import { cleanLink } from "../helpers";
 
 function Idea({ idea }: IdeaProps): JSX.Element {
   return (

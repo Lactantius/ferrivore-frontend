@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 
-import { ideaDetailsReq, deleteIdeaReq } from "./api";
+import { ideaDetailsReq, deleteIdeaReq } from "../api";
 import IdeaCard from "./IdeaCard";
 import ReactionForm from "./ReactionForm";
 import "./IdeaDetails.css";

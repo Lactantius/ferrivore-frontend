@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { addIdeaReq, deleteIdeaReq } from "./api";
+import { addIdeaReq, deleteIdeaReq } from "../api";
 
 import "./AddIdeaForm.css";
 import ReactionForm from "./ReactionForm";

@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Rating from "@mui/material/Rating";
 
-import { allUserIdeasReq, allPostedIdeasReq } from "./api";
-import { cleanLink } from "./helpers";
+import { allUserIdeasReq, allPostedIdeasReq } from "../api";
+import { cleanLink } from "../helpers";
 import "./IdeaList.css";
 
 const truncateString: (length: number) => (str: string) => string =

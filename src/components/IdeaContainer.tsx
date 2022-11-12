@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 
 import ReactionForm from "./ReactionForm";
-import { newIdeaReq } from "./api";
+import { newIdeaReq } from "../api";
 import "./IdeaContainer.css";
 import GetIdeaForm from "./GetIdeaForm";
 import Results from "./Results";
