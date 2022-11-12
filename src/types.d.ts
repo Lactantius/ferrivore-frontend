@@ -239,9 +239,9 @@ interface ReactionFormProps {
   token: string;
   idea: Idea | IdeaWithScore;
   initialValue: number | null;
-  setUserReaction?: function;
-  setAllReactions?: function;
-  setReactionSubmitted?: function;
+  setUserReaction?: SetUserReactionFunc;
+  setAllReactions?: SetAllReactionsFunc;
+  setReactionSubmitted?: SetBooleanFunc;
   reactionSubmitted: boolean;
 }
 
@@ -323,3 +323,13 @@ interface AddIdeaFormErrors {
  */
 
 type SaveUserFunc = (user: UserToken) => void;
+
+type SetBooleanFunc = React.Dispatch<React.SetStateAction<boolean>>;
+
+type SetUserReactionFunc = React.Dispatch<
+  React.SetStateAction<UserReaction | ErrorRes>
+>;
+
+type SetAllReactionsFunc = React.Dispatch<
+  React.SetStateAction<AllReactions | ErrorRes>
+>;

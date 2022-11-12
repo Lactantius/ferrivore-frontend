@@ -9,7 +9,6 @@ import "./ReactionForm.css";
 
 function ReactionForm({
   idea,
-  user,
   token,
   initialValue,
   setUserReaction,
@@ -55,7 +54,7 @@ function ReactionForm({
     token: string,
     id: string
   ) => {
-    reactionPromise
+    void reactionPromise
       .then((reaction) => {
         if ("reaction" in reaction) {
           setUserReaction({
@@ -66,7 +65,7 @@ function ReactionForm({
           setUserReaction(reaction);
         }
       })
-      .then(async (_) => await allReactionsReq(token, id))
+      .then(async () => await allReactionsReq(token, id))
       .then((allReactions) => {
         // Let the first request finish so that the new reaction will be included.
         if ("reactions" in allReactions) {

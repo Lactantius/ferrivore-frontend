@@ -65,7 +65,6 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
             <Idea idea={idea} />
             <ReactionForm
               idea={idea}
-              user={user}
               token={token}
               initialValue={null}
               setUserReaction={setUserReaction}
