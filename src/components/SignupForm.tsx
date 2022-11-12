@@ -8,13 +8,13 @@ import { signupReq } from "../api";
 import { formatErrors } from "../helpers";
 import "./SignupForm.css";
 
-function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
+function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<SignupFormVals>({
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   } as SignupFormVals);
 
   const [formErrors, setFormErrors] = useState<SignupFormErrors>(
@@ -34,7 +34,7 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate(formData)) {
-      signup(formData);
+      void signup(formData);
     }
     /* const data = new FormData(e.currentTarget);
      * const signupVals: SignupFormVals = {
@@ -55,7 +55,7 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
       setFormErrors({
         ...formErrors,
         passwordSufficient: null,
-        passwordsMatch: null
+        passwordsMatch: null,
       });
     }
     if (name === "confirmPassword") {
@@ -69,7 +69,7 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -78,34 +78,34 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
     const passwordSufficient = data.password.length > 9;
     const properEmail = data.email.toLowerCase().match(
       // From https://stackoverflow.com/a/46181/6632828
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
     );
-    if (passwordsMatch && passwordSufficient && (properEmail != null)) {
+    if (passwordsMatch && passwordSufficient && properEmail != null) {
       return true;
     }
     if (!passwordsMatch) {
       setFormErrors({
         ...formErrors,
-        passwordsMatch: "Passwords do not match."
+        passwordsMatch: "Passwords do not match.",
       });
     }
     if (properEmail == null) {
       setFormErrors({
         ...formErrors,
-        properEmail: "Please enter a validly formatted email."
+        properEmail: "Please enter a validly formatted email.",
       });
     }
     if (!passwordSufficient) {
       setFormErrors({
         ...formErrors,
         passwordSufficient:
-          "Please enter a password of at least 10 characters."
+          "Please enter a password of at least 10 characters.",
       });
     }
     return false;
   };
 
-  if ((user != null) || token) {
+  if (user != null || token) {
     return <Navigate to="/" />;
   }
 
@@ -126,9 +126,7 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
         />
         <TextField
           required
-          error={
-            !!(formErrors.uniqueEmail || formErrors.properEmail)
-          }
+          error={!!(formErrors.uniqueEmail || formErrors.properEmail)}
           helperText={
             formErrors.uniqueEmail ??
             formErrors.properEmail ??
@@ -143,9 +141,7 @@ function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
         />
         <TextField
           required
-          error={
-            !!(formErrors.passwordsMatch || formErrors.passwordSufficient)
-          }
+          error={!!(formErrors.passwordsMatch || formErrors.passwordSufficient)}
           helperText={
             formErrors.passwordsMatch ??
             formErrors.passwordSufficient ??

@@ -8,7 +8,7 @@ import GetIdeaForm from "./GetIdeaForm";
 import Results from "./Results";
 import Idea from "./Idea";
 
-function IdeaContainer ({ user, token }: IdeaContainerProps): JSX.Element {
+function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
   const [idea, setIdea] = useState<IdeaWithScore | string>("Loading...");
   const [reactionSubmitted, setReactionSubmitted] = useState<boolean>(false);
   const [userReaction, setUserReaction] = useState<UserReaction | ErrorRes>(
@@ -32,7 +32,7 @@ function IdeaContainer ({ user, token }: IdeaContainerProps): JSX.Element {
     );
   }, [token]);
 
-  type GetIdeaFunc = (token: string) => (ideaType: string) => void
+  type GetIdeaFunc = (token: string) => (ideaType: string) => void;
   const getIdea: GetIdeaFunc = (token) => (ideaType) => {
     newIdeaReq(ideaType)(token).then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
@@ -43,55 +43,49 @@ function IdeaContainer ({ user, token }: IdeaContainerProps): JSX.Element {
   return (
     <div className="IdeaContainer">
       <React.StrictMode>
-        {typeof idea === "string"
-          ? (
-            <>
-              <h3 className="IdeaContainer-empty">{idea}</h3>
-              {idea.includes("disagree") || idea.includes("nice")
-                ? (
-                  <Button
-                    onClick={() => getIdea(token)("popular")}
-                    variant="outlined"
-                  >
+        {typeof idea === "string" ? (
+          <>
+            <h3 className="IdeaContainer-empty">{idea}</h3>
+            {idea.includes("disagree") || idea.includes("nice") ? (
+              <Button
+                onClick={() => getIdea(token)("popular")}
+                variant="outlined"
+              >
                 Get a popular idea
-                  </Button>
-                )
-                : (
-                  <Button href="/new" variant="outlined">
+              </Button>
+            ) : (
+              <Button href="/new" variant="outlined">
                 Add more ideas
-                  </Button>
-                )}
-            </>
-          )
-          : (
-            <>
-              <h1>Here’s an idea...</h1>
-              <Idea idea={idea} />
-              <ReactionForm
-                idea={idea}
-                user={user}
-                token={token}
-                initialValue={null}
-                setUserReaction={setUserReaction}
-                setAllReactions={setAllReactions}
-                setReactionSubmitted={setReactionSubmitted}
-                reactionSubmitted={reactionSubmitted}
-              />
-              {reactionSubmitted
-                ? (
-                  <>
-                    <GetIdeaForm getIdea={getIdea(token)} />
-                    <Results
-                      userReaction={userReaction}
-                      anonReactions={allReactions}
-                    />
-                  </>
-                )
-                : (
-                  <></>
-                )}
-            </>
-          )}
+              </Button>
+            )}
+          </>
+        ) : (
+          <>
+            <h1>Here’s an idea...</h1>
+            <Idea idea={idea} />
+            <ReactionForm
+              idea={idea}
+              user={user}
+              token={token}
+              initialValue={null}
+              setUserReaction={setUserReaction}
+              setAllReactions={setAllReactions}
+              setReactionSubmitted={setReactionSubmitted}
+              reactionSubmitted={reactionSubmitted}
+            />
+            {reactionSubmitted ? (
+              <>
+                <GetIdeaForm getIdea={getIdea(token)} />
+                <Results
+                  userReaction={userReaction}
+                  anonReactions={allReactions}
+                />
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
       </React.StrictMode>
     </div>
   );

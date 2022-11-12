@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 import "./App.css";
 
-function App (): JSX.Element {
+function App(): JSX.Element {
   useEffect(() => {
     document.title = "Ferrivore";
   }, []);
@@ -27,7 +27,7 @@ function App (): JSX.Element {
 
   const setUserAndStorage = (user: User | null) => {
     setUser(user);
-    const stringified = (user != null) ? JSON.stringify(user) : "";
+    const stringified = user != null ? JSON.stringify(user) : "";
     window.localStorage.setItem("user", stringified);
   };
 
@@ -36,11 +36,11 @@ function App (): JSX.Element {
     window.localStorage.setItem("token", token);
   };
 
-  const saveUser = (user: UserToken) => {
+  const saveUser: SaveUserFunc = (user) => {
     const userData: User = {
       email: user.email,
       username: user.username,
-      userId: user.userId
+      userId: user.userId,
     };
     setUser(userData);
     window.localStorage.setItem("user", JSON.stringify(userData));

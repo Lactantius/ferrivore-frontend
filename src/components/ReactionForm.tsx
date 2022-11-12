@@ -7,7 +7,7 @@ import { reactReq, allReactionsReq } from "../api";
 
 import "./ReactionForm.css";
 
-function ReactionForm ({
+function ReactionForm({
   idea,
   user,
   token,
@@ -15,7 +15,7 @@ function ReactionForm ({
   setUserReaction,
   setAllReactions,
   setReactionSubmitted,
-  reactionSubmitted
+  reactionSubmitted,
 }: ReactionFormProps): JSX.Element {
   const [value, setValue] = React.useState<number | null>(null);
 
@@ -26,7 +26,7 @@ function ReactionForm ({
     const reactionRes = reactReq(token, {
       ideaId: idea.ideaId,
       agreement,
-      type: "like"
+      type: "like",
     });
     if (setReactionSubmitted) {
       setReactionSubmitted(true);
@@ -39,7 +39,7 @@ function ReactionForm ({
     e.preventDefault();
     const reactionRes = reactReq(token, {
       ideaId: idea.ideaId,
-      type: "dislike"
+      type: "dislike",
     });
     if (setReactionSubmitted) {
       setReactionSubmitted(true);
@@ -60,7 +60,7 @@ function ReactionForm ({
         if ("reaction" in reaction) {
           setUserReaction({
             userReaction: reaction.reaction.type,
-            userAgreement: reaction.reaction.agreement
+            userAgreement: reaction.reaction.agreement,
           });
         } else {
           setUserReaction(reaction);

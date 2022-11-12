@@ -9,7 +9,7 @@ import { addIdeaReq, deleteIdeaReq } from "../api";
 import "./AddIdeaForm.css";
 import ReactionForm from "./ReactionForm";
 
-type ValidateFunction = (data: AddIdeaFormVals) => AddIdeaFormErrors
+type ValidateFunction = (data: AddIdeaFormVals) => AddIdeaFormErrors;
 const validate: ValidateFunction = (data) => {
   const descriptionIsLongEnough =
     data.description.length > 9 ? null : "Please enter a longer description.";
@@ -20,24 +20,24 @@ const validate: ValidateFunction = (data) => {
     descriptionIsLongEnough,
     descriptionIsShortEnough,
     urlIsValid,
-    submission: null
+    submission: null,
   };
 };
 
-type CheckURLFunction = (url: string) => boolean
+type CheckURLFunction = (url: string) => boolean;
 const checkUrl: CheckURLFunction = (url) => {
   const match = url.toLowerCase().match(
     // From https://stackoverflow.com/a/8234912/6632828
-    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
+    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)/
   );
-  return (match != null);
+  return match != null;
 };
 
-function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
+function AddIdeaForm({ user, token }: AddIdeaFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<AddIdeaFormVals>({
     url: "",
-    description: ""
+    description: "",
   });
   const [reactionSubmitted, setReactionSubmitted] = useState<boolean>(false);
   const [idea, setIdea] = useState<Idea | null>(null);
@@ -45,7 +45,7 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
     urlIsValid: null,
     descriptionIsLongEnough: null,
     descriptionIsShortEnough: null,
-    submission: null
+    submission: null,
   });
 
   const handleChange = (e: React.ChangeEvent) => {
@@ -57,12 +57,12 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
       setFormErrors((errors) => ({
         ...errors,
         descriptionIsLongEnough: null,
-        descriptionIsShortEnough: null
+        descriptionIsShortEnough: null,
       }));
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -77,7 +77,7 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
     setFormErrors(validationErrors);
     if (Object.values(validationErrors).every((e) => e === null)) {
       const res = addIdeaReq(token!, formData);
-      res.then((data) => {
+      void res.then((data) => {
         "idea" in data
           ? setIdea(data.idea)
           : setFormErrors((errors) => ({ ...errors, submission: data.msg }));
@@ -85,7 +85,7 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
     }
   };
 
-  if ((user == null) || !token) {
+  if (user == null || !token) {
     return <Navigate to="/" />;
   }
 
@@ -111,8 +111,10 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
           required
           multiline={true}
           error={
-            !!(formErrors.descriptionIsLongEnough ||
-            formErrors.descriptionIsShortEnough)
+            !!(
+              formErrors.descriptionIsLongEnough ||
+              formErrors.descriptionIsShortEnough
+            )
           }
           helperText={
             formErrors.descriptionIsLongEnough ??
@@ -133,40 +135,36 @@ function AddIdeaForm ({ user, token }: AddIdeaFormProps): JSX.Element {
           Submit Idea
         </Button>
       </Box>
-      {(idea != null)
-        ? (
-          <ReactionForm
-            idea={idea}
-            user={user}
-            token={token}
-            initialValue={null}
-            setReactionSubmitted={setReactionSubmitted}
-            reactionSubmitted={reactionSubmitted}
-          />
-        )
-        : (
-          <></>
-        )}
-      {reactionSubmitted
-        ? (
-          <Button
-            className="AddIdeaForm-save"
-            variant="contained"
-            onClick={() => navigate("/")}
-          >
+      {idea != null ? (
+        <ReactionForm
+          idea={idea}
+          user={user}
+          token={token}
+          initialValue={null}
+          setReactionSubmitted={setReactionSubmitted}
+          reactionSubmitted={reactionSubmitted}
+        />
+      ) : (
+        <></>
+      )}
+      {reactionSubmitted ? (
+        <Button
+          className="AddIdeaForm-save"
+          variant="contained"
+          onClick={() => navigate("/")}
+        >
           Save
-          </Button>
-        )
-        : (
-          <></>
-        )}
+        </Button>
+      ) : (
+        <></>
+      )}
       <Button
         className="AddIdeaForm-cancel"
         variant="contained"
         color="error"
         onClick={() => {
           if (idea != null) {
-            deleteIdeaReq(idea.ideaId, token);
+            void deleteIdeaReq(idea.ideaId, token);
           }
           navigate("/");
         }}
