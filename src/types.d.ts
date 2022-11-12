@@ -267,7 +267,7 @@ interface ResultsProps {
 }
 
 interface GetIdeaFormProps {
-  getIdea: function;
+  getIdea: GetIdeaFunc;
 }
 
 interface PasswordEditFormProps {
@@ -335,3 +335,5 @@ type SetUserReactionFunc = React.Dispatch<
 type SetAllReactionsFunc = React.Dispatch<
   React.SetStateAction<AllReactions | ErrorRes>
 >;
+
+type GetIdeaFunc = (token: string) => (ideaType: string) => void;

@@ -27,14 +27,13 @@ function IdeaContainer({ user, token }: IdeaContainerProps): JSX.Element {
       const popular = await newIdeaReq("popular")(token);
       return popular;
     };
-    getFirstIdea().then((data) =>
+    void getFirstIdea().then((data) =>
       setIdea("idea" in data ? data.idea : data.msg)
     );
   }, [token]);
 
-  type GetIdeaFunc = (token: string) => (ideaType: string) => void;
   const getIdea: GetIdeaFunc = (token) => (ideaType) => {
-    newIdeaReq(ideaType)(token).then((data) => {
+    void newIdeaReq(ideaType)(token).then((data) => {
       "idea" in data ? setIdea(data.idea) : setIdea(data.msg);
     });
     setReactionSubmitted(false);
