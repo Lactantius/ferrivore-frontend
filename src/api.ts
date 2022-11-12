@@ -19,7 +19,7 @@ async function loginReq({
     },
     body: JSON.stringify({ email, password }),
   });
-  return res.json();
+  return res.json() as Promise<UserTokenRes | ErrorRes>;
 }
 
 /*
@@ -37,7 +37,7 @@ async function signupReq({
     },
     body: JSON.stringify({ email, username, password }),
   });
-  return res.json();
+  return res.json() as Promise<UserTokenRes | ErrorRes>;
 }
 
 /*
@@ -57,7 +57,7 @@ async function updateReq(
     },
     body: JSON.stringify({ ...updateData }),
   });
-  return res.json();
+  return res.json() as Promise<UserTokenRes | ErrorRes>;
 }
 
 /**
@@ -76,7 +76,7 @@ const newIdeaReq: NewIdeaReqFunc = (ideaType) => async (token) => {
   const res = await fetch(`${BASE_URL}/ideas/${ideaType}`, {
     headers: authHeaders(token),
   });
-  return res.json();
+  return res.json() as Promise<IdeaWithScoreRes | ErrorRes>;
 };
 
 async function addIdeaReq(
@@ -91,7 +91,7 @@ async function addIdeaReq(
     },
     body: JSON.stringify({ url, description }),
   });
-  return res.json();
+  return res.json() as Promise<IdeaRes | ErrorRes>;
 }
 
 async function reactReq(
@@ -106,7 +106,7 @@ async function reactReq(
     },
     body: JSON.stringify({ type, agreement }),
   });
-  return res.json();
+  return res.json() as Promise<ReactionRes | ErrorRes>;
 }
 
 async function allReactionsReq(
@@ -119,33 +119,38 @@ async function allReactionsReq(
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json();
+  return res.json() as Promise<AllReactionsRes | ErrorRes>;
 }
 
-async function allUserIdeasReq(token: string): Promise<IdeasWithReactionsRes> {
+async function allUserIdeasReq(
+  token: string
+): Promise<IdeasWithReactionsRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/viewed-with-relationships`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json();
+  return res.json() as Promise<IdeasWithReactionsRes | ErrorRes>;
 }
 
 async function allPostedIdeasReq(
   user: User,
   token: string
-): Promise<IdeasWithReactionsRes> {
+): Promise<IdeasWithReactionsRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/user/${user.userId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json();
+  return res.json() as Promise<IdeasWithReactionsRes | ErrorRes>;
 }
 
-async function deleteIdeaReq(id: string, token: string) {
+async function deleteIdeaReq(
+  id: string,
+  token: string
+): Promise<DeleteRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/${id}`, {
     method: "DELETE",
     headers: {
@@ -153,7 +158,7 @@ async function deleteIdeaReq(id: string, token: string) {
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json();
+  return res.json() as Promise<DeleteRes | ErrorRes>;
 }
 
 async function ideaDetailsReq(
@@ -172,7 +177,7 @@ async function ideaDetailsReq(
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.json();
+  return res.json() as Promise<IdeaDetailsRes | ErrorRes>;
 }
 
 export {

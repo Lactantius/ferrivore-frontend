@@ -110,6 +110,10 @@ interface ErrorRes {
   msg: string;
 }
 
+interface DeleteRes {
+  deleted: string;
+}
+
 interface AllReactionsRes {
   reactions: {
     userReaction: string;
