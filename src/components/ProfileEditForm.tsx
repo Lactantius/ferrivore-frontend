@@ -8,15 +8,15 @@ import { formatErrors } from "../helpers";
 import "./ProfileEditForm.css";
 import Success from "./Success";
 
-function ProfileEditForm ({
+function ProfileEditForm({
   user,
   token,
-  saveUser
+  saveUser,
 }: ProfileEditFormProps): JSX.Element {
   const [formData, setFormData] = useState<EditProfileFormVals>({
     username: user.username,
     email: user.email,
-    password: ""
+    password: "",
   } as EditProfileFormVals);
 
   const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
@@ -28,7 +28,7 @@ function ProfileEditForm ({
   const validate = (data: EditProfileFormVals) => {
     const properEmail = data.email.toLowerCase().match(
       // From https://stackoverflow.com/a/46181/6632828
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
     );
     if (properEmail != null) {
       return true;
@@ -36,7 +36,7 @@ function ProfileEditForm ({
     if (!properEmail) {
       setFormErrors({
         ...formErrors,
-        properEmail: "Please enter a validly formatted email."
+        properEmail: "Please enter a validly formatted email.",
       });
       return false;
     }
@@ -55,14 +55,14 @@ function ProfileEditForm ({
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate(formData)) {
-      updateUser(token, user.userId, formData);
+      void updateUser(token, user.userId, formData);
     }
     setFormData({ ...formData, password: "" });
   };
@@ -75,7 +75,7 @@ function ProfileEditForm ({
     const updateData: UpdateUserVals = {
       currentPassword: data.password,
       newUsername: data.username,
-      newEmail: data.email
+      newEmail: data.email,
     };
     const res = await updateReq(token, userId, updateData);
     if ("user" in res) {
@@ -104,9 +104,7 @@ function ProfileEditForm ({
         />
         <TextField
           required
-          error={
-            !!(formErrors.uniqueEmail || formErrors.properEmail)
-          }
+          error={!!(formErrors.uniqueEmail || formErrors.properEmail)}
           helperText={
             formErrors.uniqueEmail ??
             formErrors.properEmail ??
