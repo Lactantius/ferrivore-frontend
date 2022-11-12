@@ -228,7 +228,7 @@ interface AddIdeaFormProps {
 
 interface NavBarProps {
   user: User | null;
-  logout: function;
+  logout: LogoutFunc;
 }
 
 interface IdeaCardProps {
@@ -323,6 +323,8 @@ interface AddIdeaFormErrors {
  */
 
 type SaveUserFunc = (user: UserToken) => void;
+
+type LogoutFunc = () => void;
 
 type SetBooleanFunc = React.Dispatch<React.SetStateAction<boolean>>;
 

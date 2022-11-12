@@ -7,11 +7,11 @@ import Box from "@mui/material/Box";
 import "./LoginForm.css";
 import { loginReq } from "../api";
 
-function LoginForm ({ user, token, saveUser }: LoginFormProps): JSX.Element {
+function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormVals>({
     email: "",
-    password: ""
+    password: "",
   } as LoginFormVals);
 
   const [formErrors, setFormErrors] = useState<string>("");
@@ -31,7 +31,7 @@ function LoginForm ({ user, token, saveUser }: LoginFormProps): JSX.Element {
     setFormErrors("");
     setFormData((fData) => ({
       ...fData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -40,12 +40,12 @@ function LoginForm ({ user, token, saveUser }: LoginFormProps): JSX.Element {
     const data = new FormData(e.currentTarget);
     const loginVals: LoginFormVals = {
       email: data.get("email") as string,
-      password: data.get("password") as string
+      password: data.get("password") as string,
     };
-    login(loginVals);
+    void login(loginVals);
   };
 
-  if ((user != null) || token) {
+  if (user != null || token) {
     return <Navigate to="/" />;
   }
 

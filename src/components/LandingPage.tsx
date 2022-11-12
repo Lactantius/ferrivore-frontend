@@ -6,14 +6,14 @@ import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
 import "./LandingPage.css";
 
-function LandingPage (): JSX.Element {
+function LandingPage(): JSX.Element {
   return (
     <div className="LandingPage">
       <h1>Ferrivore</h1>
       <h2>An idea discovery tool</h2>
       <p>
         Ferrivore recommends ideas based on <i>quality</i>, not just who said
-        them or whether you'll agree. <Link to="/about">Learn more</Link>.
+        them or whether you’ll agree. <Link to="/about">Learn more</Link>.
       </p>
       <div className="LandingPage-buttons">
         <Button

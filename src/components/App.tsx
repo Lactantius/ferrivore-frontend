@@ -48,7 +48,7 @@ function App(): JSX.Element {
     window.localStorage.setItem("token", user.token);
   };
 
-  const logout = () => {
+  const logout: LogoutFunc = () => {
     setTokenAndStorage("");
     setUserAndStorage(null);
   };
