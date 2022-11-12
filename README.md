@@ -18,4 +18,5 @@ This is the frontend code for Ferrivore. For more information, [see the main rep
 - [ ] Input icons into separate files and output them from there
 - [ ] Move more logic out of components
 - [ ] Refactor api.ts to reduce duplication and add safety
-- [ ] Turn on more type checking
+- [x] Turn on more type checking
+- [ ] Use Zod or io-ts in api.ts
