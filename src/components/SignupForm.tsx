@@ -8,13 +8,13 @@ import { signupReq } from "../api";
 import { formatErrors } from "../helpers";
 import "./SignupForm.css";
 
-function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
+function SignupForm ({ user, token, saveUser }: SignupFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<SignupFormVals>({
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   } as SignupFormVals);
 
   const [formErrors, setFormErrors] = useState<SignupFormErrors>(
@@ -55,7 +55,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       setFormErrors({
         ...formErrors,
         passwordSufficient: null,
-        passwordsMatch: null,
+        passwordsMatch: null
       });
     }
     if (name === "confirmPassword") {
@@ -69,7 +69,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -80,32 +80,32 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       // From https://stackoverflow.com/a/46181/6632828
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
-    if (passwordsMatch && passwordSufficient && properEmail) {
+    if (passwordsMatch && passwordSufficient && (properEmail != null)) {
       return true;
     }
     if (!passwordsMatch) {
       setFormErrors({
         ...formErrors,
-        passwordsMatch: "Passwords do not match.",
+        passwordsMatch: "Passwords do not match."
       });
     }
-    if (!properEmail) {
+    if (properEmail == null) {
       setFormErrors({
         ...formErrors,
-        properEmail: "Please enter a validly formatted email.",
+        properEmail: "Please enter a validly formatted email."
       });
     }
     if (!passwordSufficient) {
       setFormErrors({
         ...formErrors,
         passwordSufficient:
-          "Please enter a password of at least 10 characters.",
+          "Please enter a password of at least 10 characters."
       });
     }
     return false;
   };
 
-  if (user || token) {
+  if ((user != null) || token) {
     return <Navigate to="/" />;
   }
 
@@ -115,7 +115,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
-          error={formErrors.uniqueUsername ? true : false}
+          error={!!formErrors.uniqueUsername}
           helperText={formErrors.uniqueUsername ?? "Input a username"}
           id="username"
           name="username"
@@ -127,7 +127,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         <TextField
           required
           error={
-            formErrors.uniqueEmail || formErrors.properEmail ? true : false
+            !!(formErrors.uniqueEmail || formErrors.properEmail)
           }
           helperText={
             formErrors.uniqueEmail ??
@@ -144,9 +144,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         <TextField
           required
           error={
-            formErrors.passwordsMatch || formErrors.passwordSufficient
-              ? true
-              : false
+            !!(formErrors.passwordsMatch || formErrors.passwordSufficient)
           }
           helperText={
             formErrors.passwordsMatch ??
@@ -163,7 +161,7 @@ function SignupForm({ user, token, saveUser }: SignupFormProps): JSX.Element {
         />
         <TextField
           required
-          error={formErrors.passwordsMatch ? true : false}
+          error={!!formErrors.passwordsMatch}
           helperText={formErrors.passwordsMatch ?? "Input your password again"}
           id="confirm-password"
           name="confirmPassword"

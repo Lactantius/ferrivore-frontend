@@ -16,7 +16,7 @@ const truncateString: (length: number) => (str: string) => string =
   (length: number) => (str: string) =>
     str.length > length ? str.slice(0, length - 3).concat("...") : str;
 
-function IdeaList({ user, token }: IdeaListProps): JSX.Element {
+function IdeaList ({ user, token }: IdeaListProps): JSX.Element {
   const [ideas, setIdeas] = useState(Array<IdeaWithAllReactions>);
   const [loading, setLoading] = useState<boolean>(true);
   const [postedOnly, setPostedOnly] = useState(false);
@@ -25,107 +25,117 @@ function IdeaList({ user, token }: IdeaListProps): JSX.Element {
     setReactedIdeas(token!);
   }, [token]);
 
-  const setPostedIdeas = (user: User, token: string) =>
-    allPostedIdeasReq(user, token).then((i) => {
+  const setPostedIdeas = async (user: User, token: string) =>
+    await allPostedIdeasReq(user, token).then((i) => {
       setIdeas(i.ideas);
       setLoading(false);
     });
 
-  const setReactedIdeas = (token: string) =>
-    allUserIdeasReq(token).then((i) => {
+  const setReactedIdeas = async (token: string) =>
+    await allUserIdeasReq(token).then((i) => {
       setIdeas(i.ideas);
       setLoading(false);
     });
 
-  if (!user || !token) return <Navigate to="/" />;
+  if ((user == null) || !token) return <Navigate to="/" />;
 
   return (
     <div className="IdeaList">
       <h1>Ideas</h1>
-      {postedOnly ? (
-        <>
-          <p>These are the ideas you have posted.</p>
-          <Button
-            onClick={() => {
-              setReactedIdeas(token);
-              setPostedOnly(false);
-              setLoading(true);
-            }}
-          >
+      {postedOnly
+        ? (
+          <>
+            <p>These are the ideas you have posted.</p>
+            <Button
+              onClick={() => {
+                setReactedIdeas(token);
+                setPostedOnly(false);
+                setLoading(true);
+              }}
+            >
             See all viewed ideas
-          </Button>
-        </>
-      ) : (
-        <>
-          <p>These are the ideas you have rated.</p>
-          <Button
-            onClick={() => {
-              setPostedIdeas(user, token);
-              setPostedOnly(true);
-              setLoading(true);
-            }}
-          >
+            </Button>
+          </>
+        )
+        : (
+          <>
+            <p>These are the ideas you have rated.</p>
+            <Button
+              onClick={() => {
+                setPostedIdeas(user, token);
+                setPostedOnly(true);
+                setLoading(true);
+              }}
+            >
             See only ideas you have posted
-          </Button>
-        </>
-      )}
+            </Button>
+          </>
+        )}
       <Button href="/">Get a new instead</Button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {ideas.length > 0 ? (
-            <Table className="IdeaList-table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Idea</TableCell>
-                  <TableCell>URL</TableCell>
-                  <TableCell>Agreement Level</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {ideas.map((idea) => {
-                  return (
-                    <TableRow hover={true}>
-                      <TableCell>
-                        <a href={`/ideas/${idea.ideaId}`}>
-                          {truncateString(50)(idea.description)}
-                        </a>
-                      </TableCell>
-                      <TableCell>
-                        <a href={idea.url}>
-                          {truncateString(20)(cleanLink(idea.url))}
-                        </a>
-                      </TableCell>
-                      <TableCell>
-                        {idea.userAgreement ? (
-                          <Rating
-                            name="agreement"
-                            max={7}
-                            value={idea.userAgreement + 4}
-                            size="small"
-                            readOnly
-                          />
-                        ) : (
-                          <i>Not interested</i>
-                        )}
-                      </TableCell>
+      {loading
+        ? (
+          <p>Loading...</p>
+        )
+        : (
+          <>
+            {ideas.length > 0
+              ? (
+                <Table className="IdeaList-table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Idea</TableCell>
+                      <TableCell>URL</TableCell>
+                      <TableCell>Agreement Level</TableCell>
                     </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          ) : (
-            <>
-              {postedOnly ? (
-                <p>You have not posted any ideas yet.</p>
-              ) : (
-                <p>You have not rated any ideas yet.</p>
+                  </TableHead>
+                  <TableBody>
+                    {ideas.map((idea) => {
+                      return (
+                        <TableRow hover={true}>
+                          <TableCell>
+                            <a href={`/ideas/${idea.ideaId}`}>
+                              {truncateString(50)(idea.description)}
+                            </a>
+                          </TableCell>
+                          <TableCell>
+                            <a href={idea.url}>
+                              {truncateString(20)(cleanLink(idea.url))}
+                            </a>
+                          </TableCell>
+                          <TableCell>
+                            {idea.userAgreement
+                              ? (
+                                <Rating
+                                  name="agreement"
+                                  max={7}
+                                  value={idea.userAgreement + 4}
+                                  size="small"
+                                  readOnly
+                                />
+                              )
+                              : (
+                                <i>Not interested</i>
+                              )}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              )
+              : (
+                <>
+                  {postedOnly
+                    ? (
+                      <p>You have not posted any ideas yet.</p>
+                    )
+                    : (
+                      <p>You have not rated any ideas yet.</p>
+                    )}
+                </>
               )}
-            </>
-          )}
-        </>
-      )}
+          </>
+        )}
     </div>
   );
 }

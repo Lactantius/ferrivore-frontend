@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import "./NavBar.css";
 
-function NavBar({ user, logout }: NavBarProps): JSX.Element {
+function NavBar ({ user, logout }: NavBarProps): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,37 +28,39 @@ function NavBar({ user, logout }: NavBarProps): JSX.Element {
         Ferrivore
       </NavLink>
       <div className="NavBar-desktop">
-        {user ? (
-          <>
-            <NavLink to="/ideas" className="push">
-              <LightbulbOutlinedIcon />
+        {(user != null)
+          ? (
+            <>
+              <NavLink to="/ideas" className="push">
+                <LightbulbOutlinedIcon />
               History
-            </NavLink>
-            <NavLink to="/new">
-              <AddCircleOutlineIcon />
+              </NavLink>
+              <NavLink to="/new">
+                <AddCircleOutlineIcon />
               New
-            </NavLink>
-            <NavLink to="/profile">
-              <AccountCircleOutlinedIcon />
+              </NavLink>
+              <NavLink to="/profile">
+                <AccountCircleOutlinedIcon />
               Profile
-            </NavLink>
-            <NavLink to="/" onClick={(e: React.MouseEvent) => logout()}>
-              <LogoutIcon />
+              </NavLink>
+              <NavLink to="/" onClick={(e: React.MouseEvent) => logout()}>
+                <LogoutIcon />
               Logout
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink to="/login" className="push">
-              <LoginIcon />
+              </NavLink>
+            </>
+          )
+          : (
+            <>
+              <NavLink to="/login" className="push">
+                <LoginIcon />
               Login
-            </NavLink>
-            <NavLink to="/signup">
-              <PersonAddAltOutlinedIcon />
+              </NavLink>
+              <NavLink to="/signup">
+                <PersonAddAltOutlinedIcon />
               Sign up
-            </NavLink>
-          </>
-        )}
+              </NavLink>
+            </>
+          )}
       </div>
       <div className="NavBar-mobile">
         <button
@@ -78,52 +80,54 @@ function NavBar({ user, logout }: NavBarProps): JSX.Element {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            "aria-labelledby": "menu-button",
+            "aria-labelledby": "menu-button"
           }}
         >
-          {user ? (
-            <>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/ideas" className="push">
-                  <LightbulbOutlinedIcon />
+          {(user != null)
+            ? (
+              <>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/ideas" className="push">
+                    <LightbulbOutlinedIcon />
                   History
-                </NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/new">
-                  <AddCircleOutlineIcon />
+                  </NavLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/new">
+                    <AddCircleOutlineIcon />
                   New
-                </NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/profile">
-                  <AccountCircleOutlinedIcon />
+                  </NavLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/profile">
+                    <AccountCircleOutlinedIcon />
                   Profile
-                </NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/" onClick={(e: React.MouseEvent) => logout()}>
-                  <LogoutIcon />
+                  </NavLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/" onClick={(e: React.MouseEvent) => logout()}>
+                    <LogoutIcon />
                   Logout
-                </NavLink>
-              </MenuItem>
-            </>
-          ) : (
-            <>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/login" className="push">
-                  <LoginIcon />
+                  </NavLink>
+                </MenuItem>
+              </>
+            )
+            : (
+              <>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/login" className="push">
+                    <LoginIcon />
                   Login
-                </NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <NavLink to="/signup">
-                  <PersonAddAltOutlinedIcon />
+                  </NavLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <NavLink to="/signup">
+                    <PersonAddAltOutlinedIcon />
                   Sign up
-                </NavLink>
-              </MenuItem>
-            </>
-          )}
+                  </NavLink>
+                </MenuItem>
+              </>
+            )}
         </Menu>
       </div>
     </nav>

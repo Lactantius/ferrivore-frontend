@@ -8,15 +8,15 @@ import { formatErrors } from "../helpers";
 import "./PasswordEditForm.css";
 import Success from "./Success";
 
-function PasswordEditForm({
+function PasswordEditForm ({
   user,
   token,
-  saveUser,
+  saveUser
 }: PasswordEditFormProps): JSX.Element {
   const [formData, setFormData] = useState<PasswordEditFormVals>({
     currentPassword: "",
     newPassword: "",
-    confirmNewPassword: "",
+    confirmNewPassword: ""
   } as PasswordEditFormVals);
 
   const [formErrors, setFormErrors] = useState<EditPasswordFormErrors>(
@@ -34,7 +34,7 @@ function PasswordEditForm({
       setFormErrors({
         ...formErrors,
         passwordSufficient: null,
-        passwordsMatch: null,
+        passwordsMatch: null
       });
     }
     if (name === "confirmNewPassword") {
@@ -42,7 +42,7 @@ function PasswordEditForm({
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -55,14 +55,14 @@ function PasswordEditForm({
     if (!passwordsMatch) {
       setFormErrors({
         ...formErrors,
-        passwordsMatch: "Passwords do not match.",
+        passwordsMatch: "Passwords do not match."
       });
     }
     if (!passwordSufficient) {
       setFormErrors({
         ...formErrors,
         passwordSufficient:
-          "Please enter a password of at least 10 characters.",
+          "Please enter a password of at least 10 characters."
       });
     }
     return false;
@@ -77,7 +77,7 @@ function PasswordEditForm({
       ...formData,
       currentPassword: "",
       newPassword: "",
-      confirmNewPassword: "",
+      confirmNewPassword: ""
     });
   };
 
@@ -88,7 +88,7 @@ function PasswordEditForm({
   ) => {
     const updateData: UpdateUserVals = {
       currentPassword: data.currentPassword,
-      newPassword: data.newPassword,
+      newPassword: data.newPassword
     };
     const res = await updateReq(token, userId, updateData);
     if ("user" in res) {
@@ -106,7 +106,7 @@ function PasswordEditForm({
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
-          error={formErrors.invalidPassword ? true : false}
+          error={!!formErrors.invalidPassword}
           helperText={formErrors.invalidPassword ?? "Input current password"}
           id="current-password"
           name="currentPassword"
@@ -119,9 +119,7 @@ function PasswordEditForm({
         <TextField
           required
           error={
-            formErrors.passwordsMatch || formErrors.passwordSufficient
-              ? true
-              : false
+            !!(formErrors.passwordsMatch || formErrors.passwordSufficient)
           }
           helperText={
             formErrors.passwordSufficient ??
@@ -138,7 +136,7 @@ function PasswordEditForm({
         />
         <TextField
           required
-          error={formErrors.passwordsMatch ? true : false}
+          error={!!formErrors.passwordsMatch}
           helperText={formErrors.passwordsMatch ?? "Input new password again"}
           id="confirm-new-password"
           name="confirmNewPassword"

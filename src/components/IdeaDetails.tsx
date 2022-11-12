@@ -7,7 +7,7 @@ import IdeaCard from "./IdeaCard";
 import ReactionForm from "./ReactionForm";
 import "./IdeaDetails.css";
 
-function IdeaDetails({ user, token }: UserProps): JSX.Element {
+function IdeaDetails ({ user, token }: UserProps): JSX.Element {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -34,7 +34,7 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
     navigate("/ideas");
   };
 
-  if (!user || !token) return <Navigate to="/" />;
+  if ((user == null) || !token) return <Navigate to="/" />;
 
   if (!idea || Object.keys(idea).length === 0) return <h2>Loading...</h2>;
 
@@ -58,18 +58,20 @@ function IdeaDetails({ user, token }: UserProps): JSX.Element {
           }
           reactionSubmitted={true}
         />
-        {idea.postedBy === user.userId ? (
-          <Button
-            className="IdeaDetails-delete"
-            variant="contained"
-            color="error"
-            onClick={() => deleteIdea(token, idea.ideaId)}
-          >
+        {idea.postedBy === user.userId
+          ? (
+            <Button
+              className="IdeaDetails-delete"
+              variant="contained"
+              color="error"
+              onClick={() => deleteIdea(token, idea.ideaId)}
+            >
             Delete idea
-          </Button>
-        ) : (
-          <></>
-        )}
+            </Button>
+          )
+          : (
+            <></>
+          )}
       </React.StrictMode>
     </div>
   );

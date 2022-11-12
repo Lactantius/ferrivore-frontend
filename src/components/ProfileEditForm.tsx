@@ -8,15 +8,15 @@ import { formatErrors } from "../helpers";
 import "./ProfileEditForm.css";
 import Success from "./Success";
 
-function ProfileEditForm({
+function ProfileEditForm ({
   user,
   token,
-  saveUser,
+  saveUser
 }: ProfileEditFormProps): JSX.Element {
   const [formData, setFormData] = useState<EditProfileFormVals>({
-    username: user!.username,
-    email: user!.email,
-    password: "",
+    username: user.username,
+    email: user.email,
+    password: ""
   } as EditProfileFormVals);
 
   const [formErrors, setFormErrors] = useState<EditProfileFormErrors>(
@@ -30,13 +30,13 @@ function ProfileEditForm({
       // From https://stackoverflow.com/a/46181/6632828
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
-    if (properEmail) {
+    if (properEmail != null) {
       return true;
     }
     if (!properEmail) {
       setFormErrors({
         ...formErrors,
-        properEmail: "Please enter a validly formatted email.",
+        properEmail: "Please enter a validly formatted email."
       });
       return false;
     }
@@ -55,7 +55,7 @@ function ProfileEditForm({
     }
     setFormData((fData) => ({
       ...fData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -75,7 +75,7 @@ function ProfileEditForm({
     const updateData: UpdateUserVals = {
       currentPassword: data.password,
       newUsername: data.username,
-      newEmail: data.email,
+      newEmail: data.email
     };
     const res = await updateReq(token, userId, updateData);
     if ("user" in res) {
@@ -93,7 +93,7 @@ function ProfileEditForm({
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
-          error={formErrors.uniqueUsername ? true : false}
+          error={!!formErrors.uniqueUsername}
           helperText={formErrors.uniqueUsername ?? "Edit to change username"}
           id="username"
           name="username"
@@ -105,7 +105,7 @@ function ProfileEditForm({
         <TextField
           required
           error={
-            formErrors.uniqueEmail || formErrors.properEmail ? true : false
+            !!(formErrors.uniqueEmail || formErrors.properEmail)
           }
           helperText={
             formErrors.uniqueEmail ??
@@ -122,7 +122,7 @@ function ProfileEditForm({
         />
         <TextField
           required
-          error={formErrors.invalidPassword ? true : false}
+          error={!!formErrors.invalidPassword}
           helperText={formErrors.invalidPassword ?? "Input current password"}
           id="password"
           name="password"

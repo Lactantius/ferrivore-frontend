@@ -6,10 +6,10 @@ import AddIdeaForm from "./AddIdeaForm";
 const user: User = {
   email: "test@test.com",
   username: "test",
-  userId: "uuid",
+  userId: "uuid"
 };
 
-const token: string = "userToken";
+const token = "userToken";
 
 it("matches snapshot", () => {
   const { asFragment } = render(

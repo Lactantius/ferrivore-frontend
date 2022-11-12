@@ -7,11 +7,11 @@ import Box from "@mui/material/Box";
 import "./LoginForm.css";
 import { loginReq } from "../api";
 
-function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
+function LoginForm ({ user, token, saveUser }: LoginFormProps): JSX.Element {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginFormVals>({
     email: "",
-    password: "",
+    password: ""
   } as LoginFormVals);
 
   const [formErrors, setFormErrors] = useState<string>("");
@@ -31,7 +31,7 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
     setFormErrors("");
     setFormData((fData) => ({
       ...fData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -40,12 +40,12 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
     const data = new FormData(e.currentTarget);
     const loginVals: LoginFormVals = {
       email: data.get("email") as string,
-      password: data.get("password") as string,
+      password: data.get("password") as string
     };
     login(loginVals);
   };
 
-  if (user || token) {
+  if ((user != null) || token) {
     return <Navigate to="/" />;
   }
 
@@ -55,8 +55,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <TextField
           required
-          error={formErrors ? true : false}
-          helperText={formErrors ? formErrors : "Input your account email"}
+          error={!!formErrors}
+          helperText={formErrors || "Input your account email"}
           id="email"
           name="email"
           label="Email"
@@ -66,8 +66,8 @@ function LoginForm({ user, token, saveUser }: LoginFormProps): JSX.Element {
         />
         <TextField
           required
-          error={formErrors ? true : false}
-          helperText={formErrors ? formErrors : "Input your password"}
+          error={!!formErrors}
+          helperText={formErrors || "Input your password"}
           id="password"
           name="password"
           label="Password"

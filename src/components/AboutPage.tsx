@@ -2,7 +2,7 @@ import React from "react";
 
 import "./AboutPage.css";
 
-function AboutPage(): JSX.Element {
+function AboutPage (): JSX.Element {
   return (
     <div className="AboutPage">
       <h1>What is this?</h1>

@@ -5,8 +5,8 @@ import PasswordEditForm from "./PasswordEditForm";
 import ProfileEditForm from "./ProfileEditForm";
 import "./Profile.css";
 
-function Profile({ user, token, saveUser }: ProfileProps): JSX.Element {
-  if (!user || !token) {
+function Profile ({ user, token, saveUser }: ProfileProps): JSX.Element {
+  if ((user == null) || !token) {
     return <Navigate to="/" />;
   }
 

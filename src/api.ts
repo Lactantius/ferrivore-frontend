@@ -8,42 +8,42 @@ const BASE_URL =
 /*
  * Login a user
  */
-async function loginReq({
+async function loginReq ({
   email,
-  password,
+  password
 }: LoginFormVals): Promise<UserTokenRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/users/login`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password })
   });
-  return res.json();
+  return await res.json();
 }
 
 /*
  * Register a new user
  */
-async function signupReq({
+async function signupReq ({
   email,
   password,
-  username,
+  username
 }: SignupFormVals): Promise<UserTokenRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/users/signup`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ email, username, password }),
+    body: JSON.stringify({ email, username, password })
   });
-  return res.json();
+  return await res.json();
 }
 
 /*
  * Update user info
  */
-async function updateReq(
+async function updateReq (
   token: string,
   userId: string,
   updateData: UpdateUserVals
@@ -53,11 +53,11 @@ async function updateReq(
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ ...updateData }),
+    body: JSON.stringify({ ...updateData })
   });
-  return res.json();
+  return await res.json();
 }
 
 /**
@@ -66,20 +66,20 @@ async function updateReq(
 
 const authHeaders = (token: string) => ({
   "Content-Type": "application/json",
-  Authorization: `Bearer ${token}`,
+  Authorization: `Bearer ${token}`
 });
 
 type NewIdeaReqFunc = (
   ideaType: string
-) => (token: string) => Promise<IdeaWithScoreRes | ErrorRes>;
+) => (token: string) => Promise<IdeaWithScoreRes | ErrorRes>
 const newIdeaReq: NewIdeaReqFunc = (ideaType) => async (token) => {
   const res = await fetch(`${BASE_URL}/ideas/${ideaType}`, {
-    headers: authHeaders(token),
+    headers: authHeaders(token)
   });
-  return res.json();
+  return await res.json();
 };
 
-async function addIdeaReq(
+async function addIdeaReq (
   token: string,
   { url, description }: AddIdeaFormVals
 ): Promise<IdeaRes | ErrorRes> {
@@ -87,14 +87,14 @@ async function addIdeaReq(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ url, description }),
+    body: JSON.stringify({ url, description })
   });
-  return res.json();
+  return await res.json();
 }
 
-async function reactReq(
+async function reactReq (
   token: string,
   { ideaId, type, agreement }: ReactionFormVals
 ): Promise<ReactionRes | ErrorRes> {
@@ -102,61 +102,61 @@ async function reactReq(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ type, agreement }),
+    body: JSON.stringify({ type, agreement })
   });
-  return res.json();
+  return await res.json();
 }
 
-async function allReactionsReq(
+async function allReactionsReq (
   token: string,
   idea_id: string
 ): Promise<AllReactionsRes | ErrorRes> {
   const res = await fetch(`${BASE_URL}/ideas/${idea_id}/reactions`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
-  return res.json();
+  return await res.json();
 }
 
-async function allUserIdeasReq(token: string): Promise<IdeasWithReactionsRes> {
+async function allUserIdeasReq (token: string): Promise<IdeasWithReactionsRes> {
   const res = await fetch(`${BASE_URL}/ideas/viewed-with-relationships`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
-  return res.json();
+  return await res.json();
 }
 
-async function allPostedIdeasReq(
+async function allPostedIdeasReq (
   user: User,
   token: string
 ): Promise<IdeasWithReactionsRes> {
   const res = await fetch(`${BASE_URL}/ideas/user/${user.userId}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
-  return res.json();
+  return await res.json();
 }
 
-async function deleteIdeaReq(id: string, token: string) {
+async function deleteIdeaReq (id: string, token: string) {
   const res = await fetch(`${BASE_URL}/ideas/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
-  return res.json();
+  return await res.json();
 }
 
-async function ideaDetailsReq(
+async function ideaDetailsReq (
   id: string,
   token: string,
   with_reactions = false,
@@ -166,16 +166,16 @@ async function ideaDetailsReq(
     `${BASE_URL}/ideas/${id}?` +
       new URLSearchParams({
         "with-reactions": String(with_reactions),
-        "with-user-reaction": String(with_user_reaction),
+        "with-user-reaction": String(with_user_reaction)
       }),
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     }
   );
-  return res.json();
+  return await res.json();
 }
 
 export {
@@ -189,5 +189,5 @@ export {
   allPostedIdeasReq,
   deleteIdeaReq,
   ideaDetailsReq,
-  newIdeaReq,
+  newIdeaReq
 };

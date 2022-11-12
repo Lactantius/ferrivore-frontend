@@ -8,7 +8,7 @@ const idea: IdeaWithScore = {
   createdAt: "date",
   ideaId: "uuid",
   score: -2.01,
-  popularity: 10,
+  popularity: 10
 };
 
 it("matches snapshot", () => {

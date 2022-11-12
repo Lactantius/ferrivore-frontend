@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 import "./GetIdeaForm.css";
 
-function GetIdeaForm({ getIdea }: GetIdeaFormProps): JSX.Element {
+function GetIdeaForm ({ getIdea }: GetIdeaFormProps): JSX.Element {
   return (
     <div className="GetIdeaForm">
       <h2>Get a new idea</h2>

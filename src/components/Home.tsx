@@ -5,14 +5,16 @@ import LandingPage from "./LandingPage";
 
 import "./Home.css";
 
-function Home({ user, token }: HomeProps): JSX.Element {
+function Home ({ user, token }: HomeProps): JSX.Element {
   return (
     <div className="Home">
-      {user && token ? (
-        <IdeaContainer user={user} token={token} />
-      ) : (
-        <LandingPage />
-      )}
+      {(user != null) && token
+        ? (
+          <IdeaContainer user={user} token={token} />
+        )
+        : (
+          <LandingPage />
+        )}
     </div>
   );
 }

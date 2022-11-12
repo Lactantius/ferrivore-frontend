@@ -11,7 +11,7 @@ import AddIdeaForm from "./AddIdeaForm";
 import AboutPage from "./AboutPage";
 import PageNotFound from "./PageNotFound";
 
-function Router({ user, token, saveUser }: RouterProps): JSX.Element {
+function Router ({ user, token, saveUser }: RouterProps): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<Home user={user} token={token} />} />
